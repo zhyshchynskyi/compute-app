@@ -1,0 +1,22 @@
+[project]
+name = "compute-app-server"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "pyon12", email = "pyon12@proton.me"},
+]
+dependencies = [
+    "fastapi[standard]>=0.114.1",
+    "pydantic>=2.9.1",
+    "pydantic-settings>=2.5.2",
+    "psycopg2-binary>=2.9.9",
+    "sqlmodel>=0.0.22",
+    "alembic>=1.13.2",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
