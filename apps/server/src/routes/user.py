@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from typings.user import CreateUserDto
+from dtos.user import CreateUserDto
 from models.user import User, UserDaoDep
 
 users_router = APIRouter()
