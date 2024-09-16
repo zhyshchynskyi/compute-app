@@ -6,6 +6,7 @@ import uvicorn
 from core.config import config
 
 from routes.user import users_router
+from worker import create_task
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,6 +17,7 @@ app = FastAPI(
 
 @app.get("/")
 def health_check():
+    create_task.delay(10)
     return "Hello world"
 
 

@@ -11,6 +11,8 @@ class Config(BaseSettings):
 
     PORT: int = Field(env="PORT", default=8000)
 
+    REDIS_BACKEND_URL: str = Field(env="REDIS_BACKEND_URL", default="redis://localhost:6379")
+
     class Config:
         env_file = ".env"
 
