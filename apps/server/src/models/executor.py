@@ -24,20 +24,17 @@ class GpuDetail(SQLModel):
 class GpuSpec(SQLModel):
     count: int
     details: List[GpuDetail]
-    gpu_scrape_error: Optional[str]
 
 
 class CpuSpec(SQLModel):
     count: int
     model: str
-    cpu_scrape_error: Optional[str]
 
 
 class MemorySpec(SQLModel):
     total: int
     used: int
     free: int
-    ram_scrape_error: Optional[str]
 
 
 class MachineSpecs(SQLModel):
@@ -47,16 +44,12 @@ class MachineSpecs(SQLModel):
 
 
 class Executor(BaseModel, table=True):
-    miner_address: str
-    miner_port: int
     miner_hotkey: str
+    validator_hotkey: str
     executor_id: UUID
     executor_ip_address: str
-    executor_ssh_username: str
-    executor_ssh_port: int
+    executor_ip_port: str
     specs: MachineSpecs = Field(sa_column=Column(type_=JSONB(astext_type=JSON()), nullable=False))
-    private_key: Optional[str] = None
-    public_key: Optional[str] = None
     rented: Optional[bool] = None
 
     # @field_validator('specs')
