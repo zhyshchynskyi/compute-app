@@ -1,11 +1,17 @@
 import logging
 import time
-from fastapi import WebSocket, WebSocketDisconnect
-import bittensor
-from protocol.base import BaseRequest
-from protocol.validator_requests import BaseValidatorRequest, ExecutorSpecRequest, AuthenticateRequest
-from protocol.compute_app_requests import Response
 
+import bittensor
+from fastapi import WebSocket, WebSocketDisconnect
+
+from protocol.base import BaseRequest
+from protocol.compute_app_requests import Response
+from protocol.validator_requests import (
+    AuthenticateRequest,
+    BaseValidatorRequest,
+    ExecutorSpecRequest,
+)
+from worker import save_executor_into_db
 
 AUTH_MESSAGE_MAX_AGE = 10
 MAX_MESSAGE_COUNT = 10
@@ -19,12 +25,20 @@ class ValidatorConsumersManager:
 
     def register_consumer(self, consumer: "ValidatorConsumer"):
         self.consumers[consumer.validator_key] = consumer
-        logger.info("Register validator consumer(%s) to manager. Total consumers: %d", consumer.validator_key, len(self.consumers))
+        logger.info(
+            "Register validator consumer(%s) to manager. Total consumers: %d",
+            consumer.validator_key,
+            len(self.consumers),
+        )
 
     def deregister_consumer(self, consumer: "ValidatorConsumer"):
         if self.consumers.get(consumer.validator_key) is consumer:
             self.consumers.pop(consumer.validator_key)
-        logger.info("Deregister validator consumer(%s) to manager. Total consumers: %d", consumer.validator_key, len(self.consumers))
+        logger.info(
+            "Deregister validator consumer(%s) to manager. Total consumers: %d",
+            consumer.validator_key,
+            len(self.consumers),
+        )
 
 
 class ValidatorConsumer:
@@ -96,8 +110,8 @@ class ValidatorConsumer:
     async def handle_message(self, msg: BaseValidatorRequest):
         if isinstance(msg, AuthenticateRequest):
             await self.handle_authentication(msg)
-            return 
-        
+            return
+
         if not self.validator_authenticated:
             if len(self.msg_queue) <= MAX_MESSAGE_COUNT:
                 self.msg_queue.append(msg)
@@ -106,12 +120,13 @@ class ValidatorConsumer:
         if isinstance(msg, ExecutorSpecRequest):
             await self.handle_executor_machine_spec(msg)
             return
-            
+
         # TODO: implement renting process finished module
 
     async def handle_executor_machine_spec(self, executor_spec: ExecutorSpecRequest):
         """Store into DB"""
         logger.info("Storing executor machine spec into DB: %s", str(executor_spec))
+        save_executor_into_db.delay(executor_spec.model_dump_json())
 
     async def handle(self):
         # await self.connect()

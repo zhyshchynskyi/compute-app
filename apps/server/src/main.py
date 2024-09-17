@@ -1,13 +1,11 @@
 import logging
 
-from fastapi import FastAPI
 import uvicorn
+from fastapi import FastAPI
 
 from core.config import config
-
 from routes.user import users_router
 from routes.validator import validator_router
-from worker import create_task
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 
@@ -18,7 +16,6 @@ app = FastAPI(
 
 @app.get("/")
 def health_check():
-    create_task.delay(10)
     return "Hello world"
 
 
