@@ -3,7 +3,7 @@ from uuid import UUID
 from pydantic import field_validator
 from fastapi import Depends
 
-from sqlmodel import SQLModel, Field, Column, select
+from sqlmodel import SQLModel, Field, Column, select, Relationship
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy import JSON
 
@@ -58,6 +58,8 @@ class Executor(BaseModel, table=True):
     private_key: Optional[str] = None
     public_key: Optional[str] = None
     rented: Optional[bool] = None
+
+    pods: list["Pod"] = Relationship(back_populates="executor")
 
     # @field_validator('specs')
     # def validate_specs(cls, specs: MachineSpecs):

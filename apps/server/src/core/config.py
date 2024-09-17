@@ -10,6 +10,7 @@ class Config(BaseSettings):
     # DEBUG: bool = Field(env="DEBUG", default=False)
 
     PORT: int = Field(env="PORT", default=8000)
+    JWT_SECRET_KEY: str = Field(env="JWT_SECRET_KEY")
 
     class Config:
         env_file = ".env"
