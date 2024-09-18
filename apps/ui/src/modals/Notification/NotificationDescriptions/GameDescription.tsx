@@ -1,7 +1,6 @@
 import Typography from 'share-ui/components/typography/Typography'
 import TypographyPrimary from 'components/Typography/Primary'
 import TypographyTertiary from 'components/Typography/Tertiary'
-import { useUserByIdService } from 'apis'
 
 type GameDescriptionProps = {
   gameName: string

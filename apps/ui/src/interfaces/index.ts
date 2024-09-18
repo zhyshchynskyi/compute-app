@@ -1,4 +1,3 @@
-export * from './account.interface'
 export * from './user.interface'
 export * from './tableRow.interface'
 export * from './accountSetting.interface'

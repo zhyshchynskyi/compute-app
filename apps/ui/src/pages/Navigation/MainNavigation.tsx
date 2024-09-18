@@ -35,62 +35,19 @@ import Subnet from 'share-ui/components/Icon/Icons/components/Subnet';
 import { AuthContext } from 'contexts';
 
 interface NavigationPermissions {
-  chat: boolean;
-  datasources: boolean;
   pod: boolean;
-  exploreApis: boolean;
-  subnet: boolean;
-  model: boolean;
   template: boolean;
   secret: boolean;
-  apiKey: boolean;
   billing: boolean;
-  admin: boolean;
-  teams: boolean;
 }
 
 const getNavigationList = ({ permission, pathname }: { permission: NavigationPermissions; pathname: string }) => [
-  {
-    name: 'chat',
-    icon: <Chats size={40} />,
-    route: '/chat',
-    is_visible: permission.chat,
-    rootRoute: '/chat',
-  },
-  {
-    name: 'datasource',
-    icon: <StyledValueOutlineIcon size={40} />,
-    route: '/datasources',
-    is_visible: permission.datasources,
-    rootRoute: '/datasources',
-  },
   {
     name: 'pods',
     icon: <StyledCloudIcon size={30} picked={pathname.includes('/pods')} />,
     route: '/pods/create-pod',
     is_visible: permission.pod,
     rootRoute: '/pods',
-  },
-  {
-    name: 'explore-apis',
-    icon: <StyledExploreIcon size={50} picked={pathname.includes('/explore-apis')} />,
-    route: '/explore-apis',
-    is_visible: false,
-    rootRoute: '/explore-apis',
-  },
-  {
-    name: 'subnets',
-    icon: <StyledSubnetIcon size={26} picked={pathname.includes('/subnets')} />,
-    route: '/subnets',
-    is_visible: permission.subnet,
-    rootRoute: '/subnets',
-  },
-  {
-    name: 'model',
-    icon: <FineTuning />,
-    route: '/models',
-    is_visible: permission.model,
-    rootRoute: '/models',
   },
   {
     name: 'templates',
@@ -107,39 +64,15 @@ const getNavigationList = ({ permission, pathname }: { permission: NavigationPer
     rootRoute: '/secrets',
   },
   {
-    name: 'api-keys',
-    icon: <StyledAPIIcon size={40} picked={pathname.includes('/api-key')} />,
-    route: '/api-key',
-    is_visible: permission.apiKey,
-    rootRoute: '/api-key',
-  },
-  {
     name: 'billing',
     icon: <StyledBillingIcon picked={pathname.includes('/billing')} />,
     route: '/billing',
     is_visible: permission.billing,
     rootRoute: '/billing',
   },
-  {
-    name: 'teams',
-    icon: <StyledTeamsIcon picked={pathname.includes('/teams')} />,
-    route: '/teams',
-    is_visible: permission.teams,
-    rootRoute: '/teams',
-  },
-  {
-    name: 'admin',
-    icon: <StyledAdminIcon picked={pathname.includes('/admin')} size={28} />,
-    route: '/admin',
-    is_visible: permission.admin,
-    rootRoute: '/admin',
-  },
 ];
 
 const MainNavigation = ({ restricted, theme }: { restricted?: boolean; theme: ThemeProps }) => {
-  const { selected_account } = useAppModeContext();
-  const { user } = useContext(AuthContext);
-
   const domainEnv = import.meta.env;
   const isDatura = domainEnv.REACT_APP_ENV === 'datura';
 
@@ -147,10 +80,6 @@ const MainNavigation = ({ restricted, theme }: { restricted?: boolean; theme: Th
   const domainLogo = getDomainConfig('logo');
 
   const isHome = true;
-  const isChat = false;
-  const isModel = false;
-  const isIntegration = false;
-  const isDatasource = false;
 
   const navigate = useNavigate();
 
@@ -168,21 +97,11 @@ const MainNavigation = ({ restricted, theme }: { restricted?: boolean; theme: Th
     setActive(pathArr);
   }, [pathname]);
 
-  const isAdmin = false;
-
   const permission = {
-    chat: !isDatura && isChat && !isAdmin,
-    datasources: !isDatura && isDatasource && !isAdmin,
     pod: true,
-    exploreApis: isDatura && !isAdmin,
-    subnet: isDatura && !isAdmin,
-    model: !isDatura && isModel && !isAdmin,
     template: true,
-    apiKey: isDatura && !isAdmin,
-    secret: false,
-    billing: isDatura && !isAdmin,
-    teams: isDatura && !isAdmin,
-    admin: isAdmin,
+    secret: true,
+    billing: true,
   };
 
   const navigation_list = getNavigationList({ permission, pathname });
@@ -190,63 +109,30 @@ const MainNavigation = ({ restricted, theme }: { restricted?: boolean; theme: Th
   return (
     <StyledRoot>
       <StyledUl>
-        {isHome && (
-          <Tooltip content={t('home')} position={Tooltip?.positions?.LEFT}>
-            <StyledLi
-              isActive={active[1] === ''}
-              onClick={() => {
-                if (!restricted) {
-                  onHandleClick('/');
-                }
-              }}
-            >
-              <StyledLogo src={domainLogo} />
-            </StyledLi>
-          </Tooltip>
-        )}
-        {!restricted && (
-          <>
-            {navigation_list
-              .filter((navigation) => navigation.is_visible)
-              .map((navigation, index: number) => (
-                <Tooltip content={t(navigation.name)} position={Tooltip?.positions?.LEFT} key={index}>
-                  <StyledLi
-                    isActive={pathname.includes(navigation.rootRoute)}
-                    onClick={() => navigate(navigation.route)}
-                  >
-                    {navigation.icon}
-                    {pathname.includes(navigation.route) && <StyledCorner />}
-                  </StyledLi>
-                </Tooltip>
-              ))}
-          </>
-        )}
+        <Tooltip content={t('home')} position={Tooltip?.positions?.LEFT}>
+          <StyledLi
+            isActive={active[1] === ''}
+            onClick={() => {
+              if (!restricted) {
+                onHandleClick('/');
+              }
+            }}
+          >
+            <StyledLogo src={domainLogo} />
+          </StyledLi>
+        </Tooltip>
+        {navigation_list
+          .filter((navigation) => navigation.is_visible)
+          .map((navigation, index: number) => (
+            <Tooltip content={t(navigation.name)} position={Tooltip?.positions?.LEFT} key={index}>
+              <StyledLi isActive={pathname.includes(navigation.rootRoute)} onClick={() => navigate(navigation.route)}>
+                {navigation.icon}
+                {pathname.includes(navigation.route) && <StyledCorner />}
+              </StyledLi>
+            </Tooltip>
+          ))}
       </StyledUl>
       <StyledBottomSection>
-        {!restricted && (
-          <>
-            {!isDatura ? (
-              <>
-                {isIntegration && (
-                  <Tooltip content={t('integration')} position={Tooltip?.positions?.LEFT}>
-                    <StyledLi
-                      isActive={includes(active, 'integrations')}
-                      onClick={() => onHandleClick('/integrations')}
-                    >
-                      <Integrations size={40} />
-                      {includes(active, 'integrations') && <StyledCorner />}
-                    </StyledLi>
-                  </Tooltip>
-                )}
-              </>
-            ) : (
-              <StyledInnerWrapper>
-                <ModeSwitcher />
-              </StyledInnerWrapper>
-            )}
-          </>
-        )}
-
         <StyledInnerWrapper>
           <AvatarDropDown theme={theme} />
         </StyledInnerWrapper>

@@ -3,8 +3,6 @@ import withRenderModal from 'hocs/withRenderModal'
 import { useModal } from 'hooks'
 import styled from 'styled-components'
 import Modal from 'share-ui/components/Modal/Modal'
-import IconButton from 'share-ui/components/IconButton/IconButton'
-import Close from 'share-ui/components/Icon/Icons/components/Close'
 
 type VideoModalProps = {
   data: {

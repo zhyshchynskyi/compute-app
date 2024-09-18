@@ -45,7 +45,7 @@ export function chainFunctions(funcs: Array<(args: any) => void | boolean>, allo
 }
 
 export function convertToArray<T>(input: T | Array<T>): Array<T> {
-  return isArray(input) ? input : [input];
+  return (isArray(input) ? input : [input]) as T[];
 }
 
 export function NOOP() {}

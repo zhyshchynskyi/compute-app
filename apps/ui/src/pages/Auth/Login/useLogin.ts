@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from 'redux/apis/userApi';
-import { setToken } from 'redux/token';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Please enter Email address'),
@@ -39,8 +38,6 @@ const useLogin = () => {
         }).unwrap();
 
         if (response) {
-          setToken(response.token);
-
           setAlertMessage({ type: 'success', message: 'You logged in' });
 
           return setTimeout(() => {

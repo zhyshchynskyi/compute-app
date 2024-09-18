@@ -79,7 +79,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: './src/index.tsx', // Main app entry point
-        widget: './src/TestComp.tsx', // Widget entry point
+        // widget: './src/TestComp.tsx', // Widget entry point
         index: 'index.html',
       },
 

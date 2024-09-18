@@ -18,7 +18,6 @@ const DevelopersRouteLayout = () => {
   const { user } = useContext(AuthContext)
   const { expand } = useContext(LayoutContext)
 
-  const { first_name } = user
   const outlet = useOutlet()
 
   const { pathname } = useLocation()

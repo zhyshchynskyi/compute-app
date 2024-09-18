@@ -1,21 +1,19 @@
-import styled, { css } from 'styled-components'
-import { StyledTitle } from './RunLogMessages'
-import { useState, useEffect, useRef } from 'react'
-import {
-  StyledNavigationChevronDown,
-  StyledNavigationChevronUp,
-} from 'pages/Agents/AgentForm/components/ShowAdvancedButton'
+import styled, { css } from 'styled-components';
+import { StyledTitle } from './RunLogMessages';
+import { useState, useEffect, useRef } from 'react';
+import NavigationChevronUp from 'share-ui/components/Icon/Icons/components/NavigationChevronUp';
+import NavigationChevronDown from 'share-ui/components/Icon/Icons/components/NavigationChevronDown';
 
 const HistoryCollapse = ({ historyMessages }: { historyMessages: any }) => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
-  const historyContainerRef = useRef(null as any)
+  const historyContainerRef = useRef(null as any);
 
   useEffect(() => {
     if (show) {
-      historyContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      historyContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-  }, [show])
+  }, [show]);
 
   return (
     <StyledHistoryContainer show={show} onClick={() => setShow(!show)} ref={historyContainerRef}>
@@ -34,13 +32,13 @@ const HistoryCollapse = ({ historyMessages }: { historyMessages: any }) => {
               </StyledCodeContent>
             )}
           </>
-        )
+        );
       })}
     </StyledHistoryContainer>
-  )
-}
+  );
+};
 
-export default HistoryCollapse
+export default HistoryCollapse;
 
 //todo colors from theme
 const StyledHistoryContainer = styled.div<{ show: boolean }>`
@@ -55,12 +53,12 @@ const StyledHistoryContainer = styled.div<{ show: boolean }>`
   max-height: 55px;
   overflow: hidden;
 
-  ${props =>
+  ${(props) =>
     props.show &&
     css`
       max-height: fit-content;
     `}
-`
+`;
 
 const StyledCodeContent = styled.pre`
   margin: 0;
@@ -69,7 +67,7 @@ const StyledCodeContent = styled.pre`
   white-space: pre-wrap;
   font-size: 12px;
   color: #000;
-`
+`;
 const StyledHeaderWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -77,4 +75,15 @@ const StyledHeaderWrapper = styled.div`
   width: 100%;
 
   cursor: pointer;
-`
+`;
+
+const StyledNavigationChevronUp = styled(NavigationChevronUp)`
+  path {
+    color: ${({ theme }) => theme.body.iconColor};
+  }
+`;
+const StyledNavigationChevronDown = styled(NavigationChevronDown)`
+  path {
+    color: ${({ theme }) => theme.body.iconColor};
+  }
+`;

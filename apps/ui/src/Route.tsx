@@ -1,6 +1,5 @@
 import { Route as Router, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-// import Settings from './pages/Settings';
 import {
   ForgotPassword,
   Login,
@@ -11,8 +10,7 @@ import {
   GoogleLogin,
 } from 'pages/Auth';
 import MainComponent from 'pages/MainComponent';
-// import ChangePassword from 'pages/ChangePassword';
-// import Account from 'pages/Account';
+import ChangePassword from 'pages/ChangePassword';
 import { AuthContext } from 'contexts';
 import { useContext, useEffect, useState } from 'react';
 import { PublicRoute } from 'routes';
@@ -28,31 +26,18 @@ import RootLayout from 'routes/RootLayout';
 import HomeRouteLayout from 'routes/HomeRouteLayout';
 import SuccessPaymentModal from 'modals/SuccessPaymentModal';
 import LoginModal from 'modals/LoginModal';
-import TeamOfAgentViewModal from 'modals/TeamOfAgentViewModal';
 import SettingsModal from 'modals/SettingsModal';
-import ToolkitModal from 'modals/ToolkitModal';
-import ScheduleRunModal from 'modals/ScheduleRunModal';
 import RunLogsModal from 'modals/RunLogsModal/RunLogsModal';
-import VideoModal from 'modals/VideoModal';
-import TwilioPhoneNumberSidConfirmationModal from 'modals/TwilioPhoneNumberSidConfirmationModal';
-import CreateScheduleModal from 'modals/CreateScheduleModal';
-import EditScheduleModal from 'modals/EditScheduleModal';
-import LlmSettingsModal from 'modals/LlmSettingsModal';
 import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods';
 import PodDetails from 'pages/Pods/components/PodDetails';
 import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template';
-// import { Subnets, CreateSubnetApiService, SubnetApiService, EditSubnetApiModal } from 'pages/Subnets';
 import Billing from 'pages/Billing';
-import CreateNewApp from 'pages/CreateNewApp';
-// import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets';
-// import Credentials from 'pages/Credentials';
-import UpdateAppWrapper from 'pages/CreateNewApp/UpdateAppWrapper';
-import SubnetApiDetailsModal from 'pages/Subnets/panels/SubnetApiDetailsModal';
+import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets';
 import { useAppModeContext } from 'context/AppModeContext';
-// import ExploreApis from 'pages/ExploreApis';
 import Profile from 'pages/Profile';
-// import { InviteUsers } from 'pages/InviteUsers';
-// import ManageTeams from 'pages/ManageTeams';
+import MainRouteLayout from 'routes/MainRouteLayout';
+import Account from 'pages/Account';
+import Settings from 'pages/Settings';
 
 const Route = () => {
   const { account_switch_loading } = useAppModeContext();
@@ -101,7 +86,13 @@ const Route = () => {
             <Router path={'edit/:id'} element={<EditTemplate />} key={document.location.href} />
           </Router>
 
-          {/* 
+          <Router path={'billing'} element={<Billing />} key={document.location.href}></Router>
+
+          <Router element={<MainRouteLayout />}>
+            <Router path="change-password" element={<ChangePassword />} key={document.location.href} />
+            <Router path="account" element={<Account />} key={document.location.href} />
+            <Router path="settings" element={<Settings />} key={document.location.href} />
+          </Router>
 
           <Router path="secrets" key={document.location.href}>
             <Router index element={<Secrets />} key={document.location.href} />
@@ -109,47 +100,8 @@ const Route = () => {
             <Router path={':id'} element={<SecretDetails />} key={document.location.href} />
           </Router>
 
-					<Router path={'billing'} element={<Billing />} key={document.location.href}></Router>
-
-					<Router path="teams" key={document.location.href}>
-            <Router index element={<InviteUsers />} key={document.location.href} />
-          </Router>
-
-					<Router path="manage-teams" key={document.location.href}>
-            <Router index element={<ManageTeams />} key={document.location.href} />
-          </Router> */}
-
-          {/* <Router element={<MainRouteLayout />}>
-            <Router path="change-password" element={<ChangePassword />} key={document.location.href} />
-            <Router path="account" element={<Account />} key={document.location.href} />
-            <Router path="api-keys" element={<ApiKeys />} key={document.location.href} />
-            <Router path="settings" element={<Settings />} key={document.location.href} />
-          </Router>
-
-          <Router path={'subnets'} element={<Subnets />} key={document.location.href}>
-            <Router path={':id'} element={<SubnetApiService />} key={document.location.href} />
-            <Router path={':id/create'} element={<CreateSubnetApiService />} key={document.location.href} />
-            <Router path={'explore'} element={<ExploreApis />} key={document.location.href} />
-
-            <Router path={':id/:subnet_api_service_id'} element={<EditSubnetApiModal />} key={document.location.href} />
-          </Router>
-
-          <Router path={'create-new-app'} element={<CreateNewApp />} key={document.location.href}></Router>
-
-          <Router path="api-key" key={document.location.href}>
-            <Router index element={<ApiKeys />} key={document.location.href} />
-            <Router path={'create-api-key'} element={<CreateApiKeyForm />} key={document.location.href} />
-            <Router path={':apiKeyId/edit-api-key'} element={<EditApiKeyForm />} key={document.location.href} />
-          </Router>
-
-          <Router path="credentials" key={document.location.href}>
-            <Router index element={<Credentials />} key={document.location.href} />
-          </Router> */}
           <Router path="profile" element={<Profile />} />
           <Router path="*" element={<MainComponent value={'page not found'} />} />
-        </Router>
-        <Router element={<UpdateAppWrapper theme={{ theme, toggleTheme }} />}>
-          <Router path="/update-app" element={<CreateNewApp isEdit />} />
         </Router>
         <Router element={<PublicRoute />}>
           <Router path="/github-login" element={<GithubLogin />} />
@@ -162,37 +114,12 @@ const Route = () => {
           <Router path="/cheat-code" element={<CheatCode />} />
         </Router>
       </Routes>
-
       <LoginModal />
       <ChangeTemplateModal />
-      {/*<SuccessPaymentModal />
+      <SuccessPaymentModal />
       <DeleteConfirmationModal />
-       <TeamOfAgentViewModal />
       <SettingsModal />
-      <ToolkitModal />
-      <LlmSettingsModal />
-      <ScheduleRunModal />
       <RunLogsModal />
-      <VideoModal />
-      <CreateScheduleModal />
-      <EditScheduleModal />
-      <TwilioPhoneNumberSidConfirmationModal />
-      <SubnetApiDetailsModal /> */}
-
-      {/* <AgentViewModal />
-      <ChatLinkModal />
-      <IntegrationListModal />
-      <DatasourceListModal />
-      <VoiceModal />
-      <CallLogsModal />
-      <ContactListModal />
-      <CreateCampaignModal />
-      <EditCampaignModal />
-      <VoiceOptionsModal />
-      <ShowApiKeyModal />
-      <CreateApiModal />
-      <EditApiModal /> */}
-
       <CommandMenu open={cmdkOpen} setCmdkOpen={setCmdkOpen} theme={theme} toggleTheme={toggleTheme} />
     </ThemeProvider>
   );

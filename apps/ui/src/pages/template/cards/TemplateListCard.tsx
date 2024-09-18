@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import strCutter from 'utils/strCutter';
 
 import IconButton from 'share-ui/components/IconButton/IconButton';
-import { StyledDeleteIcon } from 'pages/TeamOfAgents/TeamOfAgentsCard/TeamOfAgentsCard';
 
 import TypographyPrimary from 'components/Typography/Primary';
 import TypographySecondary from 'components/Typography/Secondary';
 import { StyledCardLayoutBox, StyledRootBox } from 'pages/Pods/cards/PodListCard';
 import { StyledImg } from 'pages/Pods/components/template/ChangeTemplateModal';
+import Delete from 'share-ui/components/Icon/Icons/components/Delete';
 
 type TemplateListCardProps = {
   onClick: () => void;
@@ -68,6 +68,12 @@ const TemplateListCard = ({
 };
 
 export default TemplateListCard;
+
+const StyledDeleteIcon = styled(Delete)`
+  path {
+    fill: ${({ theme }) => theme.body.iconColor};
+  }
+`;
 
 const StyledTag = styled.div`
   border: 1px solid #979797;

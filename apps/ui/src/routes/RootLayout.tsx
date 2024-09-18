@@ -14,9 +14,6 @@ const RootLayout = ({ theme }: { theme: ThemeProps }) => {
 
   if (!user && !loading) return <Navigate to="/login" />;
 
-  // if (account.id && !account.accountType && location.pathname !== '/update-app')
-  //   return <Navigate to='/update-app' />
-
   return (
     <StyledRoot>
       {user && <ChatSwitcher theme={theme} />}

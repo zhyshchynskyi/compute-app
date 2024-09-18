@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box';
+import Dropdown from 'components/Dropdown';
 
 import FormikTextField from 'components/TextFieldFormik';
 import TextareaFormik from 'components/TextareaFormik';
 import { FormikProvider } from 'formik';
-
-import AgentDropdown from 'pages/Agents/AgentForm/components/AgentDropdown';
 
 import { StyledFormInputWrapper } from 'styles/formStyles.css';
 import { StyledPanelWrapper } from 'styles/panelStyles.css';
@@ -30,7 +29,7 @@ const Settings = ({ formik }: { formik: any }) => {
               placeholder={'Container Image'}
               label={'Container Image'}
             />
-            <AgentDropdown
+            <Dropdown
               label={'Container Registry Credentials'}
               fieldName={'template_config.template_data.credential'}
               setFieldValue={formik?.setFieldValue}

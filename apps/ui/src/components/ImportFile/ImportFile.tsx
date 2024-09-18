@@ -1,21 +1,20 @@
-import { useEffect } from 'react'
-import styled from 'styled-components'
+import { useEffect } from 'react';
+import styled from 'styled-components';
 
-import ImportFileTable from './ImportFileTable'
+import ImportFileTable from './ImportFileTable';
 
-import useImportFile from './useImportFile'
+import useImportFile from './useImportFile';
 
-import Button from 'share-ui/components/Button/Button'
+import Button from 'share-ui/components/Button/Button';
 
-import UploadButton from 'components/UploadButton'
-import { ButtonPrimary, ButtonTertiary } from 'components/Button/Button'
-import { useDownloadTemplate } from './useDownloadTemplate'
+import UploadButton from 'components/UploadButton';
+import { ButtonPrimary, ButtonTertiary } from 'components/Button/Button';
+import { useDownloadTemplate } from './useDownloadTemplate';
 
-import { t } from 'i18next'
+import { t } from 'i18next';
 
-import TypographySecondary from 'components/Typography/Secondary'
-import { StyledMenuButtonsWrapper } from 'pages/Agents/AgentView/components/AgentViewDetailBox'
-import MenuButton from 'share-ui/components/MenuButton/MenuButton'
+import TypographySecondary from 'components/Typography/Secondary';
+import MenuButton from 'share-ui/components/MenuButton/MenuButton';
 
 const ImportFile = ({
   setFieldValue,
@@ -25,55 +24,49 @@ const ImportFile = ({
   columns,
   fileValidationFields,
 }: {
-  setFieldValue: any
-  fieldName: string
-  value?: string
-  templateData: any
-  columns: any
-  fileValidationFields: any
+  setFieldValue: any;
+  fieldName: string;
+  value?: string;
+  templateData: any;
+  columns: any;
+  fileValidationFields: any;
 }) => {
-  const {
-    parsedData,
-    setParsedData,
-    handleFileFormat,
-    handleConvertJson,
-    handleConvertCSVtoJSON,
-    fileIsLoading,
-  } = useImportFile({
-    setFieldValue: setFieldValue,
-    fileValidationFields: fileValidationFields,
-    fieldName: fieldName,
-  })
+  const { parsedData, setParsedData, handleFileFormat, handleConvertJson, handleConvertCSVtoJSON, fileIsLoading } =
+    useImportFile({
+      setFieldValue: setFieldValue,
+      fileValidationFields: fileValidationFields,
+      fieldName: fieldName,
+    });
 
   const { handleDownloadTemplate, handleDownloadTemplateCSV } = useDownloadTemplate({
     templateData: templateData,
-  })
+  });
 
   useEffect(() => {
     if (value.length > 0) {
-      const fileUrl = value
+      const fileUrl = value;
 
       fetch(fileUrl)
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
-            throw new Error(`Failed to fetch file: ${response.status} ${response.statusText}`)
+            throw new Error(`Failed to fetch file: ${response.status} ${response.statusText}`);
           }
-          return response.text()
+          return response.text();
         })
-        .then(data => {
+        .then((data) => {
           if (fileUrl.endsWith('.json')) {
-            const { data: convertedData } = handleConvertJson(data)
-            setParsedData(convertedData)
+            const { data: convertedData } = handleConvertJson(data);
+            setParsedData(convertedData);
           } else if (fileUrl.endsWith('.csv')) {
-            const { data: convertedData } = handleConvertCSVtoJSON(data)
-            setParsedData(convertedData)
+            const { data: convertedData } = handleConvertCSVtoJSON(data);
+            setParsedData(convertedData);
           }
         })
-        .catch(error => {
-          console.error('Error fetching file:', error)
-        })
+        .catch((error) => {
+          console.error('Error fetching file:', error);
+        });
     }
-  }, [value])
+  }, [value]);
 
   return (
     <>
@@ -84,7 +77,7 @@ const ImportFile = ({
             closeDialogOnContentClick={false}
             zIndex={2}
             customWidth={140}
-            ariaLabel='Download'
+            ariaLabel="Download"
           >
             <StyledMenuButtonsWrapper>
               <ButtonTertiary onClick={handleDownloadTemplate} size={Button.sizes?.SMALL}>
@@ -97,17 +90,13 @@ const ImportFile = ({
           </MenuButton>
 
           {parsedData?.length === 0 && (
-            <UploadButton
-              onChange={handleFileFormat}
-              isLoading={fileIsLoading}
-              label={t('upload-file')}
-            />
+            <UploadButton onChange={handleFileFormat} isLoading={fileIsLoading} label={t('upload-file')} />
           )}
           {parsedData?.length > 0 && (
             <ButtonPrimary
               onClick={() => {
-                setParsedData([])
-                setFieldValue(fieldName, '')
+                setParsedData([]);
+                setFieldValue(fieldName, '');
               }}
               size={Button.sizes?.SMALL}
             >
@@ -118,10 +107,10 @@ const ImportFile = ({
         {parsedData?.length > 0 && <ImportFileTable data={parsedData} columns={columns} />}
       </StyledFormSection>
     </>
-  )
-}
+  );
+};
 
-export default ImportFile
+export default ImportFile;
 
 export const StyledFormSection = styled.div<{ columns?: string }>`
   width: 100%;
@@ -131,10 +120,24 @@ export const StyledFormSection = styled.div<{ columns?: string }>`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`
+`;
+
+const StyledMenuButtonsWrapper = styled.div`
+  background: ${({ theme }) => theme.body.backgroundColorSecondary};
+  border: ${({ theme }) => theme.body.secondaryBorder};
+  backdrop-filter: blur(100px);
+  padding: 10px;
+  border-radius: 10px;
+
+  min-width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
 
 const StyledButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-`
+`;

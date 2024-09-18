@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 
-import Button from 'share-ui/components/Button/Button'
 import IconButton from 'share-ui/components/IconButton/IconButton'
 
 import Typography from 'share-ui/components/typography/Typography'

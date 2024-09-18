@@ -1,8 +1,10 @@
-import { CSSProperties, useMemo, useRef } from "react";
-import { isEqual, isEmpty } from "lodash-es";
+import { CSSProperties, useMemo, useRef } from 'react';
+import { isEqual, isEmpty } from 'lodash-es';
 
 // remove empty values
-function removeEmpty(obj: CSSProperties) {
+function removeEmpty(obj?: CSSProperties) {
+  if (!obj) return obj;
+
   const newObj = { ...obj };
   for (const k in newObj) {
     if (newObj[k as keyof typeof newObj] === undefined) {
@@ -14,7 +16,7 @@ function removeEmpty(obj: CSSProperties) {
 }
 
 export default function useStyle(currentStyle: CSSProperties, additionalProps?: CSSProperties) {
-  const additionalPropsRef = useRef<CSSProperties>(additionalProps);
+  const additionalPropsRef = useRef<CSSProperties | undefined>(additionalProps);
   const currentStyleRef = useRef<CSSProperties>(currentStyle);
   // using deep equal in order to allow sending new object for additionalProps
   // but with the same values inside i.e. '{ color, width }'
@@ -31,7 +33,7 @@ export default function useStyle(currentStyle: CSSProperties, additionalProps?: 
     if (isEmpty(nonEmptyObj)) return currentStyleObj;
     return {
       ...currentStyleObj,
-      ...nonEmptyObj
+      ...nonEmptyObj,
     };
   }, [currentStyleObj, additionalPropsObj]);
 }
