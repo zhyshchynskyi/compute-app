@@ -33,7 +33,7 @@ class ExecutorService:
         if not executor:
             raise Exception(f"Executor {executor_uuid} doesn't exist.")
 
-        # TODO: send request to validator to rent the machine.
+        # send request to validator to rent the machine.
         logger.info(
             "Request to rent executor(%s) to validator(%s)",
             str(executor_uuid),
@@ -52,7 +52,6 @@ class ExecutorService:
             payload.docker_image,
             payload.user_public_key,
         )
-        print("container_created.port_maps", str(container_created.port_maps))
         ports_mapping = {internal: external for (internal, external) in container_created.port_maps}
         self.pod_dao.save(
             Pod(
@@ -74,7 +73,23 @@ class ExecutorService:
         if not executor:
             raise Exception(f"Executor {executor_uuid} doesn't exist.")
 
+        pod = self.pod_dao.find_by_executor_id(executor_uuid)
+        if not pod:
+            raise Exception(f"Pod for executor({executor_uuid}) doesn't exist.")
+
+        consumer = validator_consumers_manager.get_consumer(executor.validator_hotkey)
+        if not consumer:
+            logger.warning(
+                "No validator consumer available for validator(%s)", executor.validator_hotkey
+            )
+            raise Exception(f"Can't rent this executor({executor_uuid}).")
+
         # TODO: check if current executor is rented by correct owner
+
+        # remote docker container.
+        await consumer.handle_executor_remove_rent(
+            executor.miner_hotkey, str(executor.executor_id), pod.container_name, pod.volume_name
+        )
 
         # Update the executor's rented status
         executor.rented = False

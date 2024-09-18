@@ -6,7 +6,7 @@ import bittensor
 from fastapi import WebSocket, WebSocketDisconnect
 
 from protocol.base import BaseRequest
-from protocol.compute_app_requests import ContainerCreateRequest, Response
+from protocol.compute_app_requests import ContainerCreateRequest, ContainerDeleteRequest, Response
 from protocol.validator_requests import (
     AuthenticateRequest,
     BaseValidatorRequest,
@@ -178,9 +178,56 @@ class ValidatorConsumer:
         except TimeoutError:
             msg = None
 
+        self.rent_states.pop(executor_uuid)
         if isinstance(msg, ContainerCreated):
             logger.info(
                 "Container created on executor(%s): container_name=%s, volume_name=%s",
+                executor_uuid,
+                msg.container_name,
+                msg.volume_name,
+            )
+            return msg
+        elif isinstance(msg, FailedContainerRequest):
+            message = f"Container creation failed due to {msg.msg}"
+            logger.warning(message)
+            raise Exception(message)
+        else:
+            logger.warning("Unexpected error")
+            raise Exception("No response from validator")
+
+    async def handle_executor_remove_rent(
+        self,
+        miner_hotkey: str,
+        executor_uuid: str,
+        container_name: str,
+        volume_name: str,
+    ) -> ContainerCreated:
+        if self.rent_states.get(executor_uuid):
+            raise Exception(f"Executor({executor_uuid}) has been already rented.")
+
+        self.rent_states[executor_uuid] = RentState()
+
+        # send delete container request to validator
+        await self.send_message(
+            ContainerDeleteRequest(
+                container_name=container_name,
+                volume_name=volume_name,
+                miner_hotkey=miner_hotkey,
+                executor_id=executor_uuid,
+            )
+        )
+
+        # wait until validator returns with the result
+        try:
+            msg: ContainerDeleted | FailedContainerRequest = await asyncio.wait_for(
+                self.rent_states[executor_uuid].container_deleted_or_failed_future, MAX_RENT_LENGTH
+            )
+        except TimeoutError:
+            msg = None
+
+        if isinstance(msg, ContainerDeleted):
+            logger.info(
+                "Container deleted on executor(%s): container_name=%s, volume_name=%s",
                 executor_uuid,
                 msg.container_name,
                 msg.volume_name,

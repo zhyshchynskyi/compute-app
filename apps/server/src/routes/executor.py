@@ -96,9 +96,8 @@ async def unrent(
     """Endpoint to rent executor machine."""
     try:
         # Assuming some logic here to rent the executor
-        executor_service.remove_rent(executor_uuid)
+        await executor_service.remove_rent(executor_uuid)
 
-        # If successful
         # If successful
         return JSONResponse(
             status_code=status.HTTP_200_OK,
