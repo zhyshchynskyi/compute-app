@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import time
 
@@ -5,18 +6,28 @@ import bittensor
 from fastapi import WebSocket, WebSocketDisconnect
 
 from protocol.base import BaseRequest
-from protocol.compute_app_requests import Response
+from protocol.compute_app_requests import ContainerCreateRequest, Response
 from protocol.validator_requests import (
     AuthenticateRequest,
     BaseValidatorRequest,
+    ContainerCreated,
+    ContainerDeleted,
     ExecutorSpecRequest,
+    FailedContainerRequest,
 )
 from worker import save_executor_into_db
 
 AUTH_MESSAGE_MAX_AGE = 10
 MAX_MESSAGE_COUNT = 10
+MAX_RENT_LENGTH = 60 * 10
 
 logger = logging.getLogger(__name__)
+
+
+class RentState:
+    def __init__(self):
+        self.container_created_or_failed_future = asyncio.Future()
+        self.container_deleted_or_failed_future = asyncio.Future()
 
 
 class ValidatorConsumersManager:
@@ -40,6 +51,9 @@ class ValidatorConsumersManager:
             len(self.consumers),
         )
 
+    def get_consumer(self, validator_key: str) -> "ValidatorConsumer":
+        return self.consumers.get(validator_key)
+
 
 class ValidatorConsumer:
     def __init__(self, websocket: WebSocket, validator_key: str):
@@ -47,6 +61,7 @@ class ValidatorConsumer:
         self.validator_key = validator_key
         self.validator_authenticated = False
         self.msg_queue = []
+        self.rent_states: dict[str, RentState] = {}
 
     def verify_auth_msg(self, msg: AuthenticateRequest) -> tuple[bool, str]:
         if msg.payload.timestamp < time.time() - AUTH_MESSAGE_MAX_AGE:
@@ -121,7 +136,63 @@ class ValidatorConsumer:
             await self.handle_executor_machine_spec(msg)
             return
 
-        # TODO: implement renting process finished module
+        if isinstance(msg, ContainerCreated | FailedContainerRequest):
+            executor_id = msg.executor_id
+            rent_state: RentState = self.rent_states.get(executor_id)
+            if rent_state is None:
+                return
+            rent_state.container_created_or_failed_future.set_result(msg)
+            return
+
+        if isinstance(msg, ContainerDeleted | FailedContainerRequest):
+            executor_id = msg.executor_id
+            rent_state: RentState = self.rent_states.get(executor_id)
+            if rent_state is None:
+                return
+            rent_state.container_deleted_or_failed_future.set_result(msg)
+            return
+
+    async def handle_executor_rent(
+        self, miner_hotkey: str, executor_uuid: str, docker_image: str, user_pubkey: str
+    ) -> ContainerCreated:
+        if self.rent_states.get(executor_uuid):
+            raise Exception(f"Executor({executor_uuid}) has been already rented.")
+
+        self.rent_states[executor_uuid] = RentState()
+
+        # send rent request to validator
+        await self.send_message(
+            ContainerCreateRequest(
+                docker_image=docker_image,
+                user_public_key=user_pubkey,
+                miner_hotkey=miner_hotkey,
+                executor_id=executor_uuid,
+            )
+        )
+
+        # wait until validator returns with the result
+        try:
+            msg: ContainerCreated | FailedContainerRequest = await asyncio.wait_for(
+                self.rent_states[executor_uuid].container_created_or_failed_future, MAX_RENT_LENGTH
+            )
+        except TimeoutError:
+            msg = None
+
+        if isinstance(msg, ContainerCreated):
+            logger.info(
+                "Container created on executor(%s): container_name=%s, volume_name=%s",
+                executor_uuid,
+                msg.container_name,
+                msg.volume_name,
+            )
+            return msg
+        elif isinstance(msg, FailedContainerRequest):
+            message = f"Container creation failed due to {msg.msg}"
+            logger.warning(message)
+            raise Exception(message)
+        else:
+            logger.warning("Unexpected error")
+            raise Exception("No response from validator")
 
     async def handle_executor_machine_spec(self, executor_spec: ExecutorSpecRequest):
         """Store into DB"""
