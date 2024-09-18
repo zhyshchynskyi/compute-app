@@ -64,7 +64,6 @@ const useDetails = (resource: Resource) => {
         open: true,
       })
 
-    const { __typename, ...template_data } = template
     const data = {
       pod_name: values.pod_name,
       price: 1,
@@ -74,12 +73,12 @@ const useDetails = (resource: Resource) => {
       type: resource.type,
       resource: resource.id,
       gpu_count: values.max_gpu,
-      template: template_data?.id,
+      template: template?.id,
       isinstance_pricing: {
         plan: selectedPlan.field,
       },
       template_config: {
-        template_data,
+        template,
         overrides: overrides,
       },
     }

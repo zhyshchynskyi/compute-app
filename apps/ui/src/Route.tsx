@@ -40,7 +40,7 @@ import EditScheduleModal from 'modals/EditScheduleModal';
 import LlmSettingsModal from 'modals/LlmSettingsModal';
 import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods';
 import PodDetails from 'pages/Pods/components/PodDetails';
-// import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template';
+import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template';
 // import { Subnets, CreateSubnetApiService, SubnetApiService, EditSubnetApiModal } from 'pages/Subnets';
 import Billing from 'pages/Billing';
 import CreateNewApp from 'pages/CreateNewApp';
@@ -89,17 +89,19 @@ const Route = () => {
             <Router path="/" element={<Home />} key={document.location.href} />
           </Router>
 
-					{/* <Router path="pods" element={<Pods />} key={document.location.href}>
+          <Router path="pods" element={<Pods />} key={document.location.href}>
             <Router index element={<MainPod />} key={document.location.href} />
             <Router path={'create-pod'} element={<PodsContent />} key={document.location.href} />
             <Router path={'details/:id'} element={<PodDetails />} key={document.location.href} />
-          </Router> */}
+          </Router>
 
-					{/* <Router path="templates" element={<TemplateLayout />} key={document.location.href}>
+          <Router path="templates" element={<TemplateLayout />} key={document.location.href}>
             <Router index element={<Template />} key={document.location.href} />
             <Router path={'create-template'} element={<CreateTemplate />} key={document.location.href} />
             <Router path={'edit/:id'} element={<EditTemplate />} key={document.location.href} />
           </Router>
+
+          {/* 
 
           <Router path="secrets" key={document.location.href}>
             <Router index element={<Secrets />} key={document.location.href} />
@@ -161,10 +163,11 @@ const Route = () => {
         </Router>
       </Routes>
 
-      {/* <SuccessPaymentModal />
-      <DeleteConfirmationModal />
       <LoginModal />
-      <TeamOfAgentViewModal />
+      <ChangeTemplateModal />
+      {/*<SuccessPaymentModal />
+      <DeleteConfirmationModal />
+       <TeamOfAgentViewModal />
       <SettingsModal />
       <ToolkitModal />
       <LlmSettingsModal />
@@ -174,7 +177,6 @@ const Route = () => {
       <CreateScheduleModal />
       <EditScheduleModal />
       <TwilioPhoneNumberSidConfirmationModal />
-      <ChangeTemplateModal />
       <SubnetApiDetailsModal /> */}
 
       {/* <AgentViewModal />

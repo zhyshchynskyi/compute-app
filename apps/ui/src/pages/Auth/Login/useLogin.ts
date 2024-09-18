@@ -43,14 +43,14 @@ const useLogin = () => {
 
           setAlertMessage({ type: 'success', message: 'You logged in' });
 
-          navigate('/login', { state: {} });
-
-          return;
+          return setTimeout(() => {
+            navigate('/');
+          }, 100);
         }
 
         setAlertMessage({ type: 'danger', message: 'Login error' });
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setAlertMessage({ type: 'danger', message: 'Login error' });
       }
     },

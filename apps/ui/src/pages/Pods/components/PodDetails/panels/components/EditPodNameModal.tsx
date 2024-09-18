@@ -1,88 +1,84 @@
-import styled from 'styled-components'
-import withRenderModal from 'hocs/withRenderModal'
+import styled from 'styled-components';
+import withRenderModal from 'hocs/withRenderModal';
 
-import MainModal from 'modals/MainModal'
+import MainModal from 'modals/MainModal';
 
-import { useModal } from 'hooks'
+import { useModal } from 'hooks';
 
-import { FormikProvider, useFormik } from 'formik'
-import FormikTextField from 'components/TextFieldFormik'
-import { ToastContext } from 'contexts'
-import { useContext } from 'react'
-import { useUpdatePodNameService } from 'apis/pod/usePodService'
-import * as yup from 'yup'
+import { FormikProvider, useFormik } from 'formik';
+import FormikTextField from 'components/TextFieldFormik';
+import { ToastContext } from 'contexts';
+import { useContext } from 'react';
+import * as yup from 'yup';
 
 type EditPodNameModalProps = {
   data: {
-    name: string
-    id: string
-  }
-}
+    name: string;
+    id: string;
+  };
+};
 
 const podNameValidationSchema = yup.object().shape({
   name: yup.string().required('Name is required'),
-})
+});
 
 const EditPodNameModal = ({ data }: EditPodNameModalProps) => {
-  const { setToast } = useContext(ToastContext)
+  const { setToast } = useContext(ToastContext);
 
-  const { updatePodName, loading: name_update_loading } = useUpdatePodNameService()
-
-  const { name, id } = data
+  const { name, id } = data;
 
   const initialValues = {
     name: name || '',
-  }
+  };
 
   const formik = useFormik({
     initialValues: initialValues,
     enableReinitialize: true,
     validationSchema: podNameValidationSchema,
-    onSubmit: async values => handleSubmit(values),
-  })
+    onSubmit: async (values) => handleSubmit(values),
+  });
 
   const handleSubmit = async (values: { name: string }) => {
     try {
-      await updatePodName(id, { pod_name: values.name })
-      handleCloseModal()
-
-      setToast({
-        message: 'Name was changed!',
-        type: 'positive',
-        open: true,
-      })
+      // await updatePodName(id, { pod_name: values.name })
+      // handleCloseModal()
+      // setToast({
+      //   message: 'Name was changed!',
+      //   type: 'positive',
+      //   open: true,
+      // })
     } catch (error) {
       setToast({
         message: 'Failed to change name!',
         type: 'negative',
         open: true,
-      })
+      });
     }
-  }
+  };
 
-  const { closeModal } = useModal()
+  const { closeModal } = useModal();
 
   const handleCloseModal = () => {
-    closeModal('edit-pod-name-modal')
-  }
+    closeModal('edit-pod-name-modal');
+  };
 
   return (
     <FormikProvider value={formik}>
       <MainModal
         onClose={handleCloseModal}
         title={'Change Pod name'}
-        submitLoading={name_update_loading}
+        submitLoading={false}
         onSubmit={formik.handleSubmit}
       >
         <StyledBody>
-          <FormikTextField name='name' placeholder={'name'} label={'Name'} />
+          <FormikTextField name="name" placeholder={'name'} label={'Name'} />
         </StyledBody>
       </MainModal>
     </FormikProvider>
-  )
-}
+  );
+};
 
-export default withRenderModal('edit-pod-name-modal')(EditPodNameModal)
+export default withRenderModal('edit-pod-name-modal')(EditPodNameModal);
 
 const StyledBody = styled.div`
   padding: 20px;
@@ -93,4 +89,4 @@ const StyledBody = styled.div`
   min-width: 400px;
 
   height: auto;
-`
+`;

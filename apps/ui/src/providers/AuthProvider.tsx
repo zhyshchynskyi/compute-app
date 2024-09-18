@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { AuthContext } from 'contexts';
 
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import { RootState } from 'redux/store';
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { i18n } = useTranslation();
   const { getDomainConfig } = useDomainConfig();
+  const { pathname } = useLocation();
 
   const [getme, { isLoading }] = useLazyGetMeQuery();
 
@@ -19,7 +20,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getme();
-  }, [getme]);
+  }, [getme, pathname]);
 
   const contextValue = {
     isAuthenticated: !!user,

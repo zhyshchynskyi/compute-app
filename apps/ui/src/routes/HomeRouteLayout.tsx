@@ -24,7 +24,7 @@ const HomeRouteLayout = () => {
 
   return (
     <StyledHomeRoot>
-      {((loginConfig?.popup && !user) || user) && <StyledOutletWrapper>{outlet}</StyledOutletWrapper>}
+      {/* {((loginConfig?.popup && !user) || user) && <StyledOutletWrapper>{outlet}</StyledOutletWrapper>} */}
 
       {!user && !loginConfig?.popup ? (
         <StyledLoginWrapper>
