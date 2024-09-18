@@ -1,13 +1,15 @@
-from typing import Annotated, Optional, List
+from typing import TYPE_CHECKING, Annotated
 from uuid import UUID
-from pydantic import field_validator
+
 from fastapi import Depends
-
-from sqlmodel import SQLModel, Field, Column, select
+from sqlalchemy import JSON, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy import JSON
+from sqlmodel import Column, Field, Relationship, SQLModel, select
 
-from models.base_model import BaseModel, BaseDao
+from models.base_model import BaseDao, BaseModel
+
+if TYPE_CHECKING:
+    from models.pod import Pod
 
 
 class GpuDetail(SQLModel):
@@ -23,21 +25,18 @@ class GpuDetail(SQLModel):
 
 class GpuSpec(SQLModel):
     count: int
-    details: List[GpuDetail]
-    gpu_scrape_error: Optional[str]
+    details: list[GpuDetail]
 
 
 class CpuSpec(SQLModel):
     count: int
     model: str
-    cpu_scrape_error: Optional[str]
 
 
 class MemorySpec(SQLModel):
     total: int
     used: int
     free: int
-    ram_scrape_error: Optional[str]
 
 
 class MachineSpecs(SQLModel):
@@ -47,17 +46,16 @@ class MachineSpecs(SQLModel):
 
 
 class Executor(BaseModel, table=True):
-    miner_address: str
-    miner_port: int
     miner_hotkey: str
+    validator_hotkey: str
     executor_id: UUID
     executor_ip_address: str
-    executor_ssh_username: str
-    executor_ssh_port: int
+    executor_ip_port: str
     specs: MachineSpecs = Field(sa_column=Column(type_=JSONB(astext_type=JSON()), nullable=False))
-    private_key: Optional[str] = None
-    public_key: Optional[str] = None
-    rented: Optional[bool] = None
+    rented: bool = Field(default=False, nullable=False)
+
+    __table_args__ = (UniqueConstraint("miner_hotkey", "executor_id", name="uq_miner_executor"),)
+    pod: "Pod" = Relationship(back_populates="executor")
 
     # @field_validator('specs')
     # def validate_specs(cls, specs: MachineSpecs):
@@ -87,13 +85,19 @@ class ExecutorDao(BaseDao):
             return executor
 
     def find_by_miner_hotkey_and_executor_id(self, miner_hotkey: str, executor_id: str):
-        return self.session.exec(select(Executor).where(Executor.miner_hotkey == miner_hotkey, Executor.executor_id == executor_id)).first()
+        return self.session.exec(
+            select(Executor).where(
+                Executor.miner_hotkey == miner_hotkey, Executor.executor_id == executor_id
+            )
+        ).first()
 
     def find_all(self) -> list[Executor]:
         return self.session.exec(select(Executor)).all()
 
-    def find_by_id(self, executor_id: UUID) -> Optional[Executor]:
-        return self.session.exec(select(Executor).where(Executor.executor_id == executor_id)).first()
+    def find_by_id(self, executor_id: UUID) -> Executor | None:
+        return self.session.exec(
+            select(Executor).where(Executor.executor_id == executor_id)
+        ).first()
 
 
 ExecutorDaoDep = Annotated[ExecutorDao, Depends(ExecutorDao)]

@@ -1,0 +1,8 @@
+{
+    "python.autoComplete.extraPaths": [
+        "./apps/server/src"
+    ],
+    "python.analysis.extraPaths": [
+        "./apps/server/src"
+    ]
+}
