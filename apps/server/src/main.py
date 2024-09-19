@@ -8,6 +8,7 @@ from core.config import config
 from routes.executor import executors_router
 from routes.user import users_router
 from routes.validator import validator_router
+from routes.ssh_key import ssh_key_router
 
 logging.getLogger('passlib').setLevel(logging.ERROR)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
@@ -32,6 +33,7 @@ def health_check():
 app.include_router(users_router, prefix="/users")
 app.include_router(validator_router, prefix="/validator")
 app.include_router(executors_router, prefix="/executors")
+app.include_router(ssh_key_router, prefix="/ssh-keys")
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=config.PORT, reload=True)

@@ -1,15 +1,21 @@
-from typing import Dict, Any
+from typing import Dict, Any, TYPE_CHECKING
 from passlib.context import CryptContext
 
+from sqlmodel import Relationship
 from models.base_model import BaseModel
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+if TYPE_CHECKING:
+    from models.ssh_key import SshKey
 
 
 class User(BaseModel, table=True):
     name: str
     email: str
     password: str
+
+    ssh_keys: list["SshKey"] = Relationship(back_populates="user")
 
     @classmethod
     def hash_password(self, password: str):
