@@ -21,6 +21,8 @@ const Pods = () => {
 
   const params = useParams()
 
+  console.log('Pods', pods, pods_loading)
+
   return (
     <StyledAppContainer>
       <StyledContainer>

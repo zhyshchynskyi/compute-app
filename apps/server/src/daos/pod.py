@@ -32,7 +32,7 @@ class PodDao(BaseDao):
     def find_all_by_user_id(self, user_id: UUID | str) -> list[Pod] | None:
         return self.session.exec(
             select(
-                Pod.executor_id,
+                Pod.executor_id.label("id"),
                 Pod.container_name,
                 Pod.volume_name,
                 Pod.ports_mapping,

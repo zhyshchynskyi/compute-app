@@ -33,7 +33,14 @@ export const executorApi = createApi({
       }),
       invalidatesTags: ['Executors'],
     }),
+    unRentExecutor: builder.mutation<{ success: boolean; message: string }, string>({
+      query: (id) => ({
+          url: `/${id}/rent`,
+          method: 'DELETE',
+      }),
+      invalidatesTags: ['Executors'],
+  }),
   }),
 });
 
-export const { useGetAvailableExecutorsQuery, useRentExecutorMutation } = executorApi;
+export const { useGetAvailableExecutorsQuery, useRentExecutorMutation, useUnRentExecutorMutation } = executorApi;

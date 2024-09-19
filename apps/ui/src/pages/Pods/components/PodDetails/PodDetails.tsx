@@ -20,6 +20,8 @@ import FormContentLoader from 'components/ContentLoaders/FormContentLoader'
 import { useSettings } from './panels/useSettings'
 
 const PodDetails = () => {
+  console.log('PodDetails');
+  
   const [activeTab, setActiveTab] = useState(0)
   const handleTabClick = (tabId: number) => {
     setActiveTab(tabId)
