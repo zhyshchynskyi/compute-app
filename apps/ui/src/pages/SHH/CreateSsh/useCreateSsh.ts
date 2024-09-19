@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { useModal } from 'hooks';
 import { useContext } from 'react';
 import { ToastContext } from 'contexts';
-import { ISshKeyRegisterRequest, useRegisterSshKeyMutation } from 'redux/apis/sshKey';
+import { ISshKeyRegisterRequest, useRegisterSshKeyMutation } from 'redux/apis/sshKeyApi';
 
 const validationSchema = yup.object().shape({
   name: yup.string().required('Please enter SSH Name'),

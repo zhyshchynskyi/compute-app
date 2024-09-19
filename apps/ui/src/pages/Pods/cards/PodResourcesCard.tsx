@@ -61,7 +61,7 @@ export default function PodResourcesCard({ item, selected, selectCard }: PodReso
               }}
             >
               <TypographySecondary
-                value={`${item.lowest_price.minMemory} GB RAM * ${item.lowest_price.minVcpu} vCPU`}
+                value={`${item.lowest_price?.minMemory} GB RAM * ${item.lowest_price?.minVcpu} vCPU`}
                 size='xs-small'
               />
               <Typography value={`High`} size={TypographySizes.xss} style={{ color: '#17C568' }} />

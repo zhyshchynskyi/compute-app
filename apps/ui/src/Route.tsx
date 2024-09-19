@@ -38,6 +38,7 @@ import Profile from 'pages/Profile';
 import MainRouteLayout from 'routes/MainRouteLayout';
 import Account from 'pages/Account';
 import Settings from 'pages/Settings';
+import ChangeSshkeyModal from 'pages/Pods/components/sshkey/ChangeSshkeyModal';
 
 const Route = () => {
   const { account_switch_loading } = useAppModeContext();
@@ -116,6 +117,7 @@ const Route = () => {
       </Routes>
       <LoginModal />
       <ChangeTemplateModal />
+      <ChangeSshkeyModal />
       <SuccessPaymentModal />
       <DeleteConfirmationModal />
       <SettingsModal />

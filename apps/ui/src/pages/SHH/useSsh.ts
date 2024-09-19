@@ -2,7 +2,7 @@ import { renderColumns } from './columnConfig';
 import { useModal } from 'hooks';
 import { useContext } from 'react';
 import { ToastContext } from 'contexts';
-import { useDeleteSshKeyMutation, useGetSshKeysQuery } from 'redux/apis/sshKey';
+import { useDeleteSshKeyMutation, useGetSshKeysQuery } from 'redux/apis/sshKeyApi';
 import { ISshKey } from 'types/sshKey.types';
 
 const useSsh = () => {
