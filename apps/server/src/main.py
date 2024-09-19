@@ -9,11 +9,8 @@ from core.config import config
 from routes.executor import executors_router
 from routes.user import users_router
 from routes.validator import validator_router
-<<<<<<< HEAD
 from routes.pod import pods_router
-=======
 from routes.ssh_key import ssh_key_router
->>>>>>> master
 
 logging.getLogger('passlib').setLevel(logging.ERROR)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
