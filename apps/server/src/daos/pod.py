@@ -4,6 +4,7 @@ from uuid import UUID
 from sqlmodel import select
 
 from daos.base import BaseDao
+from models.executor import Executor
 from models.pod import Pod
 
 
@@ -29,7 +30,17 @@ class PodDao(BaseDao):
         return self.session.exec(select(Pod).where(Pod.executor_id == executor_id)).first()
     
     def find_all_by_user_id(self, user_id: UUID | str) -> list[Pod] | None:
-        return self.session.exec(select(Pod).where(Pod.user_id == user_id)).all()
+        return self.session.exec(
+            select(
+                Pod.executor_id,
+                Pod.container_name,
+                Pod.volume_name,
+                Pod.ports_mapping,
+                Executor.executor_ip_port.label("server_port"),
+                Executor.executor_ip_address.label("server_ip"),
+            ).join(Executor, Executor.id == Pod.executor_id).where(Pod.user_id == user_id)
+        ).all()
+        # return self.session.exec(select(Pod).where(Pod.user_id == user_id)).all()
 
     def find_all(self) -> list[Pod]:
         return self.session.exec(select(Pod)).all()

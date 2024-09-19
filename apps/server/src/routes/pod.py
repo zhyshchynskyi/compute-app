@@ -22,14 +22,8 @@ pods_router = APIRouter()
 )
 async def get_pods(pod_service: Annotated[PodService, Depends(PodService)], user: Annotated[User, authenticateDeps]):
     """Endpoint to get all available pods."""
-    try:
-        available_pods = await pod_service.get_available_pods(user.id)
-        return available_pods
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e),
-        )
+    available_pods = await pod_service.get_available_pods(user.id)
+    return available_pods
 
 @pods_router.post(
     "/",

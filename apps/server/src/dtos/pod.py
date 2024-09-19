@@ -18,4 +18,5 @@ class PodUpdateRequest(BaseModel):
     description: Optional[str] = None
 
 class PodResponse(BasePod):
-    pass
+    server_port: int
+    server_ip: str
