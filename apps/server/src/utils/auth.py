@@ -1,7 +1,7 @@
 from fastapi import HTTPException, Security, Depends
 from fastapi_jwt import JwtAuthorizationCredentials
 
-from models.user import UserDaoDep
+from daos.user import UserDaoDep
 from utils.jwt import jwt_access_security
 
 

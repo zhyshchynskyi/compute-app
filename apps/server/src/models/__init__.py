@@ -1,4 +1,3 @@
-from models.user import *
-from models.executor import *
-from models.template import *
-from models.pod import *
+from models.executor import *  # noqa
+from models.pod import *  # noqa
+from models.user import *  # noqa

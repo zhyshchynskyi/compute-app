@@ -1,10 +1,7 @@
-from typing import Annotated, Dict, Any
-from fastapi import Depends
+from typing import Dict, Any
 from passlib.context import CryptContext
 
-from sqlmodel import Relationship, select
-
-from models.base_model import BaseModel, BaseDao
+from models.base_model import BaseModel
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -13,8 +10,6 @@ class User(BaseModel, table=True):
     name: str
     email: str
     password: str
-
-    pods: list["Pod"] = Relationship(back_populates="user")
 
     @classmethod
     def hash_password(self, password: str):
@@ -32,20 +27,3 @@ class User(BaseModel, table=True):
             "name": self.name,
             "email": self.email,
         }
-
-
-class UserDao(BaseDao):
-    def save(self, user: User) -> User:
-        user.password = User.hash_password(user.password)
-
-        self.session.add(user)
-        self.session.commit()
-        self.session.refresh(user)
-
-        return user
-
-    def find_by_email(self, email: str) -> User:
-        return self.session.exec(select(User).where(User.email == email)).first()
-
-
-UserDaoDep = Annotated[UserDao, Depends(UserDao)]

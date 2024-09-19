@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 
 from dtos.user import CreateUserDto, LoginUserDto
-from models.user import User, UserDaoDep
+from models.user import User
+from daos.user import UserDaoDep
 from utils.jwt import jwt_access_security
 from utils.auth import authenticateDeps
 
