@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContext } from 'contexts';
 import { Override } from '../template/useEditPodTemplate';
 import { ISshKey } from 'types/sshKey.types';
+import { useRentExecutorMutation } from 'redux/apis/executorApi';
 
 const podValidationSchema = yup.object().shape({
   pod_name: yup.string().required('Please enter Name'),
@@ -40,11 +41,14 @@ const useDetails = (resource: Resource) => {
   const { closeModal, openModal } = useModal();
   const { setToast } = useContext(ToastContext);
   const navigate = useNavigate();
-  // const { createPod, loading: create_pod_loading } = useCreatePodService()
-  // const { refetch: refetchPods } = useGetPods()
+
+  const [rentExecutor, { isLoading }] = useRentExecutorMutation();
 
   const formik = useFormik({
-    initialValues: { pod_name: '', max_gpu: 1 },
+    initialValues: {
+      pod_name: '',
+      max_gpu: 1,
+    },
     onSubmit: (values) => handleSubmit(values),
     validationSchema: podValidationSchema,
   });
@@ -57,48 +61,64 @@ const useDetails = (resource: Resource) => {
   const [selectedSshKey, setSelectedSshkey] = React.useState<ISshKey | null>(null);
 
   async function handleSubmit(values: { pod_name: string; max_gpu: number }) {
-    const template = new_template ? { ...new_template } : { ...selectedTemplate };
+    const template = new_template ? new_template : selectedTemplate;
 
-    if (!new_template && !selectedTemplate)
+    if (!template) {
       return setToast({
         message: 'You need to choose Template!',
         type: 'warning',
         open: true,
       });
+    }
 
-    const data = {
-      pod_name: values.pod_name,
-      price: 1,
-      status: 'running',
-      provider: 'AWS',
-      category: 'High Performance',
-      type: resource.type,
-      resource: resource.id,
-      gpu_count: values.max_gpu,
-      template: template?.id,
-      isinstance_pricing: {
-        plan: selectedPlan.field,
-      },
-      template_config: {
-        template,
-        overrides: overrides,
-      },
-    };
+    if (!selectedSshKey) {
+      return setToast({
+        message: 'You need to choose SSH Key!',
+        type: 'warning',
+        open: true,
+      });
+    }
 
-    // const result = await createPod(data)
-    // await refetchPods()
+    // const data = {
+    //   pod_name: values.pod_name,
+    //   price: 1,
+    //   status: 'running',
+    //   provider: 'AWS',
+    //   category: 'High Performance',
+    //   type: resource.type,
+    //   resource: resource.id,
+    //   gpu_count: values.max_gpu,
+    //   template: template?.id,
+    //   isinstance_pricing: {
+    //     plan: selectedPlan.field,
+    //   },
+    //   template_config: {
+    //     template,
+    //     overrides: overrides,
+    //   },
+    // };
 
-    // if (result) {
-    //   setToast({
-    //     message: result.message,
-    //     type: result.success ? 'positive' : 'warning',
-    //     open: true,
-    //   })
+    try {
+      await rentExecutor({
+        id: resource.id,
+        docker_image: template.container_image,
+        user_public_key: selectedSshKey.public_key,
+      }).unwrap();
 
-    //   if (result.success) {
-    //     navigate(`/pods/details/${result.pod.id}`)
-    //   }
-    // }
+      setToast({
+        message: 'Created successfully',
+        type: 'positive',
+        open: true,
+      });
+
+      // navigate(`/pods/details/${result.pod.id}`)
+    } catch (error) {
+      setToast({
+        message: 'Can not rent this machine',
+        type: 'warning',
+        open: true,
+      });
+    }
   }
 
   const createPlanCards = (
@@ -204,7 +224,7 @@ const useDetails = (resource: Resource) => {
     selectedPlan,
     handleOpenChangeTemplateModal,
     selectedTemplate,
-    create_pod_loading: false,
+    create_pod_loading: isLoading,
     handleOpenEditTemplateModal,
     handleEditTemplate,
     overrides,

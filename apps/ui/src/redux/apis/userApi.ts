@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { getBaseQuery } from '../fetch-auth-query';
 import { IUser } from 'types/user.types';
 
-interface ISingupRequest {
+interface ISignupRequest {
   name: string;
   email: string;
   password: string;
@@ -23,7 +23,7 @@ export const userApi = createApi({
   baseQuery: getBaseQuery({ baseUrl: '/users' }),
   tagTypes: ['Users'],
   endpoints: (builder) => ({
-    singup: builder.mutation<IUser, ISingupRequest>({
+    singup: builder.mutation<IUser, ISignupRequest>({
       query: (data) => ({
         url: '',
         method: 'POST',
