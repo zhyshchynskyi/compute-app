@@ -1,15 +1,17 @@
 import logging
 
-from celery import Celery
+from celery import Celery, Task
 
 from core.config import config as settings
 from daos.executor import ExecutorDao
 from models.executor import Executor
 from protocol.validator_requests import ExecutorSpecRequest
 from services.ioc import ioc
+import psycopg2
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 
 celery = Celery(__name__)
@@ -17,7 +19,13 @@ celery.conf.broker_url = settings.REDIS_BACKEND_URL
 celery.conf.result_backend = settings.REDIS_BACKEND_URL
 
 
-@celery.task(name="save_executor_into_db")
+class BaseTaskWithRetry(Task):
+    autoretry_for = (psycopg2.OperationalError,)
+    retry_kwargs = {'max_retries': 5, 'countdown': 10}
+    retry_backoff = True
+
+
+@celery.task(name="save_executor_into_db", base=BaseTaskWithRetry)
 def save_executor_into_db(executor_spec_str: str):
     try:
         executor_spec = ExecutorSpecRequest.model_validate_json(executor_spec_str)

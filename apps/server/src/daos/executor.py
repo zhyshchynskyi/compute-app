@@ -23,22 +23,29 @@ class ExecutorDao(BaseDao):
         return task
 
     def upsert(self, executor: Executor) -> Executor:
-        existing_executor = self.session.exec(
-            select(Executor).where(Executor.executor_id == executor.executor_id)
-        ).scalar_one_or_none()
+        try:
+            existing_executor = self.session.exec(
+                select(Executor).where(Executor.executor_id == executor.executor_id)
+            ).scalar_one_or_none()
 
-        logger.info("Checked executor exists: %s", str(existing_executor))
-        if existing_executor:
-            for key, value in executor.model_dump().items():
-                setattr(existing_executor, key, value)
-            self.session.commit()
-            self.session.refresh(existing_executor)
-            return existing_executor
-        else:
-            self.session.add(executor)
-            self.session.commit()
-            self.session.refresh(executor)
-            return executor
+            logger.info("Checked executor exists: %s", str(existing_executor))
+            if existing_executor:
+                for key, value in executor.model_dump().items():
+                    if key != 'id':
+                        setattr(existing_executor, key, value)
+                self.session.commit()
+                self.session.refresh(existing_executor)
+                return existing_executor
+            else:
+                self.session.add(executor)
+                self.session.commit()
+                self.session.refresh(executor)
+                return executor
+        except Exception as e:
+            self.session.rollback()
+            print(e)
+            logger.error("Error upserting executor: %s", e)
+            raise
 
     def get_executor_by_uuid(self, uuid: UUID | str) -> None | Executor:
         statement = select(Executor).where(Executor.id == uuid)

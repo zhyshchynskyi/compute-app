@@ -1,7 +1,7 @@
 """add sshkey model
 
 Revision ID: 33af87c19aab
-Revises: be7476c8c0ee
+Revises: 233362b6ae78
 Create Date: 2024-09-19 09:37:04.395391
 
 """
@@ -15,7 +15,7 @@ import sqlmodel.sql.sqltypes
 
 # revision identifiers, used by Alembic.
 revision: str = '33af87c19aab'
-down_revision: Union[str, None] = 'be7476c8c0ee'
+down_revision: Union[str, None] = '233362b6ae78' 
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

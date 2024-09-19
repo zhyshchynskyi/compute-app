@@ -33,27 +33,21 @@ async def singup(payload: CreateUserDto, user_dao: UserDaoDep):
 
 @users_router.post("/login")
 async def login(payload: LoginUserDto, user_dao: UserDaoDep):
-    try:
-        user = user_dao.find_by_email(payload.email)
-        if not user:
-            raise HTTPException(status_code=404, detail="User not found")
+    user = user_dao.find_by_email(payload.email)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
 
-        if not User.verify_password(user.password, payload.password):
-            raise HTTPException(status_code=401, detail="Unauthorized")
+    if not User.verify_password(user.password, payload.password):
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
-        access_token = jwt_access_security.create_access_token(subject=user.to_json())
+    access_token = jwt_access_security.create_access_token(subject=user.to_json())
 
-        return {
-            "user": user,
-            "token": access_token,
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return {
+        "user": user,
+        "token": access_token,
+    }
 
 
 @users_router.get("/me")
 async def me(user=authenticateDeps):
-    try:
-        return user
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return user
