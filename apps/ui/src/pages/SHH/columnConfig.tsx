@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import IconButton from 'share-ui/components/IconButton/IconButton';
 import moment from 'moment';
-import { SSH } from 'types/ssh';
 import Delete from 'share-ui/components/Icon/Icons/components/Delete';
 import Edit from 'share-ui/components/Icon/Icons/components/Edit';
+import { ISshKey } from 'types/sshKey.types';
 
 // eslint-disable-next-line react/prop-types
 const DateRenderer: React.FC<{ value: Date }> = ({ value }) => {
@@ -12,8 +12,8 @@ const DateRenderer: React.FC<{ value: Date }> = ({ value }) => {
 };
 
 interface RendererColumnProps {
-  handleOpenUpdateSSHModal: (ssh: SSH) => void;
-  handleDeleteSSH: (event: React.MouseEvent<Element, MouseEvent>, ssh: Pick<SSH, 'id'>) => void;
+  handleOpenUpdateSSHModal: (ssh: ISshKey) => void;
+  handleDeleteSSH: (event: React.MouseEvent<Element, MouseEvent>, ssh: ISshKey) => void;
 }
 
 export const renderColumns = ({ handleOpenUpdateSSHModal, handleDeleteSSH }: RendererColumnProps) => [
@@ -25,13 +25,13 @@ export const renderColumns = ({ handleOpenUpdateSSHModal, handleDeleteSSH }: Ren
   },
   {
     Header: 'Key',
-    accessor: 'key',
+    accessor: 'public_key',
     minWidth: 200,
     width: 500,
   },
   {
     Header: 'Createds',
-    accessor: 'created_on',
+    accessor: 'created_at',
     minWidth: 100,
     width: 150,
     Cell: DateRenderer,
@@ -42,8 +42,7 @@ export const renderColumns = ({ handleOpenUpdateSSHModal, handleDeleteSSH }: Ren
     accessor: 'actions',
     minWidth: 100,
     width: 130,
-
-    Cell: ({ row: { original } }: { row: { original: SSH } }) => (
+    Cell: ({ row: { original } }: { row: { original: ISshKey } }) => (
       <StyledActionWrapper>
         <IconButton
           onClick={() => handleOpenUpdateSSHModal(original)}

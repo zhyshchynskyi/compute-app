@@ -1,20 +1,20 @@
-import Table from 'components/Table'
-import AddKeyModal from './AddKeyModal'
-import UpdateSSHModal from './UpdateSSH/UpdateSSHModal'
-import { StyledPanelWrapper } from 'styles/panelStyles.css'
-import useSsh from './useSsh'
+import Table from 'components/Table';
+import AddKeyModal from './AddKeyModal';
+import UpdateSSHModal from './UpdateSSH/UpdateSSHModal';
+import { StyledPanelWrapper } from 'styles/panelStyles.css';
+import useSsh from './useSsh';
 
 const SHH = () => {
-  const { columns, ssh_list, ssh_list_loading } = useSsh()
+  const { columns, sshKeys, ssh_list_loading } = useSsh();
   return (
     <>
       <StyledPanelWrapper>
-        <Table columns={columns} data={ssh_list} isLoading={ssh_list_loading} />
+        <Table columns={columns} data={sshKeys as any[]} isLoading={ssh_list_loading} />
       </StyledPanelWrapper>
       <AddKeyModal />
-      <UpdateSSHModal/>
+      <UpdateSSHModal />
     </>
-  )
-}
+  );
+};
 
-export default SHH
+export default SHH;

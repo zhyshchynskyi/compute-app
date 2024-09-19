@@ -1,28 +1,29 @@
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import React, { useContext } from 'react'
-import { Resource } from 'types/resource'
-import { useModal } from 'hooks'
-import { Template } from 'types/template'
-import { useNavigate } from 'react-router-dom'
-import { ToastContext } from 'contexts'
-import { Override } from '../template/useEditPodTemplate'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import React, { useContext } from 'react';
+import { Resource } from 'types/resource';
+import { useModal } from 'hooks';
+import { Template } from 'types/template';
+import { useNavigate } from 'react-router-dom';
+import { ToastContext } from 'contexts';
+import { Override } from '../template/useEditPodTemplate';
+import { ISshKey } from 'types/sshKey.types';
 
 const podValidationSchema = yup.object().shape({
   pod_name: yup.string().required('Please enter Name'),
-})
+});
 
 export interface PlanCard {
-  id: number
-  title: string
-  sub_title?: string
-  price: number
-  total_price?: number
-  default_total_price?: number
-  description?: string
-  per_mont?: boolean
-  default_price: number
-  field: string
+  id: number;
+  title: string;
+  sub_title?: string;
+  price: number;
+  total_price?: number;
+  default_total_price?: number;
+  description?: string;
+  per_mont?: boolean;
+  default_price: number;
+  field: string;
 }
 
 const defaultPlan = (price: number, default_price: number) => ({
@@ -33,36 +34,37 @@ const defaultPlan = (price: number, default_price: number) => ({
   description: 'Pay as you go, with costs based on actual usage time.',
   default_price: default_price,
   field: 'secure_price',
-})
+});
 
 const useDetails = (resource: Resource) => {
-  const { closeModal, openModal } = useModal()
-  const { setToast } = useContext(ToastContext)
-  const navigate = useNavigate()
+  const { closeModal, openModal } = useModal();
+  const { setToast } = useContext(ToastContext);
+  const navigate = useNavigate();
   // const { createPod, loading: create_pod_loading } = useCreatePodService()
   // const { refetch: refetchPods } = useGetPods()
 
   const formik = useFormik({
     initialValues: { pod_name: '', max_gpu: 1 },
-    onSubmit: values => handleSubmit(values),
+    onSubmit: (values) => handleSubmit(values),
     validationSchema: podValidationSchema,
-  })
+  });
   const [selectedPlan, setSelectedPlan] = React.useState<PlanCard>(
-    defaultPlan(resource.secure_price, resource.secure_price),
-  )
-  const [selectedTemplate, setSelectTemplate] = React.useState<Template | null>(null)
-  const [overrides, setOverrides] = React.useState<Override | null>(null)
-  const [new_template, setNewTemplate] = React.useState<Template | null>(null)
+    defaultPlan(resource.secure_price, resource.secure_price)
+  );
+  const [selectedTemplate, setSelectTemplate] = React.useState<Template | null>(null);
+  const [overrides, setOverrides] = React.useState<Override | null>(null);
+  const [new_template, setNewTemplate] = React.useState<Template | null>(null);
+  const [selectedSshKey, setSelectedSshkey] = React.useState<ISshKey | null>(null);
 
   async function handleSubmit(values: { pod_name: string; max_gpu: number }) {
-    const template = new_template ? { ...new_template } : { ...selectedTemplate }
+    const template = new_template ? { ...new_template } : { ...selectedTemplate };
 
     if (!new_template && !selectedTemplate)
       return setToast({
         message: 'You need to choose Template!',
         type: 'warning',
         open: true,
-      })
+      });
 
     const data = {
       pod_name: values.pod_name,
@@ -81,7 +83,7 @@ const useDetails = (resource: Resource) => {
         template,
         overrides: overrides,
       },
-    }
+    };
 
     // const result = await createPod(data)
     // await refetchPods()
@@ -100,10 +102,7 @@ const useDetails = (resource: Resource) => {
   }
 
   const createPlanCards = (
-    resource: Pick<
-      Resource,
-      'one_month_price' | 'three_month_price' | 'six_month_price' | 'secure_price'
-    >,
+    resource: Pick<Resource, 'one_month_price' | 'three_month_price' | 'six_month_price' | 'secure_price'>
   ): PlanCard[] => {
     const plans = [
       {
@@ -127,11 +126,9 @@ const useDetails = (resource: Resource) => {
         per_mont: true,
         field: 'six_month_price',
       },
-    ]
+    ];
 
-    const plan_list: PlanCard[] = [
-      defaultPlan(resource.secure_price * formik.values.max_gpu, resource.secure_price),
-    ]
+    const plan_list: PlanCard[] = [defaultPlan(resource.secure_price * formik.values.max_gpu, resource.secure_price)];
 
     plans.forEach((plan, index) => {
       if (plan.price) {
@@ -147,31 +144,31 @@ const useDetails = (resource: Resource) => {
           } at a discounted hourly cost.`,
           per_mont: plan.per_mont,
           field: plan.field,
-        })
+        });
       }
-    })
+    });
 
-    return plan_list
-  }
+    return plan_list;
+  };
 
   const handleSelectPlan = (plan: PlanCard) => {
-    setSelectedPlan(plan)
-  }
+    setSelectedPlan(plan);
+  };
 
   const handleSelectTemplate = (template: Template) => {
-    setSelectTemplate(template)
-    closeModal('change-pod-template-modal')
-  }
+    setSelectTemplate(template);
+    closeModal('change-pod-template-modal');
+  };
 
   const handleOpenChangeTemplateModal = () => {
-    openModal({ name: 'change-pod-template-modal', data: { handleSelectTemplate } })
-  }
+    openModal({ name: 'change-pod-template-modal', data: { handleSelectTemplate } });
+  };
 
   const handleClearOverrides = () => {
-    setNewTemplate(null)
-    setOverrides(null)
-    closeModal('edit-pod-template-modal')
-  }
+    setNewTemplate(null);
+    setOverrides(null);
+    closeModal('edit-pod-template-modal');
+  };
 
   const handleOpenEditTemplateModal = () => {
     openModal({
@@ -182,14 +179,23 @@ const useDetails = (resource: Resource) => {
         new_template,
         handleClearOverrides,
       },
-    })
-  }
+    });
+  };
 
   const handleEditTemplate = (template: Template, overrides: Override) => {
-    setNewTemplate(template)
-    setOverrides(overrides)
-    closeModal('edit-pod-template-modal')
-  }
+    setNewTemplate(template);
+    setOverrides(overrides);
+    closeModal('edit-pod-template-modal');
+  };
+
+  const onChangeSshKey = (key: ISshKey) => {
+    setSelectedSshkey(key);
+    closeModal('change-ssh-key-modal');
+  };
+
+  const handleOpenChangeSshKeyModal = () => {
+    openModal({ name: 'change-ssh-key-modal', data: { onChangeSshKey } });
+  };
 
   return {
     formik,
@@ -202,7 +208,9 @@ const useDetails = (resource: Resource) => {
     handleOpenEditTemplateModal,
     handleEditTemplate,
     overrides,
-  }
-}
+    selectedSshKey,
+    handleOpenChangeSshKeyModal,
+  };
+};
 
-export default useDetails
+export default useDetails;
