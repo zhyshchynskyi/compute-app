@@ -41,7 +41,7 @@ async def find_my_ssh_keys(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@ssh_key_router.get("/me/{id}")
+@ssh_key_router.get("/{id}")
 async def find_one_my_ssh_key(
     id: UUID,
     ssh_dao: Annotated[SshKeyDao, Depends(SshKeyDao)],
@@ -49,6 +49,39 @@ async def find_one_my_ssh_key(
 ):
     try:
         ssh_key = ssh_dao.find_my_ssh_key_by_id(user, id)
+        if not ssh_key:
+            raise HTTPException(status_code=404, detail="Ssh key not found")
+
+        return ssh_key
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@ssh_key_router.put("/{id}")
+async def find_one_my_ssh_key(
+    id: UUID,
+    payload: CreateSshKey,
+    ssh_dao: Annotated[SshKeyDao, Depends(SshKeyDao)],
+    user=authenticateDeps,
+):
+    try:
+        ssh_key = ssh_dao.update_my_ssh_key(user, id, payload)
+        if not ssh_key:
+            raise HTTPException(status_code=404, detail="Ssh key not found")
+
+        return ssh_key
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@ssh_key_router.delete("/{id}")
+async def find_one_my_ssh_key(
+    id: UUID,
+    ssh_dao: Annotated[SshKeyDao, Depends(SshKeyDao)],
+    user=authenticateDeps,
+):
+    try:
+        ssh_key = ssh_dao.delete_my_ssh_key(user, id)
         if not ssh_key:
             raise HTTPException(status_code=404, detail="Ssh key not found")
 

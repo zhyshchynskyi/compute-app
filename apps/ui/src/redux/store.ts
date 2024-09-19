@@ -5,10 +5,12 @@ import AuthSlice from './slices/authSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { userApi } from './apis/userApi';
+import { sshKeyApi } from './apis/sshKey';
 
 const rootReducer = combineReducers({
   auth: AuthSlice,
   [userApi.reducerPath]: userApi.reducer,
+  [sshKeyApi.reducerPath]: sshKeyApi.reducer,
 });
 
 const persistConfig = {
@@ -24,7 +26,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(userApi.middleware),
+    }).concat(userApi.middleware, sshKeyApi.middleware),
 });
 
 // exporting the store

@@ -27,7 +27,7 @@ const AddKeyModal = () => {
       >
         <StyledBody>
           <FormikTextField name='name' placeholder={'SSH Name'} label={'SSH Name'} />
-          <FormikTextField name='key' placeholder={'SSH Key'} label={'SSH Key'} />
+          <FormikTextField name='public_key' placeholder={'SSH Key'} label={'SSH Key'} />
         </StyledBody>
       </MainModal>
     </FormikProvider>
