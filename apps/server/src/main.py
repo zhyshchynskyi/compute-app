@@ -15,6 +15,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(
 
 app = FastAPI(
     title=config.PROJECT_NAME,
+    root_path="/api"
 )
 
 app.add_middleware(
