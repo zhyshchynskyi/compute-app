@@ -47,7 +47,7 @@ class ExecutorDao(BaseDao):
         return executor
 
     def get_available_executors(self) -> list[Executor]:
-        statement = select(Executor).where(Executor.rented is False)
+        statement = select(Executor).where(Executor.rented == False)
         result = self.session.exec(statement)
         available_executors = result.all()
         return [executor[0] for executor in available_executors]
