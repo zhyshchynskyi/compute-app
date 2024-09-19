@@ -1,7 +1,9 @@
-from typing import Annotated
-from fastapi import Depends
+from typing import Dict, Any
+from passlib.context import CryptContext
 
-from models.base_model import BaseModel, BaseDao
+from models.base_model import BaseModel
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class User(BaseModel, table=True):
@@ -9,14 +11,19 @@ class User(BaseModel, table=True):
     email: str
     password: str
 
+    @classmethod
+    def hash_password(self, password: str):
+        """Hash a password for storing."""
+        return pwd_context.hash(password)
 
-class UserDao(BaseDao):
-    def save(self, user: User) -> User:
-        self.session.add(user)
-        self.session.commit()
-        self.session.refresh(user)
+    @classmethod
+    def verify_password(self, hashed_password: str, plain_password: str):
+        """Verify a stored password against one provided by user"""
+        return pwd_context.verify(plain_password, hashed_password)
 
-        return user
-
-
-UserDaoDep = Annotated[UserDao, Depends(UserDao)]
+    def to_json(self) -> Dict[str, Any]:
+        return {
+            "id": str(self.id),
+            "name": self.name,
+            "email": self.email,
+        }

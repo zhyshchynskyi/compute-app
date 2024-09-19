@@ -1,19 +1,28 @@
 import logging
 
-import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 from core.config import config
 from routes.executor import executors_router
 from routes.user import users_router
 from routes.validator import validator_router
 
+logging.getLogger('passlib').setLevel(logging.ERROR)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 
 app = FastAPI(
     title=config.PROJECT_NAME,
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def health_check():

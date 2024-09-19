@@ -1,0 +1,7 @@
+export { default as Register } from 'pages/Auth/Register/Register'
+export { default as Login } from 'pages/Auth/Login/Login'
+export { default as GithubLogin } from 'pages/Auth/Login/GithubLogin'
+export { default as ForgotPassword } from 'pages/Auth/ForgotPassword/ForgotPassword'
+export { default as ResetPassword } from 'pages/Auth/ResetPassword/ResetPassword'
+export { default as TwoFAuthentication } from './TwoFAuthentication/TwoFAuthentication'
+export { default as GoogleLogin } from './Login/GoogleLogin'

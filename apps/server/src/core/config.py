@@ -10,6 +10,7 @@ class Config(BaseSettings):
     # DEBUG: bool = Field(env="DEBUG", default=False)
 
     PORT: int = Field(env="PORT", default=8000)
+    JWT_SECRET_KEY: str = Field(env="JWT_SECRET_KEY")
 
     REDIS_BACKEND_URL: str = Field(env="REDIS_BACKEND_URL", default="redis://localhost:6379")
 

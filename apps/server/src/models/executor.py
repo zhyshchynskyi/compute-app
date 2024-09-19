@@ -1,12 +1,11 @@
-from typing import TYPE_CHECKING, Annotated
+from typing import TYPE_CHECKING
 from uuid import UUID
 
-from fastapi import Depends
 from sqlalchemy import JSON, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlmodel import Column, Field, Relationship, SQLModel, select
+from sqlmodel import Column, Field, Relationship, SQLModel
 
-from models.base_model import BaseDao, BaseModel
+from models.base_model import BaseModel
 
 if TYPE_CHECKING:
     from models.pod import Pod
@@ -60,44 +59,3 @@ class Executor(BaseModel, table=True):
     # @field_validator('specs')
     # def validate_specs(cls, specs: MachineSpecs):
     #     return specs.model_dump()
-
-
-class ExecutorDao(BaseDao):
-    def upsert(self, executor: Executor) -> Executor:
-        existing = self.find_by_miner_hotkey_and_executor_id(
-            miner_hotkey=executor.miner_hotkey,
-            executor_id=executor.executor_id,
-        )
-        if existing:
-            for field_name, field_value in executor.dict().items():
-                setattr(existing, field_name, field_value)
-
-            self.session.commit()
-            self.session.refresh(existing)
-
-            return existing
-        else:
-            # Create new executor
-            self.session.add(executor)
-            self.session.commit()
-            self.session.refresh(executor)
-
-            return executor
-
-    def find_by_miner_hotkey_and_executor_id(self, miner_hotkey: str, executor_id: str):
-        return self.session.exec(
-            select(Executor).where(
-                Executor.miner_hotkey == miner_hotkey, Executor.executor_id == executor_id
-            )
-        ).first()
-
-    def find_all(self) -> list[Executor]:
-        return self.session.exec(select(Executor)).all()
-
-    def find_by_id(self, executor_id: UUID) -> Executor | None:
-        return self.session.exec(
-            select(Executor).where(Executor.executor_id == executor_id)
-        ).first()
-
-
-ExecutorDaoDep = Annotated[ExecutorDao, Depends(ExecutorDao)]
