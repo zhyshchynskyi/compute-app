@@ -25,6 +25,8 @@ const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string)
   const params = useParams();
   const { id } = params;
 
+  console.log('podData', podData);
+
   useEffect(() => {
     let timer: any;
     if (play) {
@@ -58,6 +60,7 @@ const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string)
                   />
                 </StyledNameWrapper>
                 <TypographySecondary value="ID: hgf6h5df1sdgffd" size="medium" />
+                <TypographySecondary value={JSON.stringify(podData.ports_mapping || {})} size="medium" />
               </StyledColumn>
 
               <StyledColumn>
