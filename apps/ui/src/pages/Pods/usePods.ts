@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Resource } from 'types/resource';
 import { useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useGetAvailableExecutorsQuery } from 'redux/apis/executorApi';
 
 const groupByType = (data: any) => {
   return data.reduce((acc: any, item: any) => {
@@ -85,6 +86,31 @@ export const usePod = () => {
 };
 
 export const useResource = () => {
+  const { data: executors = [], isLoading } = useGetAvailableExecutorsQuery();
+
+  const resources = useMemo(
+    () =>
+      executors.map((executor) => ({
+        ...executor,
+        name: executor.specs.gpu.details[0].name,
+        display_name: executor.specs.gpu.details[0]?.name || executor.specs.cpu.model,
+        type: 'gpu',
+        category: 'NVIDIA',
+        ram: executor.specs.ram.free,
+        secure_price: 10,
+        one_month_price: 10,
+        three_month_price: 30,
+        six_month_price: 55,
+        max_gpu: executor.specs.gpu.count,
+        status: 'high',
+        disc_type: 'ssd',
+        cloud_type: 'secure cloud',
+        region: 'CA-MTL-1',
+        cuda_version: executor.specs.gpu.details[0]?.cuda,
+      })),
+    [executors]
+  );
+
   const formik = useFormik({
     initialValues: {
       cloud_type: 'Secure Cloud',
@@ -117,6 +143,7 @@ export const useResource = () => {
   return {
     resources: groupByType(resources),
     formik,
+    isLoading,
   };
 };
 

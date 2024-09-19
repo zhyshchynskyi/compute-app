@@ -1,22 +1,22 @@
-import withRenderModal from 'hocs/withRenderModal'
+import withRenderModal from 'hocs/withRenderModal';
 
-import MainModal from 'modals/MainModal'
+import MainModal from 'modals/MainModal';
 
-import { useModal } from 'hooks'
+import { useModal } from 'hooks';
 
-import { FormikProvider } from 'formik'
-import FormikTextField from 'components/TextFieldFormik'
-import useUpdateSSH from './useUpdateSSH'
-import { SSH } from 'types/ssh'
-import { StyledBody } from '../AddKeyModal'
+import { FormikProvider } from 'formik';
+import FormikTextField from 'components/TextFieldFormik';
+import useUpdateSSH from './useUpdateSSH';
+import { StyledBody } from '../AddKeyModal';
+import { ISshKey } from 'types/sshKey.types';
 
-const UpdateSSHModal = ({ data: { ssh } }: { data: { ssh: SSH } }) => {
-  const { formik, update_shh_loader } = useUpdateSSH(ssh)
-  const { closeModal } = useModal()
+const UpdateSSHModal = ({ data: { ssh } }: { data: { ssh: ISshKey } }) => {
+  const { formik, update_shh_loader } = useUpdateSSH(ssh);
+  const { closeModal } = useModal();
 
   const handleCloseModal = () => {
-    closeModal('update-shh-key-modal')
-  }
+    closeModal('update-shh-key-modal');
+  };
 
   return (
     <FormikProvider value={formik}>
@@ -27,12 +27,12 @@ const UpdateSSHModal = ({ data: { ssh } }: { data: { ssh: SSH } }) => {
         onSubmit={formik.handleSubmit}
       >
         <StyledBody>
-          <FormikTextField name='name' placeholder={'SSH Name'} label={'SSH Name'} />
-          <FormikTextField name='key' placeholder={'SSH Key'} label={'SSH Key'} />
+          <FormikTextField name="name" placeholder={'SSH Name'} label={'SSH Name'} />
+          <FormikTextField name="public_key" placeholder={'SSH Key'} label={'SSH Key'} />
         </StyledBody>
       </MainModal>
     </FormikProvider>
-  )
-}
+  );
+};
 
-export default withRenderModal('update-shh-key-modal')(UpdateSSHModal)
+export default withRenderModal('update-shh-key-modal')(UpdateSSHModal);
