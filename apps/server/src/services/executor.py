@@ -2,7 +2,7 @@ import logging
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 
 from consumers.validator_consumer import validator_consumers_manager
 from daos.executor import ExecutorDao
@@ -13,6 +13,7 @@ from dtos.executor import (
 )
 from models.executor import Executor
 from models.pod import Pod
+from models.user import User
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +27,7 @@ class ExecutorService:
         self.executor_dao = executor_dao
         self.pod_dao = pod_dao
 
-    async def rent_executor(self, payload: RentExecutorRequest, executor_uuid: UUID):
+    async def rent_executor(self, user: User, payload: RentExecutorRequest, executor_uuid: UUID):
         # Fetch the executor by UUID
         executor = self.executor_dao.get_executor_by_uuid(executor_uuid)
 
@@ -56,6 +57,7 @@ class ExecutorService:
         self.pod_dao.save(
             Pod(
                 executor_id=executor.id,
+                user_id=user.id,
                 container_name=container_created.container_name,
                 volume_name=container_created.volume_name,
                 ports_mapping=ports_mapping,
@@ -66,7 +68,7 @@ class ExecutorService:
         executor.rented = True
         self.executor_dao.save(executor)
 
-    async def remove_rent(self, executor_uuid: UUID):
+    async def remove_rent(self, user: User, executor_uuid: UUID):
         # Fetch the executor by UUID
         executor = self.executor_dao.get_executor_by_uuid(executor_uuid)
 
@@ -77,6 +79,9 @@ class ExecutorService:
         if not pod:
             raise Exception(f"Pod for executor({executor_uuid}) doesn't exist.")
 
+        if pod.user_id != user.id:
+            raise HTTPException(f"No permission to remove this pod.")
+
         consumer = validator_consumers_manager.get_consumer(executor.validator_hotkey)
         if not consumer:
             logger.warning(
@@ -84,12 +89,13 @@ class ExecutorService:
             )
             raise Exception(f"Can't rent this executor({executor_uuid}).")
 
-        # TODO: check if current executor is rented by correct owner
-
         # remote docker container.
         await consumer.handle_executor_remove_rent(
             executor.miner_hotkey, str(executor.executor_id), pod.container_name, pod.volume_name
         )
+
+        # remove pod record in DB
+        self.pod_dao.remove_by_executor_id(executor.id)
 
         # Update the executor's rented status
         executor.rented = False

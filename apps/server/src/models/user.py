@@ -1,7 +1,10 @@
-from typing import Dict, Any
+from typing import TYPE_CHECKING, Dict, Any
 from passlib.context import CryptContext
+from sqlmodel import Relationship
 
 from models.base_model import BaseModel
+if TYPE_CHECKING:
+    from models.pod import Pod
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -10,6 +13,8 @@ class User(BaseModel, table=True):
     name: str
     email: str
     password: str
+
+    pods: list["Pod"] = Relationship(back_populates="user")
 
     @classmethod
     def hash_password(self, password: str):

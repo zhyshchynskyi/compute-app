@@ -7,15 +7,18 @@ from sqlmodel import Field, Relationship, SQLModel
 
 if TYPE_CHECKING:
     from models.executor import Executor
+    from models.user import User
 
 
 class Pod(SQLModel, table=True):
     executor_id: UUID = Field(foreign_key="executor.id", primary_key=True)
+    user_id: UUID = Field(foreign_key="user.id", nullable=False, ondelete="CASCADE")
     container_name: str
     volume_name: str
     ports_mapping: str = Field(sa_column=Column(type_=JSONB(astext_type=JSON()), nullable=False))
 
     executor: "Executor" = Relationship(back_populates="pod")
+    user: "User" = Relationship(back_populates="pods")
 
     # Needed for Column(JSON)
     class Config:

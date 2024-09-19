@@ -1,9 +1,13 @@
+import logging
 from uuid import UUID
 
 from sqlmodel import select
 
 from daos.base import BaseDao
 from models.pod import Pod
+
+
+logger = logging.getLogger(__name__)
 
 
 class PodDao(BaseDao):
@@ -23,6 +27,23 @@ class PodDao(BaseDao):
 
     def find_by_executor_id(self, executor_id: UUID) -> Pod | None:
         return self.session.exec(select(Pod).where(Pod.executor_id == executor_id)).first()
+    
+    def find_all_by_user_id(self, user_id: UUID | str) -> list[Pod] | None:
+        return self.session.exec(select(Pod).where(Pod.user_id == user_id)).all()
 
     def find_all(self) -> list[Pod]:
         return self.session.exec(select(Pod)).all()
+    
+    def remove_by_executor_id(self, executor_id: UUID) -> None:
+        try:
+            pod = self.find_by_executor_id(executor_id)
+            if pod:
+                self.session.delete(pod)
+                self.session.commit()
+                logger.info(f"Pod with executor ID {executor_id} removed successfully.")
+            else:
+                logger.warning(f"No pod found with executor ID {executor_id}.")
+        except Exception as e:
+            self.session.rollback()
+            logger.error(f"Error removing pod with executor ID {executor_id}: {e}")
+            raise

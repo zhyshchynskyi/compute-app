@@ -11,7 +11,9 @@ from dtos.executor import (
     RentExecutorRequest,
 )
 from models.executor import Executor
+from models.user import User
 from services.executor import ExecutorService
+from utils.auth import authenticateDeps
 
 executors_router = APIRouter()
 
@@ -62,10 +64,11 @@ async def rent(
     executor_uuid: UUID,
     payload: RentExecutorRequest,
     executor_service: Annotated[ExecutorService, Depends(ExecutorService)],
+    user: Annotated[User, authenticateDeps]
 ):
     """Endpoint to rent executor machine."""
     try:
-        await executor_service.rent_executor(payload, executor_uuid)
+        await executor_service.rent_executor(user, payload, executor_uuid)
 
         # If successful
         return JSONResponse(
@@ -91,12 +94,12 @@ async def rent(
     },
 )
 async def unrent(
-    executor_uuid: UUID, executor_service: Annotated[ExecutorService, Depends(ExecutorService)]
+    executor_uuid: UUID, executor_service: Annotated[ExecutorService, Depends(ExecutorService)], user: Annotated[User, authenticateDeps]
 ):
     """Endpoint to rent executor machine."""
     try:
         # Assuming some logic here to rent the executor
-        await executor_service.remove_rent(executor_uuid)
+        await executor_service.remove_rent(user, executor_uuid)
 
         # If successful
         return JSONResponse(
