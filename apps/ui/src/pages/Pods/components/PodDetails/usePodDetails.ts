@@ -4,6 +4,7 @@ import { useModal } from 'hooks';
 import { ToastContext } from 'contexts';
 import { useContext } from 'react';
 import { useUnRentExecutorMutation } from 'redux/apis/executorApi';
+import { useGetPodByIdQuery } from 'redux/apis/podsApi';
 
 export const usePodDetails = () => {
   const navigate = useNavigate();
@@ -15,13 +16,12 @@ export const usePodDetails = () => {
 
   const { setToast } = useContext(ToastContext);
 
-  // const { data: podById, loading: pod_is_loading } = usePodById(id || '')
+  const { data: podById, isLoading: isGetPodLoading } = useGetPodByIdQuery(id || '')
 
   // const { deletePodById, loading: delete_pod_loading } = useDeletePodByIdService()
 
   // const { refetch: refetchPods } = useGetPods()
 
-  const podById: any = {};
 
   const handleDeletePod = (id: string) => {
     openModal({
@@ -34,7 +34,7 @@ export const usePodDetails = () => {
             if (params.id === id) {
               navigate('/pods/create-pod')
             }
-            
+
             closeModal('delete-confirmation-modal');
             setToast({
               message: 'Pod was deleted!',
@@ -58,7 +58,7 @@ export const usePodDetails = () => {
   return {
     handleDeletePod,
     podById,
-    pod_is_loading: false,
-    delete_pod_loading: false,
+    pod_is_loading: isGetPodLoading,
+    delete_pod_loading: isLoading,
   };
 };

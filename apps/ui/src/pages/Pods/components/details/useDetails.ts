@@ -101,6 +101,7 @@ const useDetails = (resource: Resource) => {
     try {
       await rentExecutor({
         id: resource.id,
+        pod_name: values.pod_name,
         docker_image: template.container_image,
         user_public_key: selectedSshKey.public_key,
       }).unwrap();
@@ -159,9 +160,8 @@ const useDetails = (resource: Resource) => {
           default_price: plan.price,
           total_price: plan.months * 30 * 24 * plan.price * formik.values.max_gpu,
           default_total_price: plan.months * 30 * 24 * plan.price,
-          description: `Reserve a GPU for ${plan.months} month${
-            plan.months > 1 ? 's' : ''
-          } at a discounted hourly cost.`,
+          description: `Reserve a GPU for ${plan.months} month${plan.months > 1 ? 's' : ''
+            } at a discounted hourly cost.`,
           per_mont: plan.per_mont,
           field: plan.field,
         });

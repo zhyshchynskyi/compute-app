@@ -55,9 +55,10 @@ class ExecutorService:
         )
         ports_mapping = {internal: external for (internal, external) in container_created.port_maps}
         self.pod_dao.save(
-            Pod(
-                executor_id=executor.id,
+            Pod.from_executor(
+                executor,
                 user_id=user.id,
+                pod_name=payload.pod_name,
                 container_name=container_created.container_name,
                 volume_name=container_created.volume_name,
                 ports_mapping=ports_mapping,
@@ -80,7 +81,7 @@ class ExecutorService:
             raise Exception(f"Pod for executor({executor_uuid}) doesn't exist.")
 
         if pod.user_id != user.id:
-            raise HTTPException(f"No permission to remove this pod.")
+            raise HTTPException("No permission to remove this pod.")
 
         consumer = validator_consumers_manager.get_consumer(executor.validator_hotkey)
         if not consumer:

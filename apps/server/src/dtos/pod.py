@@ -1,22 +1,27 @@
-from pydantic import BaseModel
 from uuid import UUID
-from typing import Optional
+
+from pydantic import BaseModel
+
 
 class BasePod(BaseModel):
-    container_name: str
-    volume_name: str
     ports_mapping: dict
+    pod_name: str
+    ssh_connect_cmd: str
+    gpu_name: str
+    gpu_count: str
+    cpu_name: str
+    ram_total: int
 
 
 class PodCreateRequest(BaseModel):
     name: str
-    description: Optional[str] = None
+    description: str | None = None
+
 
 class PodUpdateRequest(BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
+    name: str | None = None
+    description: str | None = None
+
 
 class PodResponse(BasePod):
     id: UUID
-    server_port: int
-    server_ip: str

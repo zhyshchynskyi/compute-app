@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict
 from uuid import UUID
 
 from sqlalchemy import JSON, UniqueConstraint
@@ -44,6 +44,14 @@ class MachineSpecs(SQLModel):
     ram: MemorySpec
 
 
+class PodInfoFromExecutorDict(TypedDict):
+    ssh_connect_cmd: str
+    gpu_name: str
+    gpu_count: int
+    cpu_name: str
+    ram_total: int
+
+
 class Executor(BaseModel, table=True):
     miner_hotkey: str
     validator_hotkey: str
@@ -59,3 +67,12 @@ class Executor(BaseModel, table=True):
     # @field_validator('specs')
     # def validate_specs(cls, specs: MachineSpecs):
     #     return specs.model_dump()
+
+    def get_specs_for_pod(self) -> PodInfoFromExecutorDict:
+        machine_specs = MachineSpecs.model_validate(self.specs)
+        return {
+            "gpu_name": machine_specs.gpu.details[0].name if machine_specs.gpu.details else "",
+            "gpu_count": machine_specs.gpu.count,
+            "cpu_name": machine_specs.cpu.model,
+            "ram_total": machine_specs.ram.total,
+        }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { StyledPanelWrapper } from 'styles/panelStyles.css';
 import { MenuDots, Pause, Play } from 'share-ui/components/Icon/Icons';
@@ -18,12 +18,15 @@ import Utilization from './components/Utilizations';
 import { useParams } from 'react-router-dom';
 import EditPodNameModal from './components/EditPodNameModal';
 import { useModal } from 'hooks';
+import { IPodResponse } from 'types/pod.types';
 
-const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string) => void }) => {
+const General = ({ podData, deletePod }: { podData: IPodResponse; deletePod: (id: string) => void }) => {
   const [play, setPlay] = useState(false);
   const { openModal } = useModal();
   const params = useParams();
   const { id } = params;
+
+  const formattedRamTotal = useMemo(() => `${Math.round(podData?.ram_total / (1024 ** 2))} GB`, [podData?.ram_total]);
 
   console.log('podData', podData);
 
@@ -59,14 +62,13 @@ const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string)
                     ariaLabel="Edit name"
                   />
                 </StyledNameWrapper>
-                <TypographySecondary value="ID: hgf6h5df1sdgffd" size="medium" />
-                <TypographySecondary value={JSON.stringify(podData.ports_mapping || {})} size="medium" />
+                <TypographySecondary value={`ID: ${podData?.id}`} size="medium" />
               </StyledColumn>
 
               <StyledColumn>
-                <TypographyPrimary value="1 x RTX A5000" size="medium" />
+                <TypographyPrimary value={`${podData.gpu_count} x ${podData.gpu_name}`} size="medium" />
 
-                <TypographySecondary value="9 vCPU 50 GB RAM" size="medium" />
+                <TypographySecondary value={formattedRamTotal} size="medium" />
               </StyledColumn>
 
               <StyledColumn>
@@ -85,6 +87,12 @@ const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string)
               <StyledColumn></StyledColumn>
             </StyledBody>
 
+            <StyledBody>
+              <StyledColumn>
+                <TypographySecondary value={`SSH Connection: ${podData.ssh_connect_cmd}`} size="medium" />
+              </StyledColumn>
+            </StyledBody>
+
             <Utilization />
 
             <StyledLogsWrapper>
@@ -99,13 +107,13 @@ const General = ({ podData, deletePod }: { podData: any; deletePod: (id: string)
 
                 <MenuButton component={() => <StyledMenuDots />} closeDialogOnContentClick ariaLabel={`More actions`}>
                   <StyledMenuButtonsWrapper>
-                    <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    <ButtonTertiary onClick={() => { }} size={IconButton.sizes?.SMALL} ariaLabel={''}>
                       Lock Pod
                     </ButtonTertiary>
-                    <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    <ButtonTertiary onClick={() => { }} size={IconButton.sizes?.SMALL} ariaLabel={''}>
                       Edit Pod
                     </ButtonTertiary>
-                    <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    <ButtonTertiary onClick={() => { }} size={IconButton.sizes?.SMALL} ariaLabel={''}>
                       Start Pod
                     </ButtonTertiary>
                     <ButtonTertiary onClick={() => deletePod(id || '')} size={IconButton.sizes?.SMALL} ariaLabel={''}>

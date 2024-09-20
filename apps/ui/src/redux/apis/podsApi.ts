@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { getBaseQuery } from '../fetch-auth-query';
-import { IPod } from 'types/pod.types';
+import { IPodResponse } from 'types/pod.types';
 
 interface ICreatePodRequest {
     pod_name: string;
@@ -22,7 +22,7 @@ interface ICreatePodRequest {
 }
 
 interface ICreatePodResponse {
-    pod: IPod;
+    pod: IPodResponse;
     message: string;
     success: boolean;
 }
@@ -40,21 +40,21 @@ export const podsApi = createApi({
             }),
             invalidatesTags: ['Pods'],
         }),
-        getPods: builder.query<IPod[], void>({
+        getPods: builder.query<IPodResponse[], void>({
             query: () => ({
                 url: '',
                 method: 'GET',
             }),
             providesTags: ['Pods'],
         }),
-        getPodById: builder.query<IPod, number>({
+        getPodById: builder.query<IPodResponse, string>({
             query: (id) => ({
                 url: `/${id}`,
                 method: 'GET',
             }),
             providesTags: ['Pods'],
         }),
-        updatePod: builder.mutation<IPod, { id: number; data: Partial<ICreatePodRequest> }>({
+        updatePod: builder.mutation<IPodResponse, { id: number; data: Partial<ICreatePodRequest> }>({
             query: ({ id, data }) => ({
                 url: `/${id}`,
                 method: 'PUT',
