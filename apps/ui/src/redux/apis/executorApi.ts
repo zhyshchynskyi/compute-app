@@ -7,10 +7,14 @@ export interface IBaseResponse {
   message: string;
 }
 
-interface IRentRequest {
-  id: string;
+interface IRentExecutorRequest {
+  pod_name: string;
   docker_image: string;
   user_public_key: string;
+}
+
+interface IRentExecutorArg extends IRentExecutorRequest {
+  id: string;
 }
 
 export const executorApi = createApi({
@@ -25,7 +29,7 @@ export const executorApi = createApi({
       }),
       providesTags: ['Executors'],
     }),
-    rentExecutor: builder.mutation<IBaseResponse, IRentRequest>({
+    rentExecutor: builder.mutation<IBaseResponse, IRentExecutorArg>({
       query: ({ id, ...rest }) => ({
         url: `${id}/rent`,
         method: 'POST',
@@ -35,11 +39,11 @@ export const executorApi = createApi({
     }),
     unRentExecutor: builder.mutation<{ success: boolean; message: string }, string>({
       query: (id) => ({
-          url: `/${id}/rent`,
-          method: 'DELETE',
+        url: `/${id}/rent`,
+        method: 'DELETE',
       }),
       invalidatesTags: ['Executors'],
-  }),
+    }),
   }),
 });
 

@@ -1,17 +1,23 @@
-from fastapi import Depends
-from daos.pod import PodDao
-from models import Pod, User
-from dtos.pod import PodCreateRequest, PodUpdateRequest
-from typing import Annotated, List
+from typing import Annotated
 from uuid import UUID
+
+from fastapi import Depends
+
+from daos.pod import PodDao
+from dtos.pod import PodCreateRequest, PodResponse, PodUpdateRequest
+from models import Pod, User
+
 
 class PodService:
     def __init__(self, pod_dao: Annotated[PodDao, Depends(PodDao)]):
         self.pod_dao = pod_dao
 
-    async def get_available_pods(self, user_id: UUID | str) -> List[Pod]:
+    async def get_available_pods(self, user_id: UUID | str) -> list[PodResponse]:
         """Fetch all available pods."""
         return self.pod_dao.find_all_by_user_id(user_id)
+
+    async def get_pod_by_id(self, user_id: UUID | str, executor_id: UUID | str) -> PodResponse:
+        return self.pod_dao.find_by_executor_id(executor_id, user_id)
 
     async def create_pod(self, user: User, payload: PodCreateRequest) -> Pod:
         """Create a new pod."""

@@ -5,6 +5,7 @@ from dtos.base import BaseResponse
 
 class RentExecutorRequest(BaseModel):
     # TODO: this needs to be replaced w/ template
+    pod_name: str
     docker_image: str
     user_public_key: str
 

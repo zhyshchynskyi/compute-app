@@ -1,13 +1,15 @@
-from fastapi import APIRouter, Depends, HTTPException, status
 from typing import Annotated
 from uuid import UUID
 
-from models import Pod, User
-from dtos.pod import PodCreateRequest, PodUpdateRequest, PodResponse
+from fastapi import APIRouter, Depends, HTTPException, status
+
+from dtos.pod import PodCreateRequest, PodResponse, PodUpdateRequest
+from models import User
 from services.pod import PodService
 from utils.auth import authenticateDeps
 
 pods_router = APIRouter()
+
 
 @pods_router.get(
     "/",
@@ -20,10 +22,40 @@ pods_router = APIRouter()
         500: {"description": "Internal server error"},
     },
 )
-async def get_pods(pod_service: Annotated[PodService, Depends(PodService)], user: Annotated[User, authenticateDeps]):
+async def get_pods(
+    pod_service: Annotated[PodService, Depends(PodService)], user: Annotated[User, authenticateDeps]
+):
     """Endpoint to get all available pods."""
     available_pods = await pod_service.get_available_pods(user.id)
     return available_pods
+
+
+@pods_router.get(
+    "/{pod_uuid}",
+    response_description="Get a pod by ID",
+    summary="Get pod by ID",
+    description="Endpoint to get a specific pod by its ID.",
+    response_model=PodResponse,
+    responses={
+        200: {"description": "Pod retrieved successfully"},
+        404: {"description": "Pod not found"},
+        500: {"description": "Internal server error"},
+    },
+)
+async def get_pod_by_id(
+    pod_uuid: UUID,
+    pod_service: Annotated[PodService, Depends(PodService)],
+    user: Annotated[User, authenticateDeps],
+):
+    """Endpoint to get a specific pod by its ID."""
+    pod = await pod_service.get_pod_by_id(user.id, pod_uuid)
+    if not pod:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Pod not found",
+        )
+    return pod
+
 
 @pods_router.post(
     "/",
@@ -40,7 +72,7 @@ async def get_pods(pod_service: Annotated[PodService, Depends(PodService)], user
 async def create_pod(
     payload: PodCreateRequest,
     pod_service: Annotated[PodService, Depends(PodService)],
-    user: Annotated[User, authenticateDeps]
+    user: Annotated[User, authenticateDeps],
 ):
     """Endpoint to create a new pod."""
     try:
@@ -51,6 +83,7 @@ async def create_pod(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e),
         )
+
 
 @pods_router.put(
     "/{pod_uuid}",
@@ -69,7 +102,7 @@ async def update_pod(
     pod_uuid: UUID,
     payload: PodUpdateRequest,
     pod_service: Annotated[PodService, Depends(PodService)],
-    user: Annotated[User, authenticateDeps]
+    user: Annotated[User, authenticateDeps],
 ):
     """Endpoint to update an existing pod."""
     try:
@@ -80,6 +113,7 @@ async def update_pod(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e),
         )
+
 
 @pods_router.delete(
     "/{pod_uuid}",
@@ -95,15 +129,14 @@ async def update_pod(
 async def delete_pod(
     pod_uuid: UUID,
     pod_service: Annotated[PodService, Depends(PodService)],
-    user: Annotated[User, authenticateDeps]
+    user: Annotated[User, authenticateDeps],
 ):
     """Endpoint to delete an existing pod."""
     try:
         await pod_service.delete_pod(user, pod_uuid)
-        return BaseResponse(success=True, message="Pod successfully deleted")
+        return None
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e),
         )
-

@@ -4,9 +4,8 @@ from uuid import UUID
 from sqlmodel import select
 
 from daos.base import BaseDao
-from models.executor import Executor
+from dtos.pod import PodResponse
 from models.pod import Pod
-
 
 logger = logging.getLogger(__name__)
 
@@ -26,25 +25,42 @@ class PodDao(BaseDao):
             self.session.refresh(pod)
             return pod
 
-    def find_by_executor_id(self, executor_id: UUID) -> Pod | None:
-        return self.session.exec(select(Pod).where(Pod.executor_id == executor_id)).first()
-    
-    def find_all_by_user_id(self, user_id: UUID | str) -> list[Pod] | None:
+    def find_by_executor_id(
+        self, executor_id: UUID, user_id: UUID | None = None
+    ) -> Pod | PodResponse | None:
+        if not user_id:
+            return self.session.exec(select(Pod).where(Pod.executor_id == executor_id)).first()
+
         return self.session.exec(
             select(
                 Pod.executor_id.label("id"),
-                Pod.container_name,
-                Pod.volume_name,
                 Pod.ports_mapping,
-                Executor.executor_ip_port.label("server_port"),
-                Executor.executor_ip_address.label("server_ip"),
-            ).join(Executor, Executor.id == Pod.executor_id).where(Pod.user_id == user_id)
+                Pod.ssh_connect_cmd,
+                Pod.gpu_name,
+                Pod.gpu_count,
+                Pod.cpu_name,
+                Pod.ram_total,
+                Pod.pod_name,
+            ).where(Pod.executor_id == executor_id, Pod.user_id == user_id)
+        ).first()
+
+    def find_all_by_user_id(self, user_id: UUID | str) -> list[PodResponse] | None:
+        return self.session.exec(
+            select(
+                Pod.executor_id.label("id"),
+                Pod.ports_mapping,
+                Pod.ssh_connect_cmd,
+                Pod.gpu_name,
+                Pod.gpu_count,
+                Pod.cpu_name,
+                Pod.ram_total,
+                Pod.pod_name,
+            ).where(Pod.user_id == user_id)
         ).all()
-        # return self.session.exec(select(Pod).where(Pod.user_id == user_id)).all()
 
     def find_all(self) -> list[Pod]:
         return self.session.exec(select(Pod)).all()
-    
+
     def remove_by_executor_id(self, executor_id: UUID) -> None:
         try:
             pod = self.find_by_executor_id(executor_id)

@@ -1,8 +1,10 @@
-export interface IPod {
-    executor_id: string;
-    container_name: string;
-    volume_name: string;
+export interface IPodResponse {
+    id: string;
+    pod_name: string;
+    ssh_connect_cmd: string;
     ports_mapping: { [key: string]: number };
-    server_port: number;
-    server_ip: string;
+    gpu_name: number;
+    gpu_count: string;
+    cpu_name: string;
+    ram_total: number;
 }
