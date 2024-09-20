@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { getBaseQuery } from '../fetch-auth-query';
 import { IExecutor } from 'types/executor.types';
+import { IPodResponse } from 'types/pod.types';
 
 export interface IBaseResponse {
   success: boolean;
@@ -29,7 +30,7 @@ export const executorApi = createApi({
       }),
       providesTags: ['Executors'],
     }),
-    rentExecutor: builder.mutation<IBaseResponse, IRentExecutorArg>({
+    rentExecutor: builder.mutation<IPodResponse, IRentExecutorArg>({
       query: ({ id, ...rest }) => ({
         url: `${id}/rent`,
         method: 'POST',
@@ -37,7 +38,7 @@ export const executorApi = createApi({
       }),
       invalidatesTags: ['Executors'],
     }),
-    unRentExecutor: builder.mutation<{ success: boolean; message: string }, string>({
+    unRentExecutor: builder.mutation<IBaseResponse, string>({
       query: (id) => ({
         url: `/${id}/rent`,
         method: 'DELETE',

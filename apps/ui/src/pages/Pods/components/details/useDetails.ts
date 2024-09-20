@@ -9,6 +9,7 @@ import { ToastContext } from 'contexts';
 import { Override } from '../template/useEditPodTemplate';
 import { ISshKey } from 'types/sshKey.types';
 import { useRentExecutorMutation } from 'redux/apis/executorApi';
+import { useLazyGetPodsQuery } from 'redux/apis/podsApi';
 
 const podValidationSchema = yup.object().shape({
   pod_name: yup.string().required('Please enter Name'),
@@ -42,7 +43,8 @@ const useDetails = (resource: Resource) => {
   const { setToast } = useContext(ToastContext);
   const navigate = useNavigate();
 
-  const [rentExecutor, { isLoading }] = useRentExecutorMutation();
+  const [rentExecutor, { isLoading: isRenting }] = useRentExecutorMutation();
+  const [getPods, { isLoading: isGettingPod }] = useLazyGetPodsQuery();
 
   const formik = useFormik({
     initialValues: {
@@ -99,7 +101,7 @@ const useDetails = (resource: Resource) => {
     // };
 
     try {
-      await rentExecutor({
+      const pod = await rentExecutor({
         id: resource.id,
         pod_name: values.pod_name,
         docker_image: template.container_image,
@@ -112,7 +114,9 @@ const useDetails = (resource: Resource) => {
         open: true,
       });
 
-      // navigate(`/pods/details/${result.pod.id}`)
+      await getPods().unwrap();
+
+      navigate(`/pods/details/${resource.id}`);
     } catch (error) {
       setToast({
         message: 'Can not rent this machine',
@@ -160,8 +164,9 @@ const useDetails = (resource: Resource) => {
           default_price: plan.price,
           total_price: plan.months * 30 * 24 * plan.price * formik.values.max_gpu,
           default_total_price: plan.months * 30 * 24 * plan.price,
-          description: `Reserve a GPU for ${plan.months} month${plan.months > 1 ? 's' : ''
-            } at a discounted hourly cost.`,
+          description: `Reserve a GPU for ${plan.months} month${
+            plan.months > 1 ? 's' : ''
+          } at a discounted hourly cost.`,
           per_mont: plan.per_mont,
           field: plan.field,
         });
@@ -224,7 +229,7 @@ const useDetails = (resource: Resource) => {
     selectedPlan,
     handleOpenChangeTemplateModal,
     selectedTemplate,
-    create_pod_loading: isLoading,
+    create_pod_loading: isRenting || isGettingPod,
     handleOpenEditTemplateModal,
     handleEditTemplate,
     overrides,

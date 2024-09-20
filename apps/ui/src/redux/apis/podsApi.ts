@@ -72,4 +72,4 @@ export const podsApi = createApi({
     }),
 });
 
-export const { useCreatePodMutation, useGetPodsQuery, useGetPodByIdQuery, useUpdatePodMutation, useDeletePodMutation } = podsApi;
+export const { useCreatePodMutation, useGetPodsQuery, useLazyGetPodsQuery, useGetPodByIdQuery, useUpdatePodMutation, useDeletePodMutation } = podsApi;

@@ -68,13 +68,10 @@ async def rent(
 ):
     """Endpoint to rent executor machine."""
     try:
-        await executor_service.rent_executor(user, payload, executor_uuid)
+        pod = await executor_service.rent_executor(user, payload, executor_uuid)
 
         # If successful
-        return JSONResponse(
-            status_code=status.HTTP_201_CREATED,
-            content={"success": True, "message": "Executor successfully rented"},
-        )
+        return pod
     except Exception as e:
         return JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

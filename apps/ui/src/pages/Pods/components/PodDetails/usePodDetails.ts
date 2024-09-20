@@ -4,7 +4,7 @@ import { useModal } from 'hooks';
 import { ToastContext } from 'contexts';
 import { useContext } from 'react';
 import { useUnRentExecutorMutation } from 'redux/apis/executorApi';
-import { useGetPodByIdQuery } from 'redux/apis/podsApi';
+import { useGetPodByIdQuery, useLazyGetPodsQuery } from 'redux/apis/podsApi';
 
 export const usePodDetails = () => {
   const navigate = useNavigate();
@@ -12,16 +12,12 @@ export const usePodDetails = () => {
   const { id } = params;
   const { openModal, closeModal } = useModal();
 
-  const [unRentExecutor, { isLoading }] = useUnRentExecutorMutation();
+  const [unRentExecutor, { isLoading: isUnRenting }] = useUnRentExecutorMutation();
+  const [getPods, { isLoading: isGettingPods }] = useLazyGetPodsQuery();
 
   const { setToast } = useContext(ToastContext);
 
-  const { data: podById, isLoading: isGetPodLoading } = useGetPodByIdQuery(id || '')
-
-  // const { deletePodById, loading: delete_pod_loading } = useDeletePodByIdService()
-
-  // const { refetch: refetchPods } = useGetPods()
-
+  const { data: podById, isLoading: isGetPodLoading } = useGetPodByIdQuery(id || '');
 
   const handleDeletePod = (id: string) => {
     openModal({
@@ -30,9 +26,10 @@ export const usePodDetails = () => {
         deleteItem: async () => {
           try {
             await unRentExecutor(id).unwrap();
+            await getPods().unwrap();
 
             if (params.id === id) {
-              navigate('/pods/create-pod')
+              navigate('/pods/create-pod');
             }
 
             closeModal('delete-confirmation-modal');
@@ -40,7 +37,7 @@ export const usePodDetails = () => {
               message: 'Pod was deleted!',
               type: 'positive',
               open: true,
-            })
+            });
           } catch (e) {
             setToast({
               message: 'Failed to delete Pod!',
@@ -59,6 +56,6 @@ export const usePodDetails = () => {
     handleDeletePod,
     podById,
     pod_is_loading: isGetPodLoading,
-    delete_pod_loading: isLoading,
+    delete_pod_loading: isUnRenting || isGetPodLoading,
   };
 };
