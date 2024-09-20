@@ -54,7 +54,7 @@ class ExecutorService:
             payload.user_public_key,
         )
         ports_mapping = {internal: external for (internal, external) in container_created.port_maps}
-        self.pod_dao.save(
+        pod = self.pod_dao.save(
             Pod.from_executor(
                 executor,
                 user_id=user.id,
@@ -68,6 +68,8 @@ class ExecutorService:
         # Update the executor's rented status
         executor.rented = True
         self.executor_dao.save(executor)
+        
+        return pod
 
     async def remove_rent(self, user: User, executor_uuid: UUID):
         # Fetch the executor by UUID
