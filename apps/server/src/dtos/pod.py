@@ -3,7 +3,6 @@ from uuid import UUID
 from typing import Optional
 
 class BasePod(BaseModel):
-    executor_id: UUID
     container_name: str
     volume_name: str
     ports_mapping: dict
@@ -18,4 +17,6 @@ class PodUpdateRequest(BaseModel):
     description: Optional[str] = None
 
 class PodResponse(BasePod):
-    pass
+    id: UUID
+    server_port: int
+    server_ip: str

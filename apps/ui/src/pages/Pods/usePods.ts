@@ -3,6 +3,7 @@ import { Resource } from 'types/resource';
 import { useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useGetAvailableExecutorsQuery } from 'redux/apis/executorApi';
+import { useGetPodsQuery } from 'redux/apis/podsApi';
 
 const groupByType = (data: any) => {
   return data.reduce((acc: any, item: any) => {
@@ -14,7 +15,16 @@ const groupByType = (data: any) => {
   }, {});
 };
 
-const pods: any = [];
+// TODO: need to be removed
+const DEFAULT_POD: any = {
+  template_container_image: 'runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04',
+  pod_name: 'Demo Pod',
+  resource_display_name: 'RTX 4090',
+  resource_ram: '90G',
+  status: 'running',
+  id: 1,
+};
+
 const resources = [
   {
     id: '1',
@@ -79,9 +89,13 @@ export const usePod = () => {
   const location = useLocation();
   const prevLocation = React.useRef(location);
 
+  const { data: pods = [], isLoading } = useGetPodsQuery();
+
+  const fixedPods = pods.map((pod) => ({...DEFAULT_POD, ...pod}));
+
   return {
-    pods,
-    pods_loading: false,
+    pods: fixedPods,
+    pods_loading: isLoading,
   };
 };
 
@@ -122,7 +136,7 @@ export const useResource = () => {
       vram: 0,
     },
     // validationSchema: validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: (values) => { },
   });
 
   React.useEffect(() => {

@@ -225,6 +225,7 @@ class ValidatorConsumer:
         except TimeoutError:
             msg = None
 
+        self.rent_states.pop(executor_uuid)
         if isinstance(msg, ContainerDeleted):
             logger.info(
                 "Container deleted on executor(%s): container_name=%s, volume_name=%s",

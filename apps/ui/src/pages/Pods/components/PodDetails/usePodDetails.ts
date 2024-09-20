@@ -3,12 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useModal } from 'hooks';
 import { ToastContext } from 'contexts';
 import { useContext } from 'react';
+import { useUnRentExecutorMutation } from 'redux/apis/executorApi';
 
 export const usePodDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const { openModal, closeModal } = useModal();
+
+  const [unRentExecutor, { isLoading }] = useUnRentExecutorMutation();
 
   const { setToast } = useContext(ToastContext);
 
@@ -26,15 +29,18 @@ export const usePodDetails = () => {
       data: {
         deleteItem: async () => {
           try {
-            // await deletePodById(id)
-            // await refetchPods()
-            // if (params.id === id) navigate('/pods/create-pod')
+            await unRentExecutor(id).unwrap();
+
+            if (params.id === id) {
+              navigate('/pods/create-pod')
+            }
+            
             closeModal('delete-confirmation-modal');
-            // setToast({
-            //   message: 'Pod was deleted!',
-            //   type: 'positive',
-            //   open: true,
-            // })
+            setToast({
+              message: 'Pod was deleted!',
+              type: 'positive',
+              open: true,
+            })
           } catch (e) {
             setToast({
               message: 'Failed to delete Pod!',
