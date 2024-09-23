@@ -1,8 +1,12 @@
 {
-    "python.autoComplete.extraPaths": [
-        "./apps/server/src"
-    ],
-    "python.analysis.extraPaths": [
-        "./apps/server/src"
-    ]
+  "python.autoComplete.extraPaths": ["./apps/server/src"],
+  "python.analysis.extraPaths": ["./apps/server/src"],
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.printWidth": 120,
+  "prettier.trailingComma": "all",
+  "prettier.bracketSpacing": true,
+  "prettier.useEditorConfig": true,
+  "prettier.arrowParens": "avoid"
 }
