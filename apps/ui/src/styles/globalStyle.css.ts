@@ -69,7 +69,6 @@ const StyledInnerWrapper = styled.section`
 `
 
 const StyledHeaderGroup = styled.header<{ grid?: boolean }>`
-  // padding: 32px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,7 +86,6 @@ const StyledCenteredWrapper = styled.div`
 `
 
 const SectionDivider = styled.div`
-  // background: rgba(255, 255, 255, 0.3);
   background: ${({ theme }) =>
     theme.body.backgroundColorPrimary === 'rgb(255, 255, 255)' ? 'rgb(217,217,217)' : 'rgba(255, 255, 255, 0.3)'};
   border-radius: 3px;
