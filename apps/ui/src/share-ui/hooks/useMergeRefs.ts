@@ -29,8 +29,9 @@ function assignRef(ref: MutableRefObject<any> | LegacyRef<any>, value: HTMLEleme
   }
 
   try {
+    // prettier-ignore
     // eslint-disable-next-line no-param-reassign
-    ;(ref as MutableRefObject<any>).current = value
+    (ref as MutableRefObject<any>).current = value
   } catch (error) {
     console.error(error)
     throw new Error(`Cannot assign value '${value}' to ref '${ref}'`)
