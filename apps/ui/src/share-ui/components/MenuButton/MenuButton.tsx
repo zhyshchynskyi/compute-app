@@ -317,12 +317,6 @@ const MenuButton: L3Component<MenuButtonProps> & {
             ref={mergedRef}
             type='button'
             customWidth={customWidth}
-            // className={cx('menu-button--wrapper', overrideClassName, bemClass(`size-${size}`), {
-            //   [bemClass('open')]: isOpen,
-            //   [openDialogComponentClassName]: isOpen && openDialogComponentClassName,
-            //   [bemClass('disabled')]: disabled,
-            //   [bemClass('text')]: text,
-            // })}
             aria-haspopup='true'
             aria-expanded={isOpen}
             aria-label={!text && ariaLabel}
