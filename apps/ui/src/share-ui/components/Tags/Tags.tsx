@@ -4,11 +4,9 @@ import useMergeRefs from '../../hooks/useMergeRefs'
 import CloseSmall from '../Icon/Icons/components/CloseSmall'
 
 import { tagElementColorsNames, getTagElementColor } from '../../utils/colors-vars-map'
-// import Avatar from "../Avatar/Avatar";
 import IconButton from '../IconButton/IconButton'
 import { getTestId } from '../../tests/test-ids-utils'
 import { TagSizes } from './TagsConstants'
-// import { AvatarType } from "../Avatar/AvatarConstants";
 import { SubIcon, L3Component, L3ComponentProps } from '../../types'
 import useHover from '../../hooks/useHover'
 import ClickableWrapper from '../Clickable/ClickableWrapper'
@@ -180,16 +178,6 @@ const Tags: L3Component<TagsProps, HTMLElement> & {
                 ignoreFocusStyle
               />
             ) : null}
-            {/* {rightAvatar ? (
-              <Avatar
-                withoutBorder
-                className={cx(styles.avatar, styles.right)}
-                customSize={16}
-                src={rightAvatar}
-                type={AvatarType.IMG}
-                key={id}
-              />
-            ) : null} */}
             {hasCloseButton && (
               <StyledCloseButton outlined={outlined} disabled={disabled} size={size}>
                 <IconButton
