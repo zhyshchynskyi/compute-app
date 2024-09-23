@@ -1,25 +1,16 @@
-import { useState, useEffect, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { v4 as uuidv4 } from 'uuid'
 import { useModal } from 'hooks'
 
 import { Command } from 'cmdk'
-import { get, groupBy, has, slice } from 'lodash'
-import Games from 'share-ui/components/Icon/Icons/components/Games'
+import { get, groupBy } from 'lodash'
 
-import {
-  StyledCommandInput,
-  StyledCommandList,
-  StyledCommandWrapper,
-  StyledCommandDialog,
-  StyledCommandItemHeader,
-  StyledSvgContainer,
-} from './CommandMenuStyles'
+import { StyledCommandDialog, StyledCommandInput, StyledCommandList } from './CommandMenuStyles'
 
-import { defaultData } from './defaultData'
 import CommandItem from './components/CommandItem'
+import { defaultData } from './defaultData'
 
 import { useHotkeys } from 'react-hotkeys-hook'
 
@@ -28,7 +19,6 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
   const { openModal, closeModal } = useModal()
   const componentRef = useRef<HTMLDivElement>(null)
 
-  // const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [pages, setPages] = useState<any>([])
   const [game_id, set_game_id] = useState<string>('')
@@ -109,24 +99,9 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
       return
     } else {
       await navigate(item.url)
-      // closeModal('spotlight-modal')
       setCmdkOpen(false)
     }
-    // return openModal({ name: item.modal_name, data: { game_id: path_id } })
   }
-
-  // const onCreateOptionBasedOnOption = (game_id: any) => {
-  //   openModal({ name: modal_options.modal_name, data: { game_id } })
-  //   set_game_id(game_id)
-  // }
-
-  // const onCreateOptionBasedOnCollection = (collection_data: any) => {
-  //   const { id } = collection_data
-  //   openModal({ name: 'create-asset-modal', data: { collection_id: id } })
-  //   navigate(`/collection/${id}/assets`)
-  //   // closeModal('spotlight-modal')
-  //   setCmdkOpen(false)
-  // }
 
   useEffect(() => {
     // Function to handle outside click
@@ -134,9 +109,6 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
       setSearch('')
       if (componentRef.current) {
         setCmdkOpen(false)
-        //       // Clicked outside the component
-        // console.log('Clicked outside the component')
-        //     }
       }
     }
 
@@ -148,30 +120,6 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
       document.removeEventListener('click', handleClickOutside)
     }
   }, [])
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
-  //       // Clicked outside the component
-  //       console.log('Clicked outside the component')
-  //     }
-  //   }
-
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (event.key === 'Escape') {
-  //       // Pressed the Escape key
-  //       console.log('Pressed the Escape key')
-  //     }
-  //   }
-
-  //   document.addEventListener('click', handleClickOutside)
-  //   document.addEventListener('keydown', handleKeyDown)
-
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside)
-  //     document.removeEventListener('keydown', handleKeyDown)
-  //   }
-  // }, [])
 
   const groupedItems = groupBy(defaultData(path_id), data => {
     return get(data, 'group_name', '')
@@ -195,13 +143,7 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
         }
       }}
     >
-      <StyledCommandInput
-        // value={search}
-        // onValueChange={value => setSearch(value)}
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus
-        placeholder={t('search-placeholder')}
-      />
+      <StyledCommandInput autoFocus placeholder={t('search-placeholder')} />
       <StyledCommandList>
         <>
           <Command.Group>
