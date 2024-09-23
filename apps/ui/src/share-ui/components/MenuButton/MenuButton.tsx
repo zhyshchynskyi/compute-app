@@ -1,20 +1,19 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { forwardRef, ReactElement, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import cx from 'classnames'
-import Dialog, { DialogEvent } from '../Dialog/Dialog'
-import DialogContentContainer from '../DialogContentContainer/DialogContentContainer'
-import Tooltip from '../Tooltip/Tooltip'
+import styled from 'styled-components'
+import { AnimationType, DialogOffset, DialogPosition } from '../../constants'
 import { backwardCompatibilityForProperties } from '../../helpers/backwardCompatibilityForProperties'
 import useMergeRefs from '../../hooks/useMergeRefs'
-import { BUTTON_ICON_SIZE } from '../Button/ButtonConstants'
 import { L3Component, L3ComponentProps } from '../../types'
-import { MenuButtonComponentPosition, MenuButtonSize } from './MenuButtonConstants'
-import { AnimationType, DialogOffset, DialogPosition } from '../../constants'
-import { HideShowEvent } from '../Dialog/consts/dialog-show-hide-event'
 import { NOOP } from '../../utils/function-utils'
+import { BUTTON_ICON_SIZE } from '../Button/ButtonConstants'
+import { HideShowEvent } from '../Dialog/consts/dialog-show-hide-event'
+import Dialog, { DialogEvent } from '../Dialog/Dialog'
+import DialogContentContainer from '../DialogContentContainer/DialogContentContainer'
 import { DialogSize } from '../DialogContentContainer/DialogContentContainerConstants'
 import { Menu } from '../Icon/Icons'
-import styled from 'styled-components'
+import Tooltip from '../Tooltip/Tooltip'
+import { MenuButtonComponentPosition, MenuButtonSize } from './MenuButtonConstants'
 
 function bemClass(className: string) {
   return `menu-button--wrapper--${className}`
