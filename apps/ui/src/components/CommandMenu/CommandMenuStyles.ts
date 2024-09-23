@@ -18,11 +18,6 @@ const StyledCommandInput = styled(Command.Input)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  // color: #fff !important;
-  // color: !important;
-  // background-color: rgba(255, 255, 255, 0.2);
-  // background: rgba(255, 255, 255, 0.2);
-  // border-radius: 100px;
   color: ${({ theme }) => theme.body.textColorPrimary};
   ::placeholder {
     color: ${({ theme }) => theme.body.textColorPrimary};
@@ -56,8 +51,6 @@ const StyledCommandItem = styled(Command.Item)`
   }
   margin-top: 2px;
   border: 1px solid transparent;
-  // border: 1px solid rgba(255, 255, 255, 0.4);
-  // border-radius: 6px;
   position: relative;
   font-style: normal;
   font-weight: 500;
@@ -84,7 +77,6 @@ const StyledCommandItemName = styled.div`
 `
 
 const StyledCommandList = styled(Command.List)`
-  // margin-top: 38px;
   max-height: calc(100vh - 220px);
   overflow: scroll;
   padding: 10px 15px;
@@ -94,9 +86,7 @@ const StyledCommandList = styled(Command.List)`
   }
 `
 
-const StyledCommandWrapper = styled(Command)`
-  // overflow: scroll;
-`
+const StyledCommandWrapper = styled(Command)``
 
 const StyledCommandItemHeader = styled.div<{ marginTop?: any }>`
   display: flex;
@@ -166,10 +156,8 @@ const StyledCommandDialog = styled(Command.Dialog)`
   width: 50%;
   height: 82%;
   max-height: 1000px;
-  // overflow: scroll;
   transform: translate(-50%, -50%);
   border-radius: 16px;
-  // min-height: 500px;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -187,19 +175,3 @@ export {
   StyledCommandItemName,
   StyledCommandDialog,
 }
-
-// linear-gradient border
-
-// &::after {
-// content: '';
-// position: absolute;
-// inset: 0;
-// border-radius: 6px;
-// padding: 1px; /* control the border thickness */
-// background: linear-gradient(180deg, #73fafd 0%, #50b1d7 100%);
-// -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-// -webkit-mask-composite: xor;
-// mask-composite: exclude;
-// pointer-events: none;
-// border: none;
-// }
