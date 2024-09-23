@@ -65,28 +65,6 @@ const Login = () => {
       </StyledHeaderWrapper>
 
       <StyledFormContainer>
-        {/* <StyledColumnContainer>
-          <Checkbox
-            size='small'
-            kind='secondary'
-            label='You will keep this between us 😉'
-            labelClassName='checkbox_label'
-          />
-        </StyledColumnContainer> */}
-        {/* <Typography
-          value='Forget password?'
-          type={Typography.types.label}
-          size={Typography.sizes.lg}
-          as={'a'}
-          customColor='#FFFFFF'
-          style={{
-            textDecorationLine: 'underline',
-            cursor: 'pointer',
-            textAlign: 'center',
-            textUnderlineOffset: 5,
-            marginTop: 18,
-          }}
-        /> */}
         {loginConfig?.github && (
           <ButtonPrimary
             onClick={async () => {
