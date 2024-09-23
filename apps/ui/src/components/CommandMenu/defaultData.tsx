@@ -57,15 +57,6 @@ export const defaultData = (path_id?: any) => {
       group_name: ['Go to'],
       icon: <StyledAddIcon />,
     },
-    // {
-    //   id: uuidv4(),
-    //   name: 'Teams',
-    //   url: '/teams',
-    //   option: 'link',
-    //   group_name: ['Go to'],
-    //   icon: <Teams />,
-    // },
-
     {
       id: uuidv4(),
       name: 'Create agent',
@@ -74,7 +65,6 @@ export const defaultData = (path_id?: any) => {
       group_name: ['Go to'],
       icon: <StyledCollectionIcon />,
     },
-
     {
       id: uuidv4(),
       name: 'Add datasource',
@@ -87,42 +77,6 @@ export const defaultData = (path_id?: any) => {
         </StyledValueIcon>
       ),
     },
-
-    // {
-    //   id: uuidv4(),
-    //   name: 'General',
-    //   url: '/chat',
-    //   option: 'open-chat',
-    //   group_name: 'chat',
-    //   icon: <Home />,
-    // },
-
-    // {
-    //   id: uuidv4(),
-    //   name: 'Agents List',
-    //   url: '/agents',
-    //   option: 'show-agents',
-    //   group_name: 'Go to',
-    //   icon: <Players />,
-    // },
-
-    // {
-    //   id: uuidv4(),
-    //   name: 'Collections',
-    //   url: '/collections',
-    //   option: 'show-collections',
-    //   group_name: 'Go to',
-    //   icon: <Contracts />,
-    // },
-
-    // {
-    //   id: uuidv4(),
-    //   name: 'Change Password',
-    //   url: '/change-password',
-    //   option: 'modal',
-    //   group_name: 'Go to',
-    //   icon: <Players />,
-    // },
     {
       id: uuidv4(),
       name: 'Profile',
@@ -136,21 +90,18 @@ export const defaultData = (path_id?: any) => {
       name: 'Logout',
       url: 'create',
       option: 'modal',
-      // group_name: 'Go to',
       icon: <StyledAboutIcon />,
     },
     {
       id: uuidv4(),
       name: 'Set-blue-theme',
       option: 'theme',
-      // group_name: '',
       icon: <StyledSunIcon />,
     },
     {
       id: uuidv4(),
       name: 'Set light theme',
       option: 'theme',
-      // group_name: '',
       icon: <StyledSunIcon />,
     },
   ]
@@ -190,9 +141,3 @@ const StyledTeamsIcon = styled(Teams)`
     fill: ${({ theme }) => theme.body.iconColor};
   }
 `
-
-// const StyledIcon = styled(Value)`
-//   path {
-//     fill: ${({ theme }) => theme.body.iconColor};
-//   }
-// `
