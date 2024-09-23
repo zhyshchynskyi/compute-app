@@ -29,7 +29,6 @@ const AudioPlayer = ({ audioUrl, onCloseClick }: { audioUrl: string; onCloseClic
     if (progressBarRef.current === null) return
 
     setCurrentTime(audioRef.current.currentTime)
-    // setDuration(audioRef.current.duration)
 
     // Calculate the percentage of audio played
     const percentage = (audioRef.current.currentTime / duration) * 100
@@ -37,7 +36,6 @@ const AudioPlayer = ({ audioUrl, onCloseClick }: { audioUrl: string; onCloseClic
 
     if (percentage === 100) {
       setIsPlaying(false)
-      // progressBarRef.current.style.background = `transparent`
     }
   }
 
@@ -55,32 +53,6 @@ const AudioPlayer = ({ audioUrl, onCloseClick }: { audioUrl: string; onCloseClic
     const seconds = Math.floor(timeInSeconds % 60)
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
   }
-
-  // useEffect(() => {
-  //   getDuration(audioUrl, function (duration: number) {
-  //     setDuration(duration)
-  //   })
-  // }, [])
-
-  // const getDuration = function (url: string, next: any) {
-  //   const _player = new Audio(url)
-  //   _player.addEventListener(
-  //     'durationchange',
-  //     function (e) {
-  //       if (this.duration != Infinity) {
-  //         const duration = this.duration
-  //         _player.remove()
-  //         next(duration)
-  //       }
-  //     },
-  //     false,
-  //   )
-  //   _player.load()
-  //   _player.currentTime = 24 * 60 * 60 //fake big time
-  //   _player.volume = 0
-  //   _player.play()
-  //   //waiting...
-  // }
 
   const handleMetadata = (e: any) => {
     setDuration(e.target.duration)
