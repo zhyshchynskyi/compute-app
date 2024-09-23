@@ -14,7 +14,6 @@ import AuthProvider from 'providers/AuthProvider'
 
 import './App.css'
 
-// import '@l3-lib/ui-core/dist/main.css'
 import { LayoutProvider } from 'providers/LayoutProvider'
 import { AppModeContextProvider } from 'context/AppModeContext'
 import { Provider } from 'react-redux'
