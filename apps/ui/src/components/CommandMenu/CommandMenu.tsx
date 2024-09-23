@@ -143,7 +143,7 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
         }
       }}
     >
-      <StyledCommandInput autoFocus placeholder={t('search-placeholder')} />
+      <StyledCommandInput placeholder={t('search-placeholder')} />
       <StyledCommandList>
         <>
           <Command.Group>
