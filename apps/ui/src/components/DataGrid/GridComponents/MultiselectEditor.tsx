@@ -1,13 +1,7 @@
 import { forwardRef, useState, useRef, useEffect, useImperativeHandle } from 'react'
 import Dropdown from 'share-ui/components/Dropdown/Dropdown'
 
-// import Typography from 'share-ui/components/typography/Typography'
 import styled from 'styled-components'
-// import TypographyPrimary from 'components/Typography/Primary'
-
-// type OptionRendererProps = {
-//   label: string
-// }
 
 // eslint-disable-next-line react/display-name
 const MultiselectEditor = forwardRef((props: any, ref) => {
@@ -76,12 +70,6 @@ const MultiselectEditor = forwardRef((props: any, ref) => {
     const newValues = value.filter((oldValues: any) => oldValues !== item)
     setValue(newValues)
   }
-
-  // const OptionRenderer = ({ label }: OptionRendererProps) => {
-  //   return (
-  //     <TypographyPrimary value={label} type={Typography.types.LABEL} size={Typography.sizes.md} />
-  //   )
-  // }
 
   return (
     <StyledDiv>
