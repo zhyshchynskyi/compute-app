@@ -1,14 +1,6 @@
 import { Route as Router, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import {
-  ForgotPassword,
-  Login,
-  // Register,
-  ResetPassword,
-  TwoFAuthentication,
-  GithubLogin,
-  GoogleLogin,
-} from 'pages/Auth'
+import { ForgotPassword, Login, ResetPassword, TwoFAuthentication, GithubLogin, GoogleLogin } from 'pages/Auth'
 import MainComponent from 'pages/MainComponent'
 import ChangePassword from 'pages/ChangePassword'
 import { AuthContext } from 'contexts'
@@ -20,7 +12,6 @@ import { darkTheme, lightTheme } from 'styles/theme'
 import { WelcomeLoader } from 'components/Loader/WelcomeLoader'
 import { CheatCode } from 'pages/Auth/Register/CheatCode'
 import DeleteConfirmationModal from 'modals/DeleteConfirmationModal'
-// import MainRouteLayout from 'routes/MainRouteLayout';
 import CommandMenu from 'components/CommandMenu/CommandMenu'
 import RootLayout from 'routes/RootLayout'
 import HomeRouteLayout from 'routes/HomeRouteLayout'
@@ -42,7 +33,7 @@ import ChangeSshkeyModal from 'pages/Pods/components/sshkey/ChangeSshkeyModal'
 
 const Route = () => {
   const { account_switch_loading } = useAppModeContext()
-  const { user, loading } = useContext(AuthContext)
+  const { loading } = useContext(AuthContext)
   const [cmdkOpen, setCmdkOpen] = useState(false)
   const [theme, setTheme] = useState<string>(() => {
     const storedTheme = localStorage.getItem('theme')
