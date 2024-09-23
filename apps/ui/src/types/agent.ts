@@ -1,4 +1,3 @@
-// import { IntegrationInput } from 'services/agent/useCreateAgentService'
 import { Nullable } from './utils'
 
 export interface AgentRunner {
@@ -39,7 +38,6 @@ export interface AgentWithConfigs {
     response_mode?: string[]
     input_mode?: string[]
 
-    // integrations?: IntegrationInput[]
     integrations?: any[]
 
     runners: Nullable<AgentRunner[]>
