@@ -16,14 +16,7 @@ const withRenderModal = (getModalName: getModalNameType) => (Modal: React.FC<any
       return null
     }
 
-    return (
-      <Modal
-        {...props}
-        data={data}
-        closeModal={() => closeModal(modalName)}
-        modalName={modalName}
-      />
-    )
+    return <Modal {...props} data={data} closeModal={() => closeModal(modalName)} modalName={modalName} />
   }
 
   return Hoc

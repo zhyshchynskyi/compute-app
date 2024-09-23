@@ -20,14 +20,7 @@ type CommandItemProps = {
   groupName?: string
 }
 
-const CommandItem = ({
-  index,
-  itemIcon = <API />,
-  name,
-  subTitle,
-  handleSelect,
-  groupName,
-}: CommandItemProps) => {
+const CommandItem = ({ index, itemIcon = <API />, name, subTitle, handleSelect, groupName }: CommandItemProps) => {
   return (
     <StyledCommandItem onSelect={handleSelect}>
       <StyledTextWrapper>
@@ -35,21 +28,13 @@ const CommandItem = ({
           {itemIcon}
           {name}
         </CommandItemName>
-        <TypographyQuaternary
-          value={subTitle}
-          type={Typography.types.LABEL}
-          size={Typography.sizes.xss}
-        />
+        <TypographyQuaternary value={subTitle} type={Typography.types.LABEL} size={Typography.sizes.xss} />
       </StyledTextWrapper>
       <StyledTextWrapper>
         {/* <StyleEnterGroup>
           <img src={enterIcon} alt='click enter' />
         </StyleEnterGroup> */}
-        <TypographyPrimary
-          value={groupName}
-          type={Typography.types.LABEL}
-          size={Typography.sizes.sm}
-        />
+        <TypographyPrimary value={groupName} type={Typography.types.LABEL} size={Typography.sizes.sm} />
       </StyledTextWrapper>
     </StyledCommandItem>
   )

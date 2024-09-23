@@ -1,33 +1,33 @@
-import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu';
+import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
 
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components'
 
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import LogOut from 'share-ui/components/Icon/Icons/components/LogOut';
-import AvatarGenerator from './AvatarGenerator/AvatarGenerator';
-import React from 'react';
-import { AuthContext } from 'contexts';
-import TypographyPrimary from './Typography/Primary';
-import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants';
-import { Moon, Person, Sun } from 'share-ui/components/Icon/Icons';
-import { clearUser } from 'redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import LogOut from 'share-ui/components/Icon/Icons/components/LogOut'
+import AvatarGenerator from './AvatarGenerator/AvatarGenerator'
+import React from 'react'
+import { AuthContext } from 'contexts'
+import TypographyPrimary from './Typography/Primary'
+import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants'
+import { Moon, Person, Sun } from 'share-ui/components/Icon/Icons'
+import { clearUser } from 'redux/slices/authSlice'
+import { useDispatch } from 'react-redux'
 
-export type ThemeProps = { theme: string; toggleTheme: () => void };
+export type ThemeProps = { theme: string; toggleTheme: () => void }
 
 const AvatarDropDown = ({ theme }: { theme: ThemeProps }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { user } = React.useContext(AuthContext);
+  const { user } = React.useContext(AuthContext)
 
   const handleLogout = async () => {
-    dispatch(clearUser());
-  };
+    dispatch(clearUser())
+  }
 
   return (
     <StyledDropDownMenuRoot>
@@ -78,13 +78,13 @@ const AvatarDropDown = ({ theme }: { theme: ThemeProps }) => {
             }}
           />
         </StyledDropDownMenuItem>
-        <Arrow className="text-white" fill="currentColor" />
+        <Arrow className='text-white' fill='currentColor' />
       </StyledDropdownContent>
     </StyledDropDownMenuRoot>
-  );
-};
+  )
+}
 
-export default AvatarDropDown;
+export default AvatarDropDown
 
 const slideUpAndFade = keyframes`
   from {
@@ -95,7 +95,7 @@ const slideUpAndFade = keyframes`
     opacity: 1;
     transform: translateY(0)
   }
-`;
+`
 const slideRightAndFade = keyframes`
   from {
     opacity: 0;
@@ -105,7 +105,7 @@ const slideRightAndFade = keyframes`
     opacity: 1;
     transform: translateX(0)
   }
-`;
+`
 const slideDownAndFade = keyframes`
   from {
     opacity: 0;
@@ -115,7 +115,7 @@ const slideDownAndFade = keyframes`
     opacity: 1;
     transform: translateY(0)
   }
-`;
+`
 const slideLeftAndFade = keyframes`
   from {
     opacity: 0;
@@ -125,7 +125,7 @@ const slideLeftAndFade = keyframes`
     opacity: 1;
     transform: translateY(0)
   }
-`;
+`
 
 const StyledDropdownContent = styled(Content)`
   margin-bottom: 15px;
@@ -160,9 +160,9 @@ const StyledDropdownContent = styled(Content)`
       }
     }
   }
-`;
+`
 
-const StyledDropDownMenuRoot = styled(Root)``;
+const StyledDropDownMenuRoot = styled(Root)``
 
 const StyledDropDownMenuItem = styled(Item)`
   all: unset;
@@ -185,33 +185,33 @@ const StyledDropDownMenuItem = styled(Item)`
   :hover {
     background: ${({ theme }) => theme.body.humanMessageBgColor};
   }
-`;
+`
 
 const StyledDropDownMenuTrigger = styled(Trigger)`
   all: unset;
   cursor: pointer;
-`;
+`
 
 const StyledLogOutIcon = styled(LogOut)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`
 const StyledPersonIcon = styled(Person)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`
 
 const StyledMoonIcon = styled(Moon)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
     stroke: transparent;
   }
-`;
+`
 const StyledSunIcon = styled(Sun)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
     stroke: transparent;
   }
-`;
+`

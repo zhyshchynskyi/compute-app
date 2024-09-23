@@ -106,13 +106,8 @@ const Menu: L3Component<MenuProps> & {
       })
     }, [originalChildren])
 
-    const {
-      setSubMenuIsOpenByIndex,
-      hasOpenSubMenu,
-      openSubMenuIndex,
-      setOpenSubMenuIndex,
-      resetOpenSubMenuIndex,
-    } = useSubMenuIndex()
+    const { setSubMenuIsOpenByIndex, hasOpenSubMenu, openSubMenuIndex, setOpenSubMenuIndex, resetOpenSubMenuIndex } =
+      useSubMenuIndex()
 
     const onCloseMenu = useOnCloseMenu({
       setActiveItemIndex: onSetActiveItemIndexCallback,

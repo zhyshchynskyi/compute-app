@@ -1,35 +1,35 @@
-import styled from 'styled-components';
-import TypographyPrimary from './Typography/Primary';
+import styled from 'styled-components'
+import TypographyPrimary from './Typography/Primary'
 
-import { Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu';
-import { account_mode_icon, useAppModeContext } from 'context/AppModeContext';
-import { Check, Switcher, Team } from 'share-ui/components/Icon/Icons';
-import { StyledAddIcon } from 'pages/Navigation/MainNavigation';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Account } from 'types/account';
-import Verified from 'share-ui/components/Icon/Icons/components/Verified';
-import strCutter from 'utils/strCutter';
+import { Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
+import { account_mode_icon, useAppModeContext } from 'context/AppModeContext'
+import { Check, Switcher, Team } from 'share-ui/components/Icon/Icons'
+import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Account } from 'types/account'
+import Verified from 'share-ui/components/Icon/Icons/components/Verified'
+import strCutter from 'utils/strCutter'
 
 const ModeSwitcher = () => {
-  const navigate = useNavigate();
-  const { accounts, shared_accounts, account_id, switchAccountMode, selected_account } = useAppModeContext();
+  const navigate = useNavigate()
+  const { accounts, shared_accounts, account_id, switchAccountMode, selected_account } = useAppModeContext()
 
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [showDropdownValue, setShowDropdownValue] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const [showDropdownValue, setShowDropdownValue] = useState(false)
 
   useEffect(() => {
     if (isDropdownOpen) {
       const timer = setTimeout(() => {
-        setShowDropdownValue(true);
-      }, 100);
-      return () => clearTimeout(timer);
+        setShowDropdownValue(true)
+      }, 100)
+      return () => clearTimeout(timer)
     } else {
-      setShowDropdownValue(false);
+      setShowDropdownValue(false)
     }
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen])
 
-  const picked_shared_account = shared_accounts?.filter((shared: any) => shared.account_id === selected_account?.id);
+  const picked_shared_account = shared_accounts?.filter((shared: any) => shared.account_id === selected_account?.id)
 
   return (
     <StyledRoot isOpen={isDropdownOpen}>
@@ -47,7 +47,7 @@ const ModeSwitcher = () => {
                         ? `${picked_shared_account[0].assigned_account_name}'s Team`
                         : selected_account?.name,
                       24,
-                      true
+                      true,
                     )}
                     size={'xs-small'}
                     bold
@@ -72,7 +72,7 @@ const ModeSwitcher = () => {
 
                   {account_id === account.id && <StyledCheck />}
                 </StyledDropDownMenuItem>
-              );
+              )
             })}
 
             {shared_accounts?.map((account: any) => {
@@ -102,23 +102,23 @@ const ModeSwitcher = () => {
                     {account_id === account.account_id && <StyledCheck />}
                   </StyledDropDownMenuItem>
                 </>
-              );
+              )
             })}
 
             <StyledStickyWrapper>
               <StyledDropDownMenuItem onClick={() => navigate('create-new-app')}>
                 <StyledAddIcon size={20} />
-                <TypographyPrimary value="Create new application" size={'small'} semiBold />
+                <TypographyPrimary value='Create new application' size={'small'} semiBold />
               </StyledDropDownMenuItem>
             </StyledStickyWrapper>
           </StyledDropdownContent>
         )}
       </StyledDropDownMenuRoot>
     </StyledRoot>
-  );
-};
+  )
+}
 
-export default ModeSwitcher;
+export default ModeSwitcher
 
 const StyledRoot = styled.div<{ isOpen: boolean }>`
   background: ${({ theme }) => theme.body.backgroundColorPrimary};
@@ -141,7 +141,7 @@ const StyledRoot = styled.div<{ isOpen: boolean }>`
   margin-left: 200px; 
   border-color: ${theme.body.textColorPrimary}
   `}
-`;
+`
 
 const StyledDropdownValue = styled.div`
   display: flex;
@@ -150,7 +150,7 @@ const StyledDropdownValue = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-`;
+`
 
 const StyledCheck = styled(Check)`
   path {
@@ -158,8 +158,8 @@ const StyledCheck = styled(Check)`
   }
 
   margin-left: auto;
-`;
-const StyledDropDownMenuRoot = styled(Root)``;
+`
+const StyledDropDownMenuRoot = styled(Root)``
 
 const StyledDropdownContent = styled(Content)`
   margin-bottom: 15px;
@@ -191,7 +191,7 @@ const StyledDropdownContent = styled(Content)`
       transform: translateY(0);
     }
   }
-`;
+`
 
 const StyledDropDownMenuItem = styled(Item)<{ sticky?: boolean; borderBottom?: boolean }>`
   all: unset;
@@ -219,7 +219,7 @@ const StyledDropDownMenuItem = styled(Item)<{ sticky?: boolean; borderBottom?: b
   border-bottom: ${({ borderBottom, theme }) => (borderBottom ? theme.body.secondaryBorder : '')};
 
   background: ${({ theme }) => theme.body.avatarDropDownColor};
-`;
+`
 
 const StyledDropDownMenuTrigger = styled(Trigger)`
   all: unset;
@@ -233,11 +233,11 @@ const StyledDropDownMenuTrigger = styled(Trigger)`
   height: 100%;
 
   padding-left: 7px;
-`;
+`
 const StyledSwitcher = styled.div`
   width: 100%;
   height: 100%;
-`;
+`
 const StyledImg = styled.img`
   width: 22px;
   height: 22px;
@@ -245,24 +245,24 @@ const StyledImg = styled.img`
   object-fit: contain;
 
   ${({ theme }) => `filter: ${theme.body.imageBrightness};`}
-`;
+`
 const StyledSwitcherIcon = styled(Switcher)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
     stroke: transparent;
   }
-`;
+`
 export const StyledVerified = styled(Verified)`
   path {
     fill: #1da1f2;
     stroke: #1da1f2;
   }
-`;
+`
 export const StyledTeamIcon = styled(Team)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`
 
 const StyledStickyWrapper = styled.div`
   position: sticky;
@@ -270,4 +270,4 @@ const StyledStickyWrapper = styled.div`
   z-index: 1000000;
   border-top: ${({ theme }) => theme.body.secondaryBorder};
   background: ${({ theme }) => theme.body.avatarDropDownColor};
-`;
+`

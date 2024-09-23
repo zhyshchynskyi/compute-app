@@ -1,28 +1,28 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { getBaseQuery } from '../fetch-auth-query';
-import { IExecutor } from 'types/executor.types';
-import { IPodResponse } from 'types/pod.types';
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { getBaseQuery } from '../fetch-auth-query'
+import { IExecutor } from 'types/executor.types'
+import { IPodResponse } from 'types/pod.types'
 
 export interface IBaseResponse {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
 }
 
 interface IRentExecutorRequest {
-  pod_name: string;
-  docker_image: string;
-  user_public_key: string;
+  pod_name: string
+  docker_image: string
+  user_public_key: string
 }
 
 interface IRentExecutorArg extends IRentExecutorRequest {
-  id: string;
+  id: string
 }
 
 export const executorApi = createApi({
   reducerPath: 'executorApi',
   baseQuery: getBaseQuery({ baseUrl: '/executors' }),
   tagTypes: ['Executors'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getAvailableExecutors: builder.query<IExecutor[], void>({
       query: () => ({
         url: '',
@@ -39,13 +39,13 @@ export const executorApi = createApi({
       invalidatesTags: ['Executors'],
     }),
     unRentExecutor: builder.mutation<IBaseResponse, string>({
-      query: (id) => ({
+      query: id => ({
         url: `/${id}/rent`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Executors'],
     }),
   }),
-});
+})
 
-export const { useGetAvailableExecutorsQuery, useRentExecutorMutation, useUnRentExecutorMutation } = executorApi;
+export const { useGetAvailableExecutorsQuery, useRentExecutorMutation, useUnRentExecutorMutation } = executorApi

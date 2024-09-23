@@ -19,10 +19,7 @@ const SliderInText: FC<SliderInTextProps> & {
   kinds?: typeof InfixKind
   textSizes?: typeof SliderTextSize
 } = ({ kind = SliderInText.kinds?.TEXTFIX, textSize = SliderTextSize.SMALL }) => {
-  const [isShow, modificators, InfixComponent, inlineStyle] = useSliderInfixComponent(
-    kind,
-    textSize,
-  )
+  const [isShow, modificators, InfixComponent, inlineStyle] = useSliderInfixComponent(kind, textSize)
   return (
     isShow && (
       <div className={bem('', [...modificators, kind, textSize])} style={inlineStyle}>

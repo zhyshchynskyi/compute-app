@@ -29,9 +29,7 @@ interface FormValues {
 const renderActions = ({ index, value, handleOpenSecretModal, setFieldValue, secrets }: any) => {
   const prefix = 'DATURA_SECRET_'
   if (!value.includes(prefix)) {
-    return (
-      <KeyIcon fontSize='medium' cursor={'pointer'} onClick={() => handleOpenSecretModal(index)} />
-    )
+    return <KeyIcon fontSize='medium' cursor={'pointer'} onClick={() => handleOpenSecretModal(index)} />
   }
 
   if (value.includes(prefix)) {
@@ -83,17 +81,12 @@ const EnvVariables = ({ formik }: { formik: FormikProps<FormValues> }) => {
   const handleDeleteRow = (index: number) => {
     formik.setFieldValue(
       'environment_variables.env',
-      formik.values.environment_variables.env.filter(
-        (_: { key: string; value: string }, i: number) => i !== index,
-      ),
+      formik.values.environment_variables.env.filter((_: { key: string; value: string }, i: number) => i !== index),
     )
   }
 
   const handleSelectSecret = (secret: Secret, index: number) => {
-    formik.setFieldValue(
-      `environment_variables.env.${index}.value`,
-      `{{ DATURA_SECRET_${secret.secret_name} }}`,
-    )
+    formik.setFieldValue(`environment_variables.env.${index}.value`, `{{ DATURA_SECRET_${secret.secret_name} }}`)
     closeModal('template-secret-modal')
   }
 
@@ -110,69 +103,52 @@ const EnvVariables = ({ formik }: { formik: FormikProps<FormValues> }) => {
 
   return (
     <Box>
-      <Box
-        display={'grid'}
-        gridTemplateColumns={'1fr 1fr 30px'}
-        rowGap={1}
-        columnGap={3}
-        alignItems={'center'}
-      >
-        {formik.values.environment_variables.env.map(
-          (item: { key: string; value: string }, index: number) => (
-            <>
-              <TextField
-                name='key'
-                placeholder={'Key'}
-                value={formik.values.environment_variables.env[index].key}
-                onChange={value =>
-                  formik.setFieldValue(`environment_variables.env.${index}.key`, value)
-                }
-              />
-              <OutlinedInput
-                name='value'
-                disabled={
-                  formik.values.environment_variables.env[index].value.includes('{{ DATURA_SECRET_')
-                    ? true
-                    : false
-                }
-                placeholder={'Value'}
-                value={formik.values.environment_variables.env[index].value}
-                onChange={value =>
-                  formik.setFieldValue(
-                    `environment_variables.env.${index}.value`,
-                    value.target.value,
-                  )
-                }
-                endAdornment={
-                  <InputAdornment position='start'>
-                    <Box display={'flex'}>
-                      {renderActions({
-                        index,
-                        handleOpenSecretModal,
-                        setFieldValue: formik.setFieldValue,
-                        value: formik.values.environment_variables.env[index].value,
-                        secrets,
-                      })}
+      <Box display={'grid'} gridTemplateColumns={'1fr 1fr 30px'} rowGap={1} columnGap={3} alignItems={'center'}>
+        {formik.values.environment_variables.env.map((item: { key: string; value: string }, index: number) => (
+          <>
+            <TextField
+              name='key'
+              placeholder={'Key'}
+              value={formik.values.environment_variables.env[index].key}
+              onChange={value => formik.setFieldValue(`environment_variables.env.${index}.key`, value)}
+            />
+            <OutlinedInput
+              name='value'
+              disabled={
+                formik.values.environment_variables.env[index].value.includes('{{ DATURA_SECRET_') ? true : false
+              }
+              placeholder={'Value'}
+              value={formik.values.environment_variables.env[index].value}
+              onChange={value => formik.setFieldValue(`environment_variables.env.${index}.value`, value.target.value)}
+              endAdornment={
+                <InputAdornment position='start'>
+                  <Box display={'flex'}>
+                    {renderActions({
+                      index,
+                      handleOpenSecretModal,
+                      setFieldValue: formik.setFieldValue,
+                      value: formik.values.environment_variables.env[index].value,
+                      secrets,
+                    })}
 
-                      {/* <KeyIcon 
+                    {/* <KeyIcon 
                                             fontSize='medium' 
                                             cursor={'pointer'} 
                                             onClick={() => handleOpenSecretModal(index)}
                                         /> */}
-                      {/* <LockIcon 
+                    {/* <LockIcon 
                                             fontSize='medium'
                                             onClick={() => formik.setFieldValue(`environment_variables.env.${index}.value`, '')}
                                         /> */}
-                    </Box>
-                  </InputAdornment>
-                }
-              />
-              <Box sx={{ cursor: 'pointer' }} onClick={() => handleDeleteRow(index)}>
-                <ClearIcon />
-              </Box>
-            </>
-          ),
-        )}
+                  </Box>
+                </InputAdornment>
+              }
+            />
+            <Box sx={{ cursor: 'pointer' }} onClick={() => handleDeleteRow(index)}>
+              <ClearIcon />
+            </Box>
+          </>
+        ))}
       </Box>
       <Box mt={1}>
         <ButtonPrimary onClick={handleAddRow} size='small'>

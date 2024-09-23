@@ -6,12 +6,4 @@ import PathFour from 'assets/avatars/Path_4.svg'
 import DefaultIcon from 'assets/icons/default_icon.svg'
 import TwitterIcon from 'assets/icons/twitter_icon.svg'
 
-export {
-  PathOne,
-  PathTwo,
-  PathThree,
-  PathFour,
-  DefaultIcon,
-  TwitterIcon,
-  Avatar_3
-}
+export { PathOne, PathTwo, PathThree, PathFour, DefaultIcon, TwitterIcon, Avatar_3 }

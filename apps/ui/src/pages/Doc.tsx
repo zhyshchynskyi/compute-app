@@ -18,11 +18,7 @@ const Doc: React.FC = () => {
     const handlePopState = () => {
       // Retrieve the previous route from session storage and redirect to it
       const previousRoute = sessionStorage.getItem('/developers/api-keys')
-      if (
-        previousRoute &&
-        windowRef.current?.closed &&
-        window.location.href === 'https://docs.l3agi.com/'
-      ) {
+      if (previousRoute && windowRef.current?.closed && window.location.href === 'https://docs.l3agi.com/') {
         window.history.pushState({}, '', previousRoute)
         window.location.reload()
       }

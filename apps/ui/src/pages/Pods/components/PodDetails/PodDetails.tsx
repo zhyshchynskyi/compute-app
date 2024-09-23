@@ -40,11 +40,7 @@ const PodDetails = () => {
           </TabList>
 
           {activeTab === 1 && (
-            <ButtonPrimary
-              onClick={formik.handleSubmit}
-              disabled={update_pod_loading}
-              loading={update_pod_loading}
-            >
+            <ButtonPrimary onClick={formik.handleSubmit} disabled={update_pod_loading} loading={update_pod_loading}>
               Save
             </ButtonPrimary>
           )}

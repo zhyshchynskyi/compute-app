@@ -1,12 +1,7 @@
 import { useState } from 'react'
 
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
-import {
-  StyledChatWrapper,
-  StyledContainer,
-  StyledHorizontalDivider,
-  StyledMainWrapper,
-} from 'routes/ChatRouteLayout'
+import { StyledChatWrapper, StyledContainer, StyledHorizontalDivider, StyledMainWrapper } from 'routes/ChatRouteLayout'
 
 import TabList from 'share-ui/components/Tabs/TabList/TabList'
 import Tab from 'share-ui/components/Tabs/Tab/Tab'

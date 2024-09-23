@@ -85,28 +85,14 @@ const TextWithHighlight: React.FC<TextWithHighlightProps> = forwardRef(
           const isTermPart = i % 2 === 1
           const shouldHighlight = isTermPart && (!limit || limit < 0 || highlightTermsCount < limit)
           parts.push(
-            getTextPart(
-              tokens[i],
-              (key = key + 1),
-              shouldHighlight,
-              wrappingTextTag,
-              wrappingElementClassName,
-            ),
+            getTextPart(tokens[i], (key = key + 1), shouldHighlight, wrappingTextTag, wrappingElementClassName),
           )
           if (isTermPart) highlightTermsCount = highlightTermsCount + 1
         }
       }
 
       return parts
-    }, [
-      text,
-      highlightTerm,
-      limit,
-      ignoreCase,
-      allowTermSplit,
-      wrappingTextTag,
-      wrappingElementClassName,
-    ])
+    }, [text, highlightTerm, limit, ignoreCase, allowTermSplit, wrappingTextTag, wrappingElementClassName])
 
     const isOverflowing = useIsOverflowing({ ref: useEllipsis && componentRef })
 

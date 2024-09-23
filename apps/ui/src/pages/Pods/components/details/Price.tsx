@@ -44,12 +44,7 @@ const Price = ({ selectedPlan, formik, resource }: PriceProps) => {
             <>
               <Box>
                 <Box>
-                  <Box
-                    display={'flex'}
-                    alignItems={'center'}
-                    justifyContent={'space-between'}
-                    mt={2}
-                  >
+                  <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} mt={2}>
                     <TypographyPrimary value={`Upfront Costs`} size='small' semiBold />
                     <TypographyPrimary
                       value={`$${(selectedPlan.default_total_price
@@ -61,10 +56,7 @@ const Price = ({ selectedPlan, formik, resource }: PriceProps) => {
                     />
                   </Box>
 
-                  <TypographySecondary
-                    value={`${resource.display_name} x ${maxGpu}`}
-                    size='small'
-                  />
+                  <TypographySecondary value={`${resource.display_name} x ${maxGpu}`} size='small' />
                   <TypographySecondary value={selectedPlan.title} size='small' />
                 </Box>
 

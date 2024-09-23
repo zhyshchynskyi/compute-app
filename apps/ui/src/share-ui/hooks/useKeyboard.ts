@@ -1,21 +1,21 @@
-import { createEventHandler } from "./createEventHandler";
-import { KeyboardEventCallback } from "../types/events";
+import { createEventHandler } from './createEventHandler'
+import { KeyboardEventCallback } from '../types/events'
 
 export function useKeyboard({
   isDisabled,
   onKeyDown,
-  onKeyUp
+  onKeyUp,
 }: {
-  isDisabled: boolean;
-  onKeyDown: KeyboardEventCallback;
-  onKeyUp: KeyboardEventCallback;
+  isDisabled: boolean
+  onKeyDown: KeyboardEventCallback
+  onKeyUp: KeyboardEventCallback
 }) {
   return {
     keyboardProps: isDisabled
       ? {}
       : {
           onKeyDown: createEventHandler(onKeyDown),
-          onKeyUp: createEventHandler(onKeyUp)
-        }
-  };
+          onKeyUp: createEventHandler(onKeyUp),
+        },
+  }
 }

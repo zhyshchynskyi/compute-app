@@ -1,30 +1,30 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { getBaseQuery } from '../fetch-auth-query';
-import { IUser } from 'types/user.types';
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { getBaseQuery } from '../fetch-auth-query'
+import { IUser } from 'types/user.types'
 
 interface ISignupRequest {
-  name: string;
-  email: string;
-  password: string;
+  name: string
+  email: string
+  password: string
 }
 
 interface ILoginRequest {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 interface ILoginResponse {
-  user: IUser;
-  token: string;
+  user: IUser
+  token: string
 }
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: getBaseQuery({ baseUrl: '/users' }),
   tagTypes: ['Users'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     singup: builder.mutation<IUser, ISignupRequest>({
-      query: (data) => ({
+      query: data => ({
         url: '',
         method: 'POST',
         body: data,
@@ -32,7 +32,7 @@ export const userApi = createApi({
       invalidatesTags: ['Users'],
     }),
     login: builder.mutation<ILoginResponse, ILoginRequest>({
-      query: (data) => ({
+      query: data => ({
         url: '/login',
         method: 'POST',
         body: data,
@@ -47,6 +47,6 @@ export const userApi = createApi({
       providesTags: ['Users'],
     }),
   }),
-});
+})
 
-export const { useLazyGetMeQuery, useSingupMutation, useLoginMutation } = userApi;
+export const { useLazyGetMeQuery, useSingupMutation, useLoginMutation } = userApi

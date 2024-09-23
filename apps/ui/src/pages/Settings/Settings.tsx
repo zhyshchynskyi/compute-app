@@ -3,11 +3,7 @@ import { FormikProvider } from 'formik'
 import styled, { css } from 'styled-components'
 
 import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
-import {
-  StyledHeaderGroup,
-  StyledSectionTitle,
-  StyledSectionWrapper,
-} from 'pages/Home/homeStyle.css'
+import { StyledHeaderGroup, StyledSectionTitle, StyledSectionWrapper } from 'pages/Home/homeStyle.css'
 
 import Button from 'share-ui/components/Button/Button'
 import Loader from 'share-ui/components/Loader/Loader'
@@ -40,11 +36,7 @@ const Settings = ({ isModal = false }: { isModal?: boolean }) => {
 
             <StyledButtonWrapper>
               <BackButton />
-              <ButtonPrimary
-                onClick={formik?.handleSubmit}
-                disabled={isLoading}
-                size={Button.sizes?.SMALL}
-              >
+              <ButtonPrimary onClick={formik?.handleSubmit} disabled={isLoading} size={Button.sizes?.SMALL}>
                 {isLoading ? <Loader size={32} /> : 'Save'}
               </ButtonPrimary>
             </StyledButtonWrapper>

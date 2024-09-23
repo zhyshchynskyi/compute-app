@@ -14,11 +14,7 @@ const TextEditor = ({ value, onChange, placeholder, label }: TextEditorProps) =>
   return (
     <StyledRoot>
       {label && <TypographyPrimary value={label} size='medium' />}
-      <StyledReactQuill
-        value={value}
-        onChange={(value: string) => onChange(value)}
-        placeholder={placeholder || ''}
-      />
+      <StyledReactQuill value={value} onChange={(value: string) => onChange(value)} placeholder={placeholder || ''} />
     </StyledRoot>
   )
 }

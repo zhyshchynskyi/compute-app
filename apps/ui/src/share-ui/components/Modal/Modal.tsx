@@ -6,13 +6,7 @@ import ModalContent from '../ModalContent/ModalContent'
 import useBodyScrollLock from './useBodyScrollLock'
 import useShowHideModal from './useShowHideModal'
 import L3ComponentProps from '../../types/L3ComponentProps'
-import {
-  isModalContent,
-  isModalFooter,
-  isModalHeader,
-  ModalBackgroundColor,
-  validateTitleProp,
-} from './ModalHelper'
+import { isModalContent, isModalFooter, isModalHeader, ModalBackgroundColor, validateTitleProp } from './ModalHelper'
 import { NOOP } from '../../utils/function-utils'
 import styled, { css } from 'styled-components'
 
@@ -123,32 +117,18 @@ const Modal: FC<ModalProps> & {
   const content = useMemo(() => {
     return (
       childrenArray.find(isModalContent) || (
-        <ModalContent>
-          {childrenArray.filter(child => !isModalHeader(child) && !isModalFooter(child))}
-        </ModalContent>
+        <ModalContent>{childrenArray.filter(child => !isModalHeader(child) && !isModalFooter(child))}</ModalContent>
       )
     )
   }, [childrenArray])
 
   const dialog = ReactDOM.createPortal(
-    <StyledModalContainer
-      {...attr.container}
-      data-testid='l3-dialog-container'
-      style={{ zIndex: zIndex }}
-    >
+    <StyledModalContainer {...attr.container} data-testid='l3-dialog-container' style={{ zIndex: zIndex }}>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
 
-      <StyledOverlay
-        noOverlay={noOverlay}
-        onClick={closeDialogIfNeeded}
-        data-testid='l3-modal-overlay'
-      />
+      <StyledOverlay noOverlay={noOverlay} onClick={closeDialogIfNeeded} data-testid='l3-modal-overlay' />
 
-      <StyledDialog
-        backgroundColor={backgroundColor}
-        fullscreen={fullscreen}
-        isTransparent={isTransparent}
-      >
+      <StyledDialog backgroundColor={backgroundColor} fullscreen={fullscreen} isTransparent={isTransparent}>
         <>{content}</>
       </StyledDialog>
     </StyledModalContainer>,

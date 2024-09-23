@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import {
-  atomOneDark,
-  docco,
-  xcode,
-  vs,
-  tomorrowNightBlue,
-} from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { atomOneDark, docco, xcode, vs, tomorrowNightBlue } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
 import { useContext, useEffect, useState } from 'react'
@@ -54,38 +48,22 @@ const Details = ({ log }: any) => {
     <StyledContainer>
       {filteredLogId[0]?.is_gql === true ? (
         <StyledTitle>
-          <HeadingPrimary
-            type={Heading.types?.h1}
-            value={filteredLogId[0]?.gql_type}
-            size='small'
-          />
+          <HeadingPrimary type={Heading.types?.h1} value={filteredLogId[0]?.gql_type} size='small' />
           <HeadingPrimary type={Heading.types?.h1} value='&ensp;' size='small' />
-          <HeadingPrimary
-            type={Heading.types?.h1}
-            value={filteredLogId[0]?.gql_source}
-            size='small'
-          />
+          <HeadingPrimary type={Heading.types?.h1} value={filteredLogId[0]?.gql_source} size='small' />
         </StyledTitle>
       ) : (
         <StyledTitle>
           <HeadingPrimary type={Heading.types?.h1} value={filteredLogId[0]?.method} size='small' />
           <HeadingPrimary type={Heading.types?.h1} value='&ensp;' size='small' />
-          <HeadingPrimary
-            type={Heading.types?.h1}
-            value={filteredLogId[0]?.endpoint}
-            size='small'
-          />
+          <HeadingPrimary type={Heading.types?.h1} value={filteredLogId[0]?.endpoint} size='small' />
         </StyledTitle>
       )}
 
       <StyledDetails>
         <StyledDetailsItem>
           <StyledLabel>
-            <TypographySecondary
-              value='Status'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographySecondary value='Status' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
           <StyledStatusContainer>
             {filteredLogId[0]?.status === '400' && (
@@ -114,11 +92,7 @@ const Details = ({ log }: any) => {
         </StyledDetailsItem>
         <StyledDetailsItem>
           <StyledLabel>
-            <TypographySecondary
-              value='ID'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographySecondary value='ID' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
           {filteredLogId[0]?.asset_id !== null ? (
             <StyledLabel>
@@ -164,11 +138,7 @@ const Details = ({ log }: any) => {
         </StyledDetailsItem>
         <StyledDetailsItem>
           <StyledLabel>
-            <TypographySecondary
-              value='Time'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographySecondary value='Time' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
 
           {filteredLogId[0]?.request_date ? (
@@ -178,11 +148,7 @@ const Details = ({ log }: any) => {
                 type={Typography.types.LABEL}
                 size={Typography.sizes.sm}
               />
-              <TypographyPrimary
-                value=', '
-                type={Typography.types.LABEL}
-                size={Typography.sizes.sm}
-              />
+              <TypographyPrimary value=', ' type={Typography.types.LABEL} size={Typography.sizes.sm} />
               <TypographyPrimary
                 value={moment(filteredLogId[0]?.request_date).format('HH:mm:ss')}
                 type={Typography.types.LABEL}
@@ -194,18 +160,10 @@ const Details = ({ log }: any) => {
 
         <StyledDetailsItem>
           <StyledLabel>
-            <TypographySecondary
-              value='IP address'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographySecondary value='IP address' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
           <StyledLabel>
-            <TypographyPrimary
-              value={filteredLogId[0]?.ip}
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value={filteredLogId[0]?.ip} type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
         </StyledDetailsItem>
 
@@ -229,11 +187,7 @@ const Details = ({ log }: any) => {
         </StyledDetailsItem> */}
         <StyledDetailsItem>
           <StyledLabel>
-            <TypographyPrimary
-              value='Source'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value='Source' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledLabel>
           <StyledSource>
             <TypographyPrimary
@@ -283,11 +237,7 @@ const Details = ({ log }: any) => {
       {filteredLogId[0]?.is_gql === true ? (
         <>
           <StyledSubTitle>
-            <TypographyPrimary
-              value='Response'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value='Response' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledSubTitle>
 
           <StyledCodeContainer>
@@ -313,11 +263,7 @@ const Details = ({ log }: any) => {
           </StyledCodeContainer>
 
           <StyledSubTitle>
-            <TypographyPrimary
-              value='Graphql variables'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value='Graphql variables' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledSubTitle>
           <StyledCodeContainer>
             <SyntaxHighlighter
@@ -346,11 +292,7 @@ const Details = ({ log }: any) => {
           {filteredLogId[0]?.query_params !== null ? (
             <>
               <StyledSubTitle>
-                <TypographyPrimary
-                  value='Query parameters'
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.sm}
-                />
+                <TypographyPrimary value='Query parameters' type={Typography.types.LABEL} size={Typography.sizes.sm} />
               </StyledSubTitle>
               <StyledCodeContainer>
                 <SyntaxHighlighter
@@ -377,11 +319,7 @@ const Details = ({ log }: any) => {
           ) : null}
 
           <StyledSubTitle>
-            <TypographyPrimary
-              value='Response'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value='Response' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledSubTitle>
 
           <StyledCodeContainer>
@@ -409,11 +347,7 @@ const Details = ({ log }: any) => {
           {filteredLogId[0]?.body !== null ? (
             <>
               <StyledSubTitle>
-                <TypographyPrimary
-                  value='Body'
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.sm}
-                />
+                <TypographyPrimary value='Body' type={Typography.types.LABEL} size={Typography.sizes.sm} />
               </StyledSubTitle>
               <StyledCodeContainer>
                 <SyntaxHighlighter

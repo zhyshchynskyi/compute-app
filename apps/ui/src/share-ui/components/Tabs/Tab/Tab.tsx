@@ -69,15 +69,7 @@ const Tab: FC<TabProps> = forwardRef(
       return [...children, iconElement]
     }
     return (
-      <StyledLi
-        ref={mergedRef}
-        key={id}
-        focus={focus}
-        id={id}
-        role='tab'
-        aria-selected={active}
-        disabled={disabled}
-      >
+      <StyledLi ref={mergedRef} key={id} focus={focus} id={id} role='tab' aria-selected={active} disabled={disabled}>
         <StyledA
           onClick={() => !disabled && onClick(value)}
           active={active}

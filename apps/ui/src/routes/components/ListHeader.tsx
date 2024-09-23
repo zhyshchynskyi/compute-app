@@ -1,20 +1,20 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import IconButton from 'share-ui/components/IconButton/IconButton';
+import IconButton from 'share-ui/components/IconButton/IconButton'
 
-import { StyledAddIcon } from 'pages/Navigation/MainNavigation';
+import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
 
-import { ButtonTertiary } from 'components/Button/Button';
-import MenuButton from 'share-ui/components/MenuButton/MenuButton';
-import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants';
-import TypographyPrimary from 'components/Typography/Primary';
+import { ButtonTertiary } from 'components/Button/Button'
+import MenuButton from 'share-ui/components/MenuButton/MenuButton'
+import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants'
+import TypographyPrimary from 'components/Typography/Primary'
 
 type ListHeaderProps = {
-  title: string;
-  onAddClick?: () => void;
-  multiOption?: { label: string; function: () => void }[];
-  customLabel?: string;
-};
+  title: string
+  onAddClick?: () => void
+  multiOption?: { label: string; function: () => void }[]
+  customLabel?: string
+}
 
 const ListHeader = ({ title, customLabel, onAddClick, multiOption }: ListHeaderProps) => {
   return (
@@ -43,16 +43,16 @@ const ListHeader = ({ title, customLabel, onAddClick, multiOption }: ListHeaderP
                 >
                   {item.label}
                 </ButtonTertiary>
-              );
+              )
             })}
           </StyledMenuButtonsWrapper>
         </MenuButton>
       )}
     </StyledListHeader>
-  );
-};
+  )
+}
 
-export default ListHeader;
+export default ListHeader
 
 export const StyledMenuButtonsWrapper = styled.div`
   background: ${({ theme }) => theme.body.backgroundColorSecondary};
@@ -66,7 +66,7 @@ export const StyledMenuButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-`;
+`
 
 const StyledListHeader = styled.div`
   display: flex;
@@ -76,4 +76,4 @@ const StyledListHeader = styled.div`
   width: 100%;
   font-weight: 700;
   min-height: 30px;
-`;
+`

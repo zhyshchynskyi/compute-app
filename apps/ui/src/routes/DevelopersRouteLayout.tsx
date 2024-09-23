@@ -1,11 +1,7 @@
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import includes from 'lodash/includes'
 
-import {
-  StyledAppContainer,
-  StyledGroupContainer,
-  StyledMainContainer,
-} from '../components/Layout/LayoutStyle'
+import { StyledAppContainer, StyledGroupContainer, StyledMainContainer } from '../components/Layout/LayoutStyle'
 
 import { AuthContext, LayoutContext } from 'contexts'
 import { useContext, useEffect, useState } from 'react'

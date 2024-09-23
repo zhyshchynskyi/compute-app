@@ -1,42 +1,42 @@
-import { ReactElement, useCallback } from "react";
+import { ReactElement, useCallback } from 'react'
 
 export const useAdjacentSelectableMenuIndex = ({ children }: { children: ReactElement[] }) => {
   const isChildSelectable = useCallback(
     (newIndex: number) => {
-      const child = children[newIndex];
+      const child = children[newIndex]
       // @ts-ignore
-      return child.type.isSelectable && !child.props.disabled;
+      return child.type.isSelectable && !child.props.disabled
     },
-    [children]
-  );
+    [children],
+  )
 
   const getNextSelectableIndex = useCallback(
     (currentActiveItemIndex: number) => {
-      let newIndex;
+      let newIndex
       for (let offset = 1; offset <= children.length; offset++) {
-        newIndex = (currentActiveItemIndex + offset) % children.length;
+        newIndex = (currentActiveItemIndex + offset) % children.length
         if (isChildSelectable(newIndex)) {
-          return newIndex;
+          return newIndex
         }
       }
-      return null;
+      return null
     },
-    [children, isChildSelectable]
-  );
+    [children, isChildSelectable],
+  )
 
   const getPreviousSelectableIndex = useCallback(
     (currentActiveItemIndex: number) => {
-      let newIndex;
+      let newIndex
       for (let offset = children.length - 1; offset > 0; offset--) {
-        newIndex = (currentActiveItemIndex + offset) % children.length;
+        newIndex = (currentActiveItemIndex + offset) % children.length
         if (isChildSelectable(newIndex)) {
-          return newIndex;
+          return newIndex
         }
       }
-      return null;
+      return null
     },
-    [children, isChildSelectable]
-  );
+    [children, isChildSelectable],
+  )
 
-  return { getNextSelectableIndex, getPreviousSelectableIndex };
-};
+  return { getNextSelectableIndex, getPreviousSelectableIndex }
+}

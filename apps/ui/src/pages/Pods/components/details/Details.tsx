@@ -1,34 +1,34 @@
-import Box from '@mui/material/Box';
+import Box from '@mui/material/Box'
 
-import { borderBoxStyles } from '../../styles';
-import styled from 'styled-components';
+import { borderBoxStyles } from '../../styles'
+import styled from 'styled-components'
 
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Resource } from 'types/resource';
-import useDetails from './useDetails';
-import Price from './Price';
-import EditPodTemplateModal from '../template/EditPodTemplateModal';
-import { StyledSecondaryTitle } from 'pages/Pods/PodsContent';
-import TypographyPrimary from 'components/Typography/Primary';
-import { StyledHorizontalDivider } from 'routes/ChatRouteLayout';
-import FormikTextField from 'components/TextFieldFormik/TextFieldFormik';
-import { FormikProvider } from 'formik';
-import { ButtonPrimary, ButtonSecondary } from 'components/Button/Button';
-import { StyledSlider } from '../Filter/FilterPods';
-import PodPlanCard from 'pages/Pods/cards/PodPlanCard';
-import { StyledImg } from '../template/ChangeTemplateModal';
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import { Resource } from 'types/resource'
+import useDetails from './useDetails'
+import Price from './Price'
+import EditPodTemplateModal from '../template/EditPodTemplateModal'
+import { StyledSecondaryTitle } from 'pages/Pods/PodsContent'
+import TypographyPrimary from 'components/Typography/Primary'
+import { StyledHorizontalDivider } from 'routes/ChatRouteLayout'
+import FormikTextField from 'components/TextFieldFormik/TextFieldFormik'
+import { FormikProvider } from 'formik'
+import { ButtonPrimary, ButtonSecondary } from 'components/Button/Button'
+import { StyledSlider } from '../Filter/FilterPods'
+import PodPlanCard from 'pages/Pods/cards/PodPlanCard'
+import { StyledImg } from '../template/ChangeTemplateModal'
 
 interface DetailsProps {
-  resource: Resource;
+  resource: Resource
 }
 
 const sliderMarks = (max_gpu: number) =>
   Array.from({ length: max_gpu }, (_, index) => ({
     value: index,
     label: index,
-  }));
+  }))
 
 const Details = ({ resource }: DetailsProps) => {
   const {
@@ -43,7 +43,7 @@ const Details = ({ resource }: DetailsProps) => {
     overrides,
     selectedSshKey,
     handleOpenChangeSshKeyModal,
-  } = useDetails(resource);
+  } = useDetails(resource)
 
   return (
     <FormikProvider value={formik}>
@@ -63,12 +63,12 @@ const Details = ({ resource }: DetailsProps) => {
         }}
       >
         <StyledSecondaryTitle>
-          <TypographyPrimary value="Configure Deployment" semiBold size="large" />
+          <TypographyPrimary value='Configure Deployment' semiBold size='large' />
           <StyledHorizontalDivider />
         </StyledSecondaryTitle>
 
         <Box sx={borderBoxStyles}>
-          <FormikTextField label="Pod Name" placeholder="Name" name="pod_name" />
+          <FormikTextField label='Pod Name' placeholder='Name' name='pod_name' />
 
           <Box
             mt={2}
@@ -79,15 +79,15 @@ const Details = ({ resource }: DetailsProps) => {
             }}
           >
             <StyledTemplateFieldWrapper>
-              <TypographyPrimary value="Pod Template" size="medium" />
+              <TypographyPrimary value='Pod Template' size='medium' />
 
               {selectedTemplate ? (
                 <StyledPodTemplate>
                   <Box display={'flex'}>
-                    <StyledImg src="https://www.svgrepo.com/show/333528/docker.svg" alt="" />
+                    <StyledImg src='https://www.svgrepo.com/show/333528/docker.svg' alt='' />
                     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} ml={1}>
-                      <TypographyPrimary value={selectedTemplate?.name ?? ''} bold size="medium" />
-                      <TypographyPrimary value={selectedTemplate?.container_image ?? ''} size="small" />
+                      <TypographyPrimary value={selectedTemplate?.name ?? ''} bold size='medium' />
+                      <TypographyPrimary value={selectedTemplate?.container_image ?? ''} size='small' />
                     </Box>
                   </Box>
                   <Box>
@@ -96,7 +96,7 @@ const Details = ({ resource }: DetailsProps) => {
                 </StyledPodTemplate>
               ) : (
                 <Box mt={1}>
-                  <ButtonPrimary onClick={handleOpenChangeTemplateModal} size="small">
+                  <ButtonPrimary onClick={handleOpenChangeTemplateModal} size='small'>
                     Choose Template
                   </ButtonPrimary>
                 </Box>
@@ -105,14 +105,14 @@ const Details = ({ resource }: DetailsProps) => {
               {selectedTemplate && (
                 <Box display={'flex'} alignItems={'center'} mt={0.5}>
                   <Box>
-                    <ButtonPrimary onClick={handleOpenEditTemplateModal} size="small">
+                    <ButtonPrimary onClick={handleOpenEditTemplateModal} size='small'>
                       Edit template
                     </ButtonPrimary>
                   </Box>
 
                   {overrides ? (
                     <Box ml={2}>
-                      <TypographyPrimary value={'Overrides'} size="medium" />
+                      <TypographyPrimary value={'Overrides'} size='medium' />
                     </Box>
                   ) : null}
                 </Box>
@@ -120,13 +120,13 @@ const Details = ({ resource }: DetailsProps) => {
             </StyledTemplateFieldWrapper>
 
             <StyledSliderWrapper>
-              <TypographyPrimary value="SSH Key" size="medium" />
+              <TypographyPrimary value='SSH Key' size='medium' />
 
               {selectedSshKey ? (
                 <StyledPodTemplate>
                   <Box display={'flex'}>
                     <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} ml={1}>
-                      <TypographyPrimary value={selectedSshKey?.name ?? ''} bold size="medium" />
+                      <TypographyPrimary value={selectedSshKey?.name ?? ''} bold size='medium' />
                     </Box>
                   </Box>
                   <Box>
@@ -135,7 +135,7 @@ const Details = ({ resource }: DetailsProps) => {
                 </StyledPodTemplate>
               ) : (
                 <Box mt={1}>
-                  <ButtonPrimary onClick={handleOpenChangeSshKeyModal} size="small">
+                  <ButtonPrimary onClick={handleOpenChangeSshKeyModal} size='small'>
                     Choose SSH Key
                   </ButtonPrimary>
                 </Box>
@@ -143,15 +143,15 @@ const Details = ({ resource }: DetailsProps) => {
             </StyledSliderWrapper>
 
             <StyledSliderWrapper>
-              <TypographyPrimary value="GPU Count" size="medium" />
+              <TypographyPrimary value='GPU Count' size='medium' />
 
               <StyledSlider
-                aria-label="Custom marks"
+                aria-label='Custom marks'
                 defaultValue={1}
                 onChange={(e, value) => formik.setFieldValue('max_gpu', value)}
                 value={formik.values.max_gpu}
-                getAriaValueText={(value) => `${value}`}
-                valueLabelDisplay="auto"
+                getAriaValueText={value => `${value}`}
+                valueLabelDisplay='auto'
                 step={1}
                 max={resource.max_gpu}
                 min={1}
@@ -162,7 +162,7 @@ const Details = ({ resource }: DetailsProps) => {
 
             <Box mt={1} display={'flex'} flexDirection={'column'} gap={2}>
               <div>
-                <TypographyPrimary value="Instance Pricing" size="medium" />
+                <TypographyPrimary value='Instance Pricing' size='medium' />
                 <Box mt={0.5} display={'flex'}>
                   {plan_cards.map((plan, index) => (
                     <Box key={index} ml={index > 0 ? 2 : 0}>
@@ -174,7 +174,7 @@ const Details = ({ resource }: DetailsProps) => {
               <FormGroup>
                 <FormControlLabel
                   control={<StyledCheckbox />}
-                  label={<TypographyPrimary value="Encrypt Volume" size="medium" />}
+                  label={<TypographyPrimary value='Encrypt Volume' size='medium' />}
                   componentsProps={{
                     typography: { style: { marginTop: '5px' } },
                   }}
@@ -182,14 +182,14 @@ const Details = ({ resource }: DetailsProps) => {
                 <FormControlLabel
                   disabled
                   control={<StyledCheckbox />}
-                  label={<TypographyPrimary value="SSH Terminal Access" size="medium" />}
+                  label={<TypographyPrimary value='SSH Terminal Access' size='medium' />}
                   componentsProps={{
                     typography: { style: { marginTop: '5px' } },
                   }}
                 />
                 <FormControlLabel
                   control={<StyledCheckbox />}
-                  label={<TypographyPrimary value="Start Jupyter Notebook" size="medium" />}
+                  label={<TypographyPrimary value='Start Jupyter Notebook' size='medium' />}
                   componentsProps={{
                     typography: { style: { marginTop: '5px' } },
                   }}
@@ -202,10 +202,10 @@ const Details = ({ resource }: DetailsProps) => {
       <Price selectedPlan={selectedPlan} formik={formik} resource={resource} />
       <EditPodTemplateModal />
     </FormikProvider>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details
 
 const StyledPodTemplate = styled.div`
   width: 100%;
@@ -222,12 +222,12 @@ const StyledPodTemplate = styled.div`
   box-shadow: none !important;
   background-color: ${({ theme }) => `${theme.body.cardBgColor}`} !important;
   border-radius: 10px !important;
-`;
+`
 const StyledTemplateFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-`;
+`
 const StyledButton = styled(ButtonPrimary)`
   font-weight: 500;
 
@@ -237,7 +237,7 @@ const StyledButton = styled(ButtonPrimary)`
   right: 20px;
 
   z-index: 20;
-`;
+`
 const StyledSliderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -245,7 +245,7 @@ const StyledSliderWrapper = styled.div`
   width: 100%;
   padding-right: 20px;
   gap: 10px;
-`;
+`
 const StyledCheckbox = styled(Checkbox)`
   &.MuiCheckbox-root {
     color: ${({ theme }) => theme.body.textColorPrimary} !important;
@@ -253,4 +253,4 @@ const StyledCheckbox = styled(Checkbox)`
   &.Mui-checked {
     color: ${({ theme }) => theme.body.linkTextColor} !important;
   }
-`;
+`

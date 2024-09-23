@@ -20,9 +20,7 @@ const TemplateList = () => {
         <TemplateListCard
           key={index}
           onClick={() => handleEditTemplate(item.id)}
-          onDeleteClick={(event: React.MouseEvent<Element, MouseEvent>) =>
-            handleDeleteTemplate(event, item.id)
-          }
+          onDeleteClick={(event: React.MouseEvent<Element, MouseEvent>) => handleDeleteTemplate(event, item.id)}
           isSelected={params?.id === item.id}
           name={item.name}
           templateType={item.template_type}

@@ -1,12 +1,7 @@
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 import ListHeader from 'routes/components/ListHeader'
 
-import {
-  StyledChatWrapper,
-  StyledContainer,
-  StyledLeftColumn,
-  StyledMainWrapper,
-} from 'routes/ChatRouteLayout'
+import { StyledChatWrapper, StyledContainer, StyledLeftColumn, StyledMainWrapper } from 'routes/ChatRouteLayout'
 import { useNavigate, useOutlet } from 'react-router-dom'
 import Box from '@mui/material/Box'
 
@@ -28,10 +23,7 @@ const TemplateLayout = () => {
         <StyledMainWrapper>
           {templates?.length === 0 && template_loading ? (
             <StyledLeftColumn customWidth={400}>
-              <ListHeader
-                title={'Templates'}
-                onAddClick={() => navigate('/templates/create-template')}
-              />
+              <ListHeader title={'Templates'} onAddClick={() => navigate('/templates/create-template')} />
 
               <Box display={'flex'} flexDirection={'column'} sx={{ paddingRight: 1.5 }}>
                 <TemplateCardLoader />
@@ -44,10 +36,7 @@ const TemplateLayout = () => {
               {templates.length > 0 && (
                 <StyledLeftColumn customWidth={400}>
                   <Box display={'flex'} flexDirection={'column'} sx={{ paddingRight: 1.5 }}>
-                    <ListHeader
-                      title={'Templates'}
-                      onAddClick={() => navigate('/templates/create-template')}
-                    />
+                    <ListHeader title={'Templates'} onAddClick={() => navigate('/templates/create-template')} />
 
                     <TemplateList />
                   </Box>

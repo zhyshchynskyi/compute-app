@@ -26,16 +26,8 @@ const ResetPassword = () => {
       />
       <StyledFormContainer>
         <FormikProvider value={formik}>
-          <TextFieldFormik
-            field_name='password'
-            placeholder={`${t('new-password')}*`}
-            size='large'
-          />
-          <TextFieldFormik
-            field_name='confirm_password'
-            placeholder={`${t('confirm-password')}*`}
-            size='large'
-          />
+          <TextFieldFormik field_name='password' placeholder={`${t('new-password')}*`} size='large' />
+          <TextFieldFormik field_name='confirm_password' placeholder={`${t('confirm-password')}*`} size='large' />
           <StyledColumnContainer>
             <Checkbox
               size='small'

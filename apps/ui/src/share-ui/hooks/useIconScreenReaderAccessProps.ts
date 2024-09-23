@@ -1,23 +1,23 @@
-import { useMemo } from "react";
-import { getIconScreenReaderAccessProps } from "../helpers/screenReaderAccessHelper";
+import { useMemo } from 'react'
+import { getIconScreenReaderAccessProps } from '../helpers/screenReaderAccessHelper'
 
 export default function useIconScreenReaderAccessProps({
   isClickable,
   label,
-  isDecorationOnly
+  isDecorationOnly,
 }: {
-  isClickable: boolean;
-  label: string;
-  isDecorationOnly: boolean;
+  isClickable: boolean
+  label: string
+  isDecorationOnly: boolean
 }) {
   const screenReaderAccessProps = useMemo(
     () =>
       getIconScreenReaderAccessProps({
         isClickable,
         label,
-        isDecorationOnly
+        isDecorationOnly,
       }),
-    [isClickable, label, isDecorationOnly]
-  );
-  return screenReaderAccessProps;
+    [isClickable, label, isDecorationOnly],
+  )
+  return screenReaderAccessProps
 }

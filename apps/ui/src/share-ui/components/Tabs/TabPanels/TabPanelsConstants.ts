@@ -1,4 +1,4 @@
 export enum TabPanelsAnimationDirection {
-  RTL = "rtl",
-  LTR = "ltr"
+  RTL = 'rtl',
+  LTR = 'ltr',
 }

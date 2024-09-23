@@ -11,11 +11,7 @@ export const SizeNotEqualDescription = ({ collectionName }: MetadataDescriptionP
         type={Typography.types.LABEL}
         size={Typography.sizes.sm}
       />
-      <TypographyPrimary
-        value={collectionName}
-        type={Typography.types.LABEL}
-        size={Typography.sizes.sm}
-      />
+      <TypographyPrimary value={collectionName} type={Typography.types.LABEL} size={Typography.sizes.sm} />
     </>
   )
 }

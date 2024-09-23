@@ -15,12 +15,7 @@ const ProfileSettings = () => {
           <FormikTextField name='name' placeholder={'Full name'} label={'Full name'} />
           <FormikTextField name='email' placeholder='Email' label='Email' disabled />
           <FormikTextField name='company_name' placeholder='Company name' label='Company name' />
-          <FormikTextField
-            name='account_type'
-            placeholder='Account type'
-            label='Account type'
-            disabled
-          />
+          <FormikTextField name='account_type' placeholder='Account type' label='Account type' disabled />
           <StyledButtonWrapper>
             <ButtonPrimary onClick={formik.handleSubmit}>Save</ButtonPrimary>
           </StyledButtonWrapper>

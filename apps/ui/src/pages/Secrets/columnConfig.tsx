@@ -50,11 +50,7 @@ export const renderColumns = ({ handleOpenSecret }: RenderColumnsProps) => {
       accessor: 'secret_name',
       minWidth: 100,
       width: 150,
-      Cell: ({
-        row: { original: data },
-      }: {
-        row: { original: Pick<ColumnRowProps, 'secret_name' | 'id'> }
-      }) => (
+      Cell: ({ row: { original: data } }: { row: { original: Pick<ColumnRowProps, 'secret_name' | 'id'> } }) => (
         <StyledTypography fontSize={14} onClick={() => handleOpenSecret(data.id)}>
           {data.secret_name}
         </StyledTypography>
@@ -64,11 +60,7 @@ export const renderColumns = ({ handleOpenSecret }: RenderColumnsProps) => {
   ]
 }
 
-export const settingsActions = ({
-  handleActionClick,
-}: {
-  handleActionClick: (action: string) => void
-}) => {
+export const settingsActions = ({ handleActionClick }: { handleActionClick: (action: string) => void }) => {
   return [
     {
       label: 'Edit Secret Value',

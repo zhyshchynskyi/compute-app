@@ -77,12 +77,7 @@ export const DialogContent: L3Component<DialogContentProps> = React.forwardRef(
         onClickCapture={onClick}
         data-popper-reference-hidden={isReferenceHidden}
       >
-        <CSSTransition
-          {...transitionOptions}
-          in={isOpen}
-          appear={!!animationType}
-          timeout={showDelay}
-        >
+        <CSSTransition {...transitionOptions} in={isOpen} appear={!!animationType} timeout={showDelay}>
           <div
             className={classNames('l3-style-dialog-content-component', position, {
               [`edge-${startingEdge}`]: startingEdge,

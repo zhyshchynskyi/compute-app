@@ -23,15 +23,8 @@ interface YearPickerProps {
   'data-testid'?: string
 }
 
-const YearPicker = ({
-  selectedDate,
-  isYearBlocked,
-  changeCurrentDate,
-  'data-testid': dateTestId,
-}: YearPickerProps) => {
-  const selectedYear = selectedDate
-    ? selectedDate.format(YEAR_FORMAT)
-    : moment().format(YEAR_FORMAT)
+const YearPicker = ({ selectedDate, isYearBlocked, changeCurrentDate, 'data-testid': dateTestId }: YearPickerProps) => {
+  const selectedYear = selectedDate ? selectedDate.format(YEAR_FORMAT) : moment().format(YEAR_FORMAT)
 
   const [yearsToDisplay, setYearsToDisplay] = useState(
     calcNewYearsPage(parseInt(selectedYear) - BUFFER_FROM_CURRENT_YEAR, PAGE_SIZE),
@@ -55,16 +48,10 @@ const YearPicker = ({
   return (
     <div data-testid={`${dateTestId}-year-picker`}>
       <div>
-        <DateNavigationItemComponent
-          kind={Direction.prev}
-          onClick={() => onYearNavigationClick(Direction.prev)}
-        />
+        <DateNavigationItemComponent kind={Direction.prev} onClick={() => onYearNavigationClick(Direction.prev)} />
       </div>
       <div>
-        <DateNavigationItemComponent
-          kind={Direction.next}
-          onClick={() => onYearNavigationClick(Direction.next)}
-        />
+        <DateNavigationItemComponent kind={Direction.next} onClick={() => onYearNavigationClick(Direction.next)} />
       </div>
       <CSSTransition {...transitionOptions} in appear>
         <div>

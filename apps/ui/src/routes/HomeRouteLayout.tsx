@@ -1,26 +1,26 @@
-import React from 'react';
-import { useOutlet } from 'react-router-dom';
+import React from 'react'
+import { useOutlet } from 'react-router-dom'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { AuthContext } from 'contexts';
+import { AuthContext } from 'contexts'
 
-import { useModal } from 'hooks';
-import TermsAndPrivacyButtons from 'components/TermsAndPrivacyButtons';
-import { ButtonPrimary } from 'components/Button/Button';
-import { useDomainConfig } from 'utils/useDomainConfig';
-import { Login } from 'pages/Auth';
+import { useModal } from 'hooks'
+import TermsAndPrivacyButtons from 'components/TermsAndPrivacyButtons'
+import { ButtonPrimary } from 'components/Button/Button'
+import { useDomainConfig } from 'utils/useDomainConfig'
+import { Login } from 'pages/Auth'
 
 const HomeRouteLayout = () => {
-  const { getDomainConfig } = useDomainConfig();
+  const { getDomainConfig } = useDomainConfig()
 
-  const loginConfig = getDomainConfig('login_page');
+  const loginConfig = getDomainConfig('login_page')
 
-  const { user } = React.useContext(AuthContext);
+  const { user } = React.useContext(AuthContext)
 
-  const { openModal } = useModal();
+  const { openModal } = useModal()
 
-  const outlet = useOutlet();
+  const outlet = useOutlet()
 
   return (
     <StyledHomeRoot>
@@ -43,10 +43,10 @@ const HomeRouteLayout = () => {
       )}
       <StyledOutletWrapper>{outlet}</StyledOutletWrapper>
     </StyledHomeRoot>
-  );
-};
+  )
+}
 
-export default HomeRouteLayout;
+export default HomeRouteLayout
 
 export const StyledLoginWrapper = styled.div`
   position: fixed;
@@ -58,7 +58,7 @@ export const StyledLoginWrapper = styled.div`
   flex-direction: column;
 
   gap: 20px;
-`;
+`
 const StyledLoginButtonsWrapper = styled.div`
   position: fixed;
   bottom: 5px;
@@ -68,14 +68,14 @@ const StyledLoginButtonsWrapper = styled.div`
   flex-direction: column;
 
   gap: 20px;
-`;
+`
 
 const StyledHomeRoot = styled.div`
   width: 100%;
   height: 100%;
 
   overflow: auto;
-`;
+`
 const StyledOutletWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -85,4 +85,4 @@ const StyledOutletWrapper = styled.div`
   margin: 0 auto;
 
   padding-top: 20px;
-`;
+`

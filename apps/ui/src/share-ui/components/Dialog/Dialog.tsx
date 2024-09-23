@@ -142,12 +142,7 @@ interface DialogState {
   preventAnimation?: boolean
 }
 
-export type DialogEvent =
-  | React.MouseEvent
-  | React.KeyboardEvent
-  | KeyboardEvent
-  | React.FocusEvent
-  | CustomEvent
+export type DialogEvent = React.MouseEvent | React.KeyboardEvent | KeyboardEvent | React.FocusEvent | CustomEvent
 
 export default class Dialog extends PureComponent<DialogProps, DialogState> {
   static hideShowTriggers = HideShowEvent
@@ -345,10 +340,7 @@ export default class Dialog extends PureComponent<DialogProps, DialogState> {
       return this.showDialogIfNeeded()
     }
 
-    if (
-      this.isHideTrigger(eventName) &&
-      !isInsideClass(target as HTMLElement, hideTriggerIgnoreClass)
-    ) {
+    if (this.isHideTrigger(eventName) && !isInsideClass(target as HTMLElement, hideTriggerIgnoreClass)) {
       return this.hideDialogIfNeeded(event, eventName)
     }
   }
@@ -453,8 +445,7 @@ export default class Dialog extends PureComponent<DialogProps, DialogState> {
     const { preventAnimation } = this.state
 
     const disableOnClickOutside = !this.isHideTrigger(HideShowEvent.CLICK_OUTSIDE)
-    const animationTypeCalculated =
-      preventAnimationOnMount || preventAnimation ? undefined : animationType
+    const animationTypeCalculated = preventAnimationOnMount || preventAnimation ? undefined : animationType
     const contentRendered = isFunction(content) ? content() : content
 
     if (!contentRendered) {

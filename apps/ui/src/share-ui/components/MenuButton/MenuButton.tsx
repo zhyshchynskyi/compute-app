@@ -1,13 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, {
-  forwardRef,
-  ReactElement,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { forwardRef, ReactElement, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import cx from 'classnames'
 import Dialog, { DialogEvent } from '../Dialog/Dialog'
 import DialogContentContainer from '../DialogContentContainer/DialogContentContainer'
@@ -225,8 +217,7 @@ const MenuButton: L3Component<MenuButtonProps> & {
       const cloned = childrenArr.map(child => {
         if (!React.isValidElement(child)) return null
 
-        const newProps: { focusOnMount?: boolean; onClose?: (event: React.KeyboardEvent) => void } =
-          {}
+        const newProps: { focusOnMount?: boolean; onClose?: (event: React.KeyboardEvent) => void } = {}
 
         if (child.type && child.type.supportFocusOnMount) {
           newProps.focusOnMount = true
@@ -245,10 +236,7 @@ const MenuButton: L3Component<MenuButtonProps> & {
     const content = useMemo(() => {
       if (clonedChildren.length === 0) return null
       return (
-        <DialogContentContainer
-          size={dialogPaddingSize}
-          type={DialogContentContainer.types.POPOVER}
-        >
+        <DialogContentContainer size={dialogPaddingSize} type={DialogContentContainer.types.POPOVER}>
           {clonedChildren}
         </DialogContentContainer>
       )
@@ -291,10 +279,7 @@ const MenuButton: L3Component<MenuButtonProps> & {
     }, [open, setIsOpen])
 
     // TODO disabledReason - boolean, why?
-    const overrideTooltipContent = backwardCompatibilityForProperties([
-      tooltipContent,
-      disabledReason,
-    ]) as string
+    const overrideTooltipContent = backwardCompatibilityForProperties([tooltipContent, disabledReason]) as string
     const overrideClassName = backwardCompatibilityForProperties([className, componentClassName])
 
     return (

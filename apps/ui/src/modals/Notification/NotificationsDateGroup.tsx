@@ -58,9 +58,7 @@ const NotificationsDateGroup = ({
     }
   }, [isOpen, notifications])
 
-  const activeNotification = notifications?.filter(
-    (notification: any) => notification.read !== true,
-  )
+  const activeNotification = notifications?.filter((notification: any) => notification.read !== true)
   const activeNotificationCount = activeNotification?.length
 
   async function updateNotifications(notifications: any) {
@@ -103,11 +101,7 @@ const NotificationsDateGroup = ({
                 create_date={notification.created_on}
                 typename={notification.collection.__typename}
                 showOne={!isOpen}
-                unread={
-                  !isOpen
-                    ? !isOpen && !marked && activeNotificationCount > 0
-                    : !notification.read && !marked
-                }
+                unread={!isOpen ? !isOpen && !marked && activeNotificationCount > 0 : !notification.read && !marked}
                 description={
                   <CollectionDescription
                     collectionName={notification.collection.name}
@@ -133,14 +127,8 @@ const NotificationsDateGroup = ({
                 create_date={notification.created_on}
                 typename={notification.collection?.__typename}
                 showOne={!isOpen}
-                unread={
-                  !isOpen
-                    ? !isOpen && !marked && activeNotificationCount > 0
-                    : !notification.read && !marked
-                }
-                description={
-                  <ContractImportedDescription collectionName={notification.collection?.name} />
-                }
+                unread={!isOpen ? !isOpen && !marked && activeNotificationCount > 0 : !notification.read && !marked}
+                description={<ContractImportedDescription collectionName={notification.collection?.name} />}
               />
             )
           }
@@ -158,17 +146,8 @@ const NotificationsDateGroup = ({
                 create_date={notification.created_on}
                 typename={notification.game.__typename}
                 showOne={!isOpen}
-                unread={
-                  !isOpen
-                    ? !isOpen && !marked && activeNotificationCount > 0
-                    : !notification.read && !marked
-                }
-                description={
-                  <GameDescription
-                    gameName={notification.game.name}
-                    userId={notification.created_by}
-                  />
-                }
+                unread={!isOpen ? !isOpen && !marked && activeNotificationCount > 0 : !notification.read && !marked}
+                description={<GameDescription gameName={notification.game.name} userId={notification.created_by} />}
               />
             )
 
@@ -193,20 +172,14 @@ const NotificationsDateGroup = ({
                 create_date={notification.created_on}
                 typename={'Metadata'}
                 showOne={!isOpen}
-                unread={
-                  !isOpen
-                    ? !isOpen && !marked && activeNotificationCount > 0
-                    : !notification.read && !marked
-                }
+                unread={!isOpen ? !isOpen && !marked && activeNotificationCount > 0 : !notification.read && !marked}
                 description={
                   <>
                     {type === 'METADATA_UPDATE_REQUIRED' && (
                       <UpdateMetadataDescription collectionName={notification.collection.name} />
                     )}
                     {type === 'METADATA_UPDATING' && (
-                      <IsUpdatingMetadataDescription
-                        collectionName={notification.collection.name}
-                      />
+                      <IsUpdatingMetadataDescription collectionName={notification.collection.name} />
                     )}
                     {type === 'METADATA_UPDATED' && (
                       <MetadataUpdatedDescription collectionName={notification.collection.name} />

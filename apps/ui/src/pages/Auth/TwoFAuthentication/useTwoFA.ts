@@ -24,12 +24,10 @@ const useTwoFA = () => {
     // validationSchema,
     onSubmit: async values => {
       // const response = await loginComplete(values.code, id)
-
       // if (!response.success) {
       //   setAlertMessage({ type: 'danger', message: 'OTP code incorrect, please try again' })
       //   return
       // }
-
       // if (response && response.success) {
       //   setTimeout(() => {
       //     window.location.href = '/'
@@ -40,7 +38,6 @@ const useTwoFA = () => {
 
   const handleResendCode = async () => {
     // const response = await resendCode(id)
-
     // if (response.success) {
     //   return setAlertMessage({
     //     type: 'success',

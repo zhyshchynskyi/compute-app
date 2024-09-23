@@ -45,12 +45,7 @@ const DialogContentContainer: L3Component<DialogContentContainerProps> & {
         aria-describedby={ariaDescribedby}
         ref={mergedRef}
         style={style}
-        className={cx(
-          'dialog-content-container',
-          className,
-          bemHelper({ state: type }),
-          bemHelper({ state: size }),
-        )}
+        className={cx('dialog-content-container', className, bemHelper({ state: type }), bemHelper({ state: size }))}
       >
         {children}
       </div>

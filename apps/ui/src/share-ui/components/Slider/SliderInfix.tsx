@@ -18,10 +18,7 @@ const SliderInfix: FC<SliderInfixProps> & { kinds?: typeof InfixKind } = ({
   kind = SliderInfix.kinds.PREFIX,
   textSize,
 }) => {
-  const [isShow, modificators, InfixComponent, inlineStyle] = useSliderInfixComponent(
-    kind,
-    textSize,
-  )
+  const [isShow, modificators, InfixComponent, inlineStyle] = useSliderInfixComponent(kind, textSize)
   return (
     isShow && (
       <StyledInfix className={bem('infix', [...modificators, kind])} style={inlineStyle}>

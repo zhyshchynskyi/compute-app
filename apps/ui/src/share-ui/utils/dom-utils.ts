@@ -1,7 +1,4 @@
-export function isInsideClass(
-  domElement: HTMLElement,
-  classOrClassesName?: Array<string> | string,
-) {
+export function isInsideClass(domElement: HTMLElement, classOrClassesName?: Array<string> | string) {
   if (!classOrClassesName) return false
   let selector
 

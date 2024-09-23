@@ -1,32 +1,32 @@
 export function createEventHandler(handler: (event: UIEvent) => void) {
   if (!handler) {
-    return;
+    return
   }
 
-  let shouldStopPropagation = true;
+  let shouldStopPropagation = true
   return (e: UIEvent) => {
     const event = {
       ...e,
       preventDefault() {
-        e.preventDefault();
+        e.preventDefault()
       },
       isDefaultPrevented() {
-        return e.defaultPrevented;
+        return e.defaultPrevented
       },
       stopPropagation() {
         console.error(
-          "stopPropagation is now the default behavior for events. You can use continuePropagation() to revert this behavior."
-        );
+          'stopPropagation is now the default behavior for events. You can use continuePropagation() to revert this behavior.',
+        )
       },
       continuePropagation() {
-        shouldStopPropagation = false;
-      }
-    };
+        shouldStopPropagation = false
+      },
+    }
 
-    handler(event);
+    handler(event)
 
     if (shouldStopPropagation) {
-      e.stopPropagation();
+      e.stopPropagation()
     }
-  };
+  }
 }

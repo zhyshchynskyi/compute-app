@@ -55,11 +55,7 @@ export const CheatCode = () => {
               // {...register('command_first', { required: true })}
             />
           </StyledInputContainer>
-          <HeadingPrimary
-            value={'+'}
-            type={Heading.types?.h1}
-            style={{ fontSize: 52, lineHeight: 'normal' }}
-          />
+          <HeadingPrimary value={'+'} type={Heading.types?.h1} style={{ fontSize: 52, lineHeight: 'normal' }} />
           <StyledInputContainer>
             <TextField
               placeholder='?'

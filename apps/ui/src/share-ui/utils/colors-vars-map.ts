@@ -19,8 +19,7 @@ export const colorsMap = [
   },
   {
     color: '--primary-selected-on-secondary-color',
-    description:
-      'Use this to indicate selected state of primary items on secondary background color',
+    description: 'Use this to indicate selected state of primary items on secondary background color',
   },
   { color: '--primary-text-color', description: 'Use for default text color' },
   {
@@ -49,8 +48,7 @@ export const colorsMap = [
   // states
   {
     color: '--positive-color',
-    description:
-      'Use when you want to indicate sometime positive (success, completion of something...)',
+    description: 'Use when you want to indicate sometime positive (success, completion of something...)',
   },
   { color: '--positive-color-hover', description: 'Use only as hover color on positive color' },
   {
@@ -63,8 +61,7 @@ export const colorsMap = [
   },
   {
     color: '--negative-color',
-    description:
-      'Use when you want to indicate a negative action/state (delete, failed action..., error)',
+    description: 'Use when you want to indicate a negative action/state (delete, failed action..., error)',
   },
   { color: '--negative-color-hover', description: 'Use only as hover color on negative color' },
   {
@@ -266,19 +263,12 @@ export const elementAllowedColors = [
   ...Object.keys(l3GradientColors),
 ]
 
-export const elementColorsNames = elementAllowedColors.reduce(
-  (acc: Record<string, string>, key) => {
-    acc[key] = key
-    return acc
-  },
-  {},
-)
+export const elementColorsNames = elementAllowedColors.reduce((acc: Record<string, string>, key) => {
+  acc[key] = key
+  return acc
+}, {})
 
-export function getElementColor(
-  colorName: string,
-  isSelectedPalette = false,
-  isSelectedHoverPalette = false,
-): string {
+export function getElementColor(colorName: string, isSelectedPalette = false, isSelectedHoverPalette = false): string {
   if (contentColorsByName[colorName]) {
     return `var(--color-${contentColorsByName[colorName]}${isSelectedPalette ? '-selected' : ''})`
   }
@@ -302,13 +292,10 @@ export const tagHoverColors: Record<string, string> = {
 
 export const tagElementAllowedColors = [...Object.keys(l3GradientColors)]
 
-export const tagElementColorsNames = tagElementAllowedColors.reduce(
-  (acc: Record<string, string>, key) => {
-    acc[key] = key
-    return acc
-  },
-  {},
-)
+export const tagElementColorsNames = tagElementAllowedColors.reduce((acc: Record<string, string>, key) => {
+  acc[key] = key
+  return acc
+}, {})
 
 export function getTagElementColor(
   colorName: string,

@@ -1,10 +1,10 @@
-import moment from 'moment';
-import { useNavigate, useParams } from 'react-router-dom';
-import { settingsActions } from '../columnConfig';
-import { useModal } from 'hooks';
-import { editDescription, editSecretValue } from './SecretDetails';
-import React, { useContext } from 'react';
-import { ToastContext } from 'contexts';
+import moment from 'moment'
+import { useNavigate, useParams } from 'react-router-dom'
+import { settingsActions } from '../columnConfig'
+import { useModal } from 'hooks'
+import { editDescription, editSecretValue } from './SecretDetails'
+import React, { useContext } from 'react'
+import { ToastContext } from 'contexts'
 
 const secret = {
   id: '1',
@@ -13,19 +13,19 @@ const secret = {
   last_retrieved_on: '',
   created_on: '2024-08-06',
   updated_on: '2024-08-06',
-};
+}
 
 const useSecretDetails = () => {
-  const { setToast } = useContext(ToastContext);
-  const { closeModal, openModal } = useModal();
-  const navigate = useNavigate();
+  const { setToast } = useContext(ToastContext)
+  const { closeModal, openModal } = useModal()
+  const navigate = useNavigate()
 
   const [secret_fields, setSecret] = React.useState({
     secret_value: '',
     secret_description: '',
-  });
+  })
 
-  const { id } = useParams();
+  const { id } = useParams()
   // const { data: secret, loading: fetch_secret_loading } = useGetSecretById(id)
   // const { deleteSecret } = useDeleteSecretService()
 
@@ -37,12 +37,12 @@ const useSecretDetails = () => {
   //   }, [secret]);
 
   const handleCopyText = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
+    navigator.clipboard.writeText(text)
+  }
 
   const formatDate = (date: string) => {
-    return date ? moment(date).format('DD/MM/YYYY HH:mm:ss') : 'Never';
-  };
+    return date ? moment(date).format('DD/MM/YYYY HH:mm:ss') : 'Never'
+  }
 
   const handleDeleteSecret = async () => {
     openModal({
@@ -51,36 +51,36 @@ const useSecretDetails = () => {
         deleteItem: async () => {
           try {
             // await deleteSecret(id);
-            navigate(`/secrets`, { state: { need_refetch: true } });
-            closeModal('delete-confirmation-modal');
+            navigate(`/secrets`, { state: { need_refetch: true } })
+            closeModal('delete-confirmation-modal')
 
             setToast({
               message: 'Secret was deleted!',
               type: 'positive',
               open: true,
-            });
+            })
           } catch (e) {
             setToast({
               message: 'Failed to delete Secret!',
               type: 'negative',
               open: true,
-            });
-            closeModal('delete-confirmation-modal');
+            })
+            closeModal('delete-confirmation-modal')
           }
         },
         label: 'Delete Secret?',
       },
-    });
-  };
+    })
+  }
 
   const handleChangeInput = (field: string, value: string) => {
-    setSecret({ ...secret_fields, [field]: value });
-  };
+    setSecret({ ...secret_fields, [field]: value })
+  }
 
   const handleUpdateSecret = (field: string) => {
     // TODO update secret
-    navigate(`/secrets`, { state: { need_refetch: true } });
-  };
+    navigate(`/secrets`, { state: { need_refetch: true } })
+  }
 
   const handleActionClick = (action: string) => {
     switch (action) {
@@ -96,7 +96,7 @@ const useSecretDetails = () => {
             handleUpdateSecret,
             field: 'secret_name',
           },
-        });
+        })
 
       case 'secret-description':
         return openModal({
@@ -110,17 +110,17 @@ const useSecretDetails = () => {
             handleUpdateSecret,
             field: 'secret_description',
           },
-        });
+        })
       case 'delete':
-        return handleDeleteSecret();
+        return handleDeleteSecret()
       default:
         // eslint-disable-next-line no-console
-        console.log('No actions clicked!');
-        return;
+        console.log('No actions clicked!')
+        return
     }
-  };
+  }
 
-  const actions = settingsActions({ handleActionClick });
+  const actions = settingsActions({ handleActionClick })
 
   return {
     secret,
@@ -128,7 +128,7 @@ const useSecretDetails = () => {
     handleCopyText,
     formatDate,
     actions,
-  };
-};
+  }
+}
 
-export default useSecretDetails;
+export default useSecretDetails

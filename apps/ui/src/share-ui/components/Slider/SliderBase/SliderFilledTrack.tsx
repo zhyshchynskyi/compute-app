@@ -36,16 +36,9 @@ interface SliderFilledTrackProps extends L3ComponentProps {
   reverse?: boolean
 }
 
-const SliderFilledTrack: FC<SliderFilledTrackProps> = ({
-  className,
-  dimension = 0,
-  offset = 0,
-  reverse = false,
-}) => {
+const SliderFilledTrack: FC<SliderFilledTrackProps> = ({ className, dimension = 0, offset = 0, reverse = false }) => {
   const filledTrackStyle = defineFilledTrackProps(dimension, offset, reverse)
-  return (
-    <StyledFilledTack className={bem('filled-track', '', className)} style={filledTrackStyle} />
-  )
+  return <StyledFilledTack className={bem('filled-track', '', className)} style={filledTrackStyle} />
 }
 
 export default SliderFilledTrack

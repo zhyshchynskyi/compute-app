@@ -1,14 +1,14 @@
-import styled from 'styled-components';
-import IconButton from 'share-ui/components/IconButton/IconButton';
+import styled from 'styled-components'
+import IconButton from 'share-ui/components/IconButton/IconButton'
 
-import Delete from 'share-ui/components/Icon/Icons/components/Delete';
-import Edit from 'share-ui/components/Icon/Icons/components/Edit';
+import Delete from 'share-ui/components/Icon/Icons/components/Delete'
+import Edit from 'share-ui/components/Icon/Icons/components/Edit'
 
 type TableActionButtonsProp = {
-  onDeleteClick?: () => void;
-  onEditClick?: () => void;
-  customActions?: React.ReactNode;
-};
+  onDeleteClick?: () => void
+  onEditClick?: () => void
+  customActions?: React.ReactNode
+}
 
 const TableActionButtons = ({ onDeleteClick, onEditClick, customActions }: TableActionButtonsProp) => {
   return (
@@ -19,7 +19,7 @@ const TableActionButtons = ({ onDeleteClick, onEditClick, customActions }: Table
           icon={() => <StyledDeleteIcon />}
           size={IconButton.sizes?.SMALL}
           kind={IconButton.kinds?.TERTIARY}
-          ariaLabel="Delete"
+          ariaLabel='Delete'
         />
       )}
 
@@ -29,30 +29,30 @@ const TableActionButtons = ({ onDeleteClick, onEditClick, customActions }: Table
           icon={() => <StyledEditIcon />}
           size={IconButton.sizes?.SMALL}
           kind={IconButton.kinds?.TERTIARY}
-          ariaLabel="Edit"
+          ariaLabel='Edit'
         />
       )}
 
       {customActions && customActions}
     </StyledTableButtons>
-  );
-};
+  )
+}
 
-export default TableActionButtons;
+export default TableActionButtons
 
 const StyledTableButtons = styled.div`
   display: flex;
   align-items: center;
 
   height: 100%;
-`;
+`
 const StyledDeleteIcon = styled(Delete)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`
 const StyledEditIcon = styled(Edit)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`

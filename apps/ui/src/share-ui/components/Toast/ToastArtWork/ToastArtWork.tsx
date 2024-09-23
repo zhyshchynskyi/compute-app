@@ -21,14 +21,7 @@ export interface ArtWorkProps extends L3ComponentProps {
 export const ArtWork: React.FC<ArtWorkProps> & {
   types?: typeof ToastArtWorkType
   sizes?: ToastArtWorkSize
-} = ({
-  type = ToastArtWorkType.IMG,
-  src,
-  icon,
-  ariaLabel,
-  role,
-  size = ToastArtWorkSize.SMALL,
-}) => {
+} = ({ type = ToastArtWorkType.IMG, src, icon, ariaLabel, role, size = ToastArtWorkSize.SMALL }) => {
   const className = cx(bemHelper({ element: type }), bemHelper({ element: type, state: size }))
   switch (type) {
     case ToastArtWorkType.IMG:
@@ -44,15 +37,7 @@ export const ArtWork: React.FC<ArtWorkProps> & {
         />
       )
     case ToastArtWorkType.ICON:
-      return (
-        <Icon
-          icon={icon}
-          aria-label={ariaLabel}
-          clickable={false}
-          className={className}
-          ariaHidden={false}
-        />
-      )
+      return <Icon icon={icon} aria-label={ariaLabel} clickable={false} className={className} ariaHidden={false} />
     default:
       return null
   }

@@ -1,37 +1,30 @@
-import React from "react"
+import React from 'react'
 
 export const regions = [
-  "Any",
-  "CA-MTL-1",
-  "CA-MTL-2",
-  "CA-MTL-3",
-  "EU-NL-1",
-  "EU-RO-1",
-  "EUR-IS-1",
-  "EUR-IS-2",
-  "SEA-SG-1",
-  "US-CA-1",
-  "US-GA-1",
-  "US-KS-2",
-  "US-OR-1",
-  "US-TX-3"
+  'Any',
+  'CA-MTL-1',
+  'CA-MTL-2',
+  'CA-MTL-3',
+  'EU-NL-1',
+  'EU-RO-1',
+  'EUR-IS-1',
+  'EUR-IS-2',
+  'SEA-SG-1',
+  'US-CA-1',
+  'US-GA-1',
+  'US-KS-2',
+  'US-OR-1',
+  'US-TX-3',
 ]
 
-export const cudaVersions = [
-  "11.8",
-  "12.0",
-  "12.1",
-  "12.2",
-  "12.3",
-  "12.4"
-]
+export const cudaVersions = ['11.8', '12.0', '12.1', '12.2', '12.3', '12.4']
 
 export const ramGpuMarks = [
   { label: '8', value: '8' },
   { label: '16', value: '16' },
   { label: '24', value: '24' },
   { label: '48', value: '48' },
-  { label: '80', value: "80" },
+  { label: '80', value: '80' },
   { label: '100', value: '100' },
 ]
 
@@ -52,17 +45,16 @@ export const sliderMarks = [
 ]
 
 const useFilter = () => {
-    const [filter, setFilter] = React.useState({
-        cloud: 'Secure Cloud',
-        region: 'Any',
-        cudaVersion: 'Any'
-    })
+  const [filter, setFilter] = React.useState({
+    cloud: 'Secure Cloud',
+    region: 'Any',
+    cudaVersion: 'Any',
+  })
 
-    return {
-        filter,
-        setFilter,
-    }
+  return {
+    filter,
+    setFilter,
+  }
 }
-
 
 export default useFilter

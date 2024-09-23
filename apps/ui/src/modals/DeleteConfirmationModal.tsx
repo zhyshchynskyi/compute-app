@@ -12,97 +12,89 @@ import TypographyPrimary from 'components/Typography/Primary'
 import MainModal from './MainModal'
 
 type DeleteConfirmationModalProps = {
-    data: {
-        deleteItem: () => void
-        label: string
-        title: string
-    }
+  data: {
+    deleteItem: () => void
+    label: string
+    title: string
+  }
 }
 
 const DeleteConfirmationModal = ({ data }: DeleteConfirmationModalProps) => {
-    const { deleteItem, label } = data
-    const [isLoading, setIsLoading] = useState(false)
+  const { deleteItem, label } = data
+  const [isLoading, setIsLoading] = useState(false)
 
-    const { closeModal } = useModal()
+  const { closeModal } = useModal()
 
-    const handleConfirm = async () => {
-        setIsLoading(true)
-        await deleteItem()
-        setIsLoading(false)
-    }
+  const handleConfirm = async () => {
+    setIsLoading(true)
+    await deleteItem()
+    setIsLoading(false)
+  }
 
-    const handleClose = () => {
-        closeModal('delete-confirmation-modal')
-    }
+  const handleClose = () => {
+    closeModal('delete-confirmation-modal')
+  }
 
-    const { t } = useTranslation()
+  const { t } = useTranslation()
 
-    return (
-        <>
-            <MainModal
-                onClose={handleClose}
-                title={''}
-                customButtons={
-                    <>
-                        <Button
-                            onClick={handleClose}
-                            kind={Button.kinds?.TERTIARY}
-                            size={Button.sizes?.SMALL}
-                        >
-                            {t('cancel')}
-                        </Button>
-                        <Button
-                            onClick={handleConfirm}
-                            kind={Button.kinds?.PRIMARY}
-                            size={Button.sizes?.SMALL}
-                            disabled={isLoading}
-                            loading={isLoading}
-                        >
-                            {t('confirm')}
-                        </Button>
-                    </>
-                }
+  return (
+    <>
+      <MainModal
+        onClose={handleClose}
+        title={''}
+        customButtons={
+          <>
+            <Button onClick={handleClose} kind={Button.kinds?.TERTIARY} size={Button.sizes?.SMALL}>
+              {t('cancel')}
+            </Button>
+            <Button
+              onClick={handleConfirm}
+              kind={Button.kinds?.PRIMARY}
+              size={Button.sizes?.SMALL}
+              disabled={isLoading}
+              loading={isLoading}
             >
-                <StyledBody>
-                    <TypographyPrimary
-                        value={isLoading ? `${t('processing')}` : label}
-                        size={'large'}
-                        semiBold
-                    />
-                </StyledBody>
-            </MainModal>
-        </>
-    )
+              {t('confirm')}
+            </Button>
+          </>
+        }
+      >
+        <StyledBody>
+          <TypographyPrimary value={isLoading ? `${t('processing')}` : label} size={'large'} semiBold />
+        </StyledBody>
+      </MainModal>
+    </>
+  )
 }
 
 DeleteConfirmationModal.propTypes = {
-    openModal: PropTypes.func,
-    data: PropTypes.object,
-    closeModal: PropTypes.func,
+  openModal: PropTypes.func,
+  data: PropTypes.object,
+  closeModal: PropTypes.func,
 }
 
 export default withRenderModal('delete-confirmation-modal')(DeleteConfirmationModal)
 
 const StyledBody = styled.div`
-    min-width: 300px;
-    width: fit-content;
-    max-width: 400px;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 400px;
 
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    padding: 20px;
+  padding: 20px;
 
-    padding-top: 5px;
+  padding-top: 5px;
 
-    text-align: center;
+  text-align: center;
 `
 
 export const StyledActionsContainer = styled.div`
-    display: flex;
-    position: relative;
-    justify-content: flex-end;
-    gap: 16px;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  gap: 16px;
 
-    width: 100%;
+  width: 100%;
 `

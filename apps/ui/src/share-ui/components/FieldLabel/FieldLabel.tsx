@@ -27,13 +27,7 @@ const FieldLabel: FC<FieldLabelProps> = forwardRef(
 
     return (
       <section className='label-component--wrapper'>
-        <Icon
-          icon={icon}
-          id={labelFor}
-          clickable={false}
-          iconLabel={iconLabel}
-          iconType={Icon.type?.ICON_FONT}
-        />
+        <Icon icon={icon} id={labelFor} clickable={false} iconLabel={iconLabel} iconType={Icon.type?.ICON_FONT} />
         <StyledLabel htmlFor={labelFor} ref={ref} className={labelClassName}>
           <TypographyPrimary value={labelText} size='medium' />
         </StyledLabel>

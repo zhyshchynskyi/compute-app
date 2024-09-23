@@ -22,11 +22,10 @@ const useGithubLogin = () => {
     // }
   }
   useEffect(() => {
-
     if (code && location.pathname.includes('/github-login')) {
       fetchGithubLoginComplete(code)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
   return {

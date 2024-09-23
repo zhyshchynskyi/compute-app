@@ -1,42 +1,48 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from 'react'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 const buttonStyles = {
-    color: '#000000',
-    textTransform: 'capitalize',
-    fontSize: '0.8125rem',
-    fontWeight: 'bold',
-  }
+  color: '#000000',
+  textTransform: 'capitalize',
+  fontSize: '0.8125rem',
+  fontWeight: 'bold',
+}
 
-export const  DropDownMenu = ({ children, buttonContent, customStyles }: { children: React.ReactNode , buttonContent: any, customStyles?: any }) => {
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+export const DropDownMenu = ({
+  children,
+  buttonContent,
+  customStyles,
+}: {
+  children: React.ReactNode
+  buttonContent: any
+  customStyles?: any
+}) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+    setAnchorEl(null)
+  }
 
   return (
     <div>
       <Button
-        color='primary' 
+        color='primary'
         size='small'
         onClick={handleClick}
         sx={{
           ...buttonStyles,
-          ...customStyles
+          ...customStyles,
         }}
       >
         {buttonContent()}
       </Button>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -45,17 +51,22 @@ export const  DropDownMenu = ({ children, buttonContent, customStyles }: { child
         }}
       >
         {React.Children.map(children, (child: any) => {
-            return React.cloneElement(child, { onClick: handleClose });
+          return React.cloneElement(child, { onClick: handleClose })
         })}
       </Menu>
     </div>
-  );
+  )
 }
 
 export const DropDownItem = ({ handleSelect, onClick, children }: any) => {
-    return <MenuItem
+  return (
+    <MenuItem
       onClick={() => {
         handleSelect()
         onClick()
-    }}>{children}</MenuItem>
+      }}
+    >
+      {children}
+    </MenuItem>
+  )
 }

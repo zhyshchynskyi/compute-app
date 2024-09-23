@@ -20,21 +20,19 @@ interface SliderRailProps extends L3ComponentProps {
 // eslint-disable-next-line react/display-name
 const SliderRail: React.ForwardRefExoticComponent<SliderRailProps & React.RefAttributes<unknown>> =
   // eslint-disable-next-line react/display-name
-  forwardRef<unknown, SliderRailProps>(
-    ({ className, children, onClick = NOOP }, ref: ForwardedRef<HTMLDivElement>) => {
-      const { shapeTestId } = useSliderUi()
-      function handleClick(e: React.MouseEvent) {
-        onClick(e)
-      }
+  forwardRef<unknown, SliderRailProps>(({ className, children, onClick = NOOP }, ref: ForwardedRef<HTMLDivElement>) => {
+    const { shapeTestId } = useSliderUi()
+    function handleClick(e: React.MouseEvent) {
+      onClick(e)
+    }
 
-      return (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-        <StyledRail data-testid={shapeTestId('rail')} onClick={handleClick} ref={ref}>
-          {children}
-        </StyledRail>
-      )
-    },
-  )
+    return (
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+      <StyledRail data-testid={shapeTestId('rail')} onClick={handleClick} ref={ref}>
+        {children}
+      </StyledRail>
+    )
+  })
 
 export default SliderRail
 

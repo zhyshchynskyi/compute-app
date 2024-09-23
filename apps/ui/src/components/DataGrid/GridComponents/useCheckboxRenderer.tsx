@@ -27,11 +27,7 @@ const useCheckboxRenderer = () => {
     return (
       <StyledDiv>
         <Checkbox
-          indeterminate={
-            selectedRows.length &&
-            selectedRows.length !== allRows.length &&
-            selectedRows.length !== 0
-          }
+          indeterminate={selectedRows.length && selectedRows.length !== allRows.length && selectedRows.length !== 0}
           checked={selectedRows.length === allRows.length && allRows.length > 0}
           size='small'
           kind='secondary'
@@ -66,12 +62,7 @@ const useCheckboxRenderer = () => {
 
     return (
       <StyledDiv>
-        <Checkbox
-          size='small'
-          kind='secondary'
-          checked={p.node.isSelected()}
-          onChange={handleCheckboxChange}
-        />
+        <Checkbox size='small' kind='secondary' checked={p.node.isSelected()} onChange={handleCheckboxChange} />
       </StyledDiv>
     )
   }, [])

@@ -14,14 +14,7 @@ type UploadImageProps = {
   buttonLabel: string
 }
 
-const UploadImage = ({
-  loading,
-  value,
-  onChange,
-  remove,
-  hideRemove,
-  buttonLabel,
-}: UploadImageProps) => {
+const UploadImage = ({ loading, value, onChange, remove, hideRemove, buttonLabel }: UploadImageProps) => {
   return (
     <Box width={'100%'} display={'flex'} alignItems={'center'} gap={2}>
       <Box display={'flex'} alignItems={'center'} gap={0.5}>

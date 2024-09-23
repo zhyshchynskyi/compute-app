@@ -1,11 +1,11 @@
 export enum DialogType {
-  MODAL = "modal",
-  POPOVER = "popover"
+  MODAL = 'modal',
+  POPOVER = 'popover',
 }
 
 export enum DialogSize {
-  NONE = "none",
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large"
+  NONE = 'none',
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
 }

@@ -19,12 +19,7 @@ const RunLogsModal = ({ data }: RunLogsModalProps) => {
   const { closeModal } = useModal()
 
   return (
-    <StyledModal
-      onClose={() => closeModal(RUN_LOGS_MODAL_NAME)}
-      show
-      backgroundColor='light'
-      hideCloseButton
-    >
+    <StyledModal onClose={() => closeModal(RUN_LOGS_MODAL_NAME)} show backgroundColor='light' hideCloseButton>
       <StyledModalBody>
         <RunLogs runId={data.runId} />
       </StyledModalBody>

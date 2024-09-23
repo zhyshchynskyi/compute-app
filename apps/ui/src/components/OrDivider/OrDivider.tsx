@@ -9,11 +9,7 @@ const OrDivider = () => {
   return (
     <StyledOrDivider>
       <StyledLine />
-      <TypographyTertiary
-        value={t('or')}
-        type={Typography.types.label}
-        size={Typography.sizes.md}
-      />
+      <TypographyTertiary value={t('or')} type={Typography.types.label} size={Typography.sizes.md} />
       <StyledLine />
     </StyledOrDivider>
   )

@@ -9,11 +9,7 @@ type UseFormAutoSaveProps<T extends FieldValues> = {
   onSave: () => Promise<void>
 }
 
-const useFormAutoSave = <T extends FieldValues>({
-  form,
-  debounceMs = 1000,
-  onSave,
-}: UseFormAutoSaveProps<T>) => {
+const useFormAutoSave = <T extends FieldValues>({ form, debounceMs = 1000, onSave }: UseFormAutoSaveProps<T>) => {
   const values = useWatch({
     control: form.control,
   })

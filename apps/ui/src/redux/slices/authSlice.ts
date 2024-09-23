@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { userApi } from 'redux/apis/userApi';
-import { removeToken, setToken } from 'redux/token';
-import { IUser } from 'types/user.types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { userApi } from 'redux/apis/userApi'
+import { removeToken, setToken } from 'redux/token'
+import { IUser } from 'types/user.types'
 
 const authSlice = createSlice({
   name: 'authSlice',
@@ -15,38 +15,38 @@ const authSlice = createSlice({
         ...state,
         authStatus: true,
         user: action.payload,
-      };
+      }
     },
 
     clearUser() {
-      removeToken();
+      removeToken()
       // window.location.href = '/';
 
       return {
         authStatus: false,
         user: null,
-      };
+      }
     },
 
-    getUser: (state) => state,
+    getUser: state => state,
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addMatcher(userApi.endpoints.getMe.matchFulfilled, (state, action) => {
-      state.authStatus = !!action.payload;
-      state.user = action.payload;
-    });
+      state.authStatus = !!action.payload
+      state.user = action.payload
+    })
     builder.addMatcher(userApi.endpoints.login.matchFulfilled, (state, action) => {
-      const user = action.payload.user;
-      const token = action.payload.token;
+      const user = action.payload.user
+      const token = action.payload.token
 
-      setToken(token);
+      setToken(token)
 
-      state.authStatus = !!user;
-      state.user = user;
-    });
+      state.authStatus = !!user
+      state.user = user
+    })
   },
-});
+})
 
-export const { setUser, clearUser, getUser } = authSlice.actions;
+export const { setUser, clearUser, getUser } = authSlice.actions
 
-export default authSlice.reducer;
+export default authSlice.reducer

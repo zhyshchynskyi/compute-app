@@ -1,11 +1,7 @@
 import React, { forwardRef, useCallback, useState } from 'react'
 import cx from 'classnames'
 import moment from 'moment'
-import {
-  DayOfWeekShape,
-  DayPickerRangeController,
-  DayPickerSingleDateController,
-} from 'react-dates'
+import { DayOfWeekShape, DayPickerRangeController, DayPickerSingleDateController } from 'react-dates'
 import DatePickerHeaderComponent from './DatePickerHeader/DatePickerHeader'
 import DateNavigationItem from './DateNavigationItem/DateNavigationItem'
 import YearPicker from './YearPicker/YearPicker'
@@ -56,10 +52,7 @@ interface DatePickerProps extends L3ComponentProps {
 }
 
 // eslint-disable-next-line react/display-name
-const DatePicker: L3Component<DatePickerProps, HTMLElement> = forwardRef<
-  HTMLElement,
-  DatePickerProps
->(
+const DatePicker: L3Component<DatePickerProps, HTMLElement> = forwardRef<HTMLElement, DatePickerProps>(
   (
     {
       id,
@@ -124,9 +117,7 @@ const DatePicker: L3Component<DatePickerProps, HTMLElement> = forwardRef<
     const renderMonthYearSelection = useCallback(() => {
       return (
         <YearPicker
-          data-testid={
-            dataTestId || getTestId(ComponentDefaultTestId.DATEPICKER_YEAR_SELECTION, id)
-          }
+          data-testid={dataTestId || getTestId(ComponentDefaultTestId.DATEPICKER_YEAR_SELECTION, id)}
           selectedDate={date}
           isYearBlocked={shouldBlockYear}
           changeCurrentDate={changeCurrentDateFromMonthYearView}
@@ -151,11 +142,7 @@ const DatePicker: L3Component<DatePickerProps, HTMLElement> = forwardRef<
 
     const shouldShowNav = !hideNavigationKeys && !isMonthYearSelection
     return (
-      <div
-        data-testid={dataTestId || getTestId(ComponentDefaultTestId.DATEPICKER, id)}
-        ref={ref}
-        id={id}
-      >
+      <div data-testid={dataTestId || getTestId(ComponentDefaultTestId.DATEPICKER, id)} ref={ref} id={id}>
         {range ? (
           <DayPickerRangeController
             key={`${overrideDateForView?.toString()}`}

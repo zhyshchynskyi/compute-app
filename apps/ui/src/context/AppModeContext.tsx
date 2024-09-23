@@ -1,49 +1,49 @@
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react'
 
-import type { ReactNode } from 'react';
-import { setAccountId } from 'helpers/authHelper';
+import type { ReactNode } from 'react'
+import { setAccountId } from 'helpers/authHelper'
 // eslint-disable-next-line import/no-extraneous-dependencies
-import Cookies from 'universal-cookie';
-import { AuthContext } from 'contexts';
-import { Account } from 'types/account';
-import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie'
+import { AuthContext } from 'contexts'
+import { Account } from 'types/account'
+import { useNavigate } from 'react-router-dom'
 
 type AppModeContextType = {
-  accounts: Account[];
-  shared_accounts: any;
-  account_id: string | null;
-  switchAccountMode: (account: Account, noNavigation?: boolean) => void;
-  selected_account?: Account;
-  account_switch_loading: boolean;
-};
+  accounts: Account[]
+  shared_accounts: any
+  account_id: string | null
+  switchAccountMode: (account: Account, noNavigation?: boolean) => void
+  selected_account?: Account
+  account_switch_loading: boolean
+}
 
 export const account_mode_icon: Record<string, string> = {
   compute: 'https://cdn-icons-png.freepik.com/512/929/929574.png',
   'subnet-api': 'https://cdn-icons-png.flaticon.com/512/319/319559.png',
   validator:
     'https://uxwing.com/wp-content/themes/uxwing/download/crime-security-military-law/shield-checkmark-line-icon.png',
-};
-const cookies: any = new Cookies();
+}
+const cookies: any = new Cookies()
 
-export const AppModeContext = createContext<AppModeContextType | null>(null);
+export const AppModeContext = createContext<AppModeContextType | null>(null)
 
 type AppModeContextProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export function AppModeContextProvider({ children }: AppModeContextProviderProps): JSX.Element {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { user: current_user_account } = useContext(AuthContext);
+  const { user: current_user_account } = useContext(AuthContext)
 
-  const account_id_from_cookies = cookies.get('account_id') ?? null;
+  const account_id_from_cookies = cookies.get('account_id') ?? null
 
   useEffect(() => {
     if (!account_id_from_cookies && current_user_account) {
-      setAccountId(current_user_account.id);
+      setAccountId(current_user_account.id)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account_id_from_cookies]);
+  }, [account_id_from_cookies])
 
   const switchAccountMode = async (account: Account, noNavigation?: boolean) => {
     // await switchAccount(account.id)
@@ -53,7 +53,7 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
     // if (!noNavigation) {
     //     navigate('/')
     // }
-  };
+  }
 
   // const shared_list = shared_accounts.map(i => ({
   //     id: i.account_id,
@@ -71,15 +71,15 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
     // ),
     selected_account: undefined,
     account_switch_loading: false,
-  };
+  }
 
-  return <AppModeContext.Provider value={value}>{children}</AppModeContext.Provider>;
+  return <AppModeContext.Provider value={value}>{children}</AppModeContext.Provider>
 }
 
 export function useAppModeContext(): AppModeContextType {
-  const context = useContext(AppModeContext);
+  const context = useContext(AppModeContext)
 
-  if (!context) throw new Error('useAppModeContext must be used within an AppModeContextProvider');
+  if (!context) throw new Error('useAppModeContext must be used within an AppModeContextProvider')
 
-  return context;
+  return context
 }

@@ -15,14 +15,8 @@ export function useSliderInfixComponent(
   kind: InfixKind,
   textSize: SliderTextSize,
 ): [boolean, string[], ReactElement, CSSProperties] {
-  const {
-    prefix,
-    postfix,
-    indicateSelection,
-    selectionIndicatorWidth,
-    textfix,
-    indicateTextSelection,
-  } = useSliderInfix()
+  const { prefix, postfix, indicateSelection, selectionIndicatorWidth, textfix, indicateTextSelection } =
+    useSliderInfix()
   const { ranged, value, valueText } = useSliderSelection()
   const infix = kind === InfixKind.POSTFIX ? postfix : prefix
   const inTextFix = kind === InfixKind.TEXTFIX && textfix
@@ -52,12 +46,7 @@ export function useSliderInfixComponent(
     return [false, [], null, {}]
   }
   if (indicateSelection && (isPostfix || ranged)) {
-    return [
-      true,
-      [],
-      <SelectionIndicator key={kind} kind={kind} />,
-      { width: selectionIndicatorWidth },
-    ]
+    return [true, [], <SelectionIndicator key={kind} kind={kind} />, { width: selectionIndicatorWidth }]
   }
   if (typeof infix === 'object' && (infix as { icon: IconType }).icon) {
     const { icon, ...restIconProps } = infix as { icon: IconType }

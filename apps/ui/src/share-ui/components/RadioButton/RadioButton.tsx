@@ -88,11 +88,7 @@ const RadioButton: L3Component<RadioButtonProps, HTMLInputElement> = forwardRef(
                   onChange={onSelect}
                   ref={mergedRef as React.Ref<HTMLInputElement>}
                 />
-                <StyledControl
-                  isDisabled={disabled}
-                  checked={checked ?? false}
-                  defaultChecked={defaultChecked}
-                />
+                <StyledControl isDisabled={disabled} checked={checked ?? false} defaultChecked={defaultChecked} />
               </StyledContainer>
               {text && <StyledLabel isDisabled={disabled}>{text}</StyledLabel>}
               {children && (

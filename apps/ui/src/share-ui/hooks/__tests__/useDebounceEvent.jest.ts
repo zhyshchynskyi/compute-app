@@ -1,148 +1,148 @@
-import { renderHook, cleanup, act, RenderHookResult } from "@testing-library/react-hooks";
-import useDebounceEvent, { UseDebounceResult } from "../useDebounceEvent";
-import { ChangeEvent } from "react";
+import { renderHook, cleanup, act, RenderHookResult } from '@testing-library/react-hooks'
+import useDebounceEvent, { UseDebounceResult } from '../useDebounceEvent'
+import { ChangeEvent } from 'react'
 
-describe("useDebounceEvent", () => {
-  const delay = 0;
-  const initialStateValue = "";
-  let onChangeCallbackStub: jest.Mock;
-  let hookResult: RenderHookResult<unknown, UseDebounceResult>;
+describe('useDebounceEvent', () => {
+  const delay = 0
+  const initialStateValue = ''
+  let onChangeCallbackStub: jest.Mock
+  let hookResult: RenderHookResult<unknown, UseDebounceResult>
 
   beforeEach(() => {
-    onChangeCallbackStub = jest.fn();
+    onChangeCallbackStub = jest.fn()
     hookResult = renderHook(() =>
       useDebounceEvent({
         delay,
         initialStateValue,
-        onChange: onChangeCallbackStub
-      })
-    );
-  });
+        onChange: onChangeCallbackStub,
+      }),
+    )
+  })
 
   afterEach(() => {
-    cleanup();
-  });
+    cleanup()
+  })
 
-  describe("return types", () => {
-    it("should give a callback function", () => {
-      expect(typeof hookResult.result.current.onEventChanged).toEqual("function");
-    });
+  describe('return types', () => {
+    it('should give a callback function', () => {
+      expect(typeof hookResult.result.current.onEventChanged).toEqual('function')
+    })
 
-    it("should give a clear function", () => {
-      expect(typeof hookResult.result.current.clearValue).toEqual("function");
-    });
+    it('should give a clear function', () => {
+      expect(typeof hookResult.result.current.clearValue).toEqual('function')
+    })
 
-    it("should give a update function", () => {
-      expect(typeof hookResult.result.current.updateValue).toEqual("function");
-    });
+    it('should give a update function', () => {
+      expect(typeof hookResult.result.current.updateValue).toEqual('function')
+    })
 
-    it("should give the value ", () => {
-      expect(typeof hookResult.result.current.inputValue).toEqual("string");
-    });
-  });
-  describe("updating the value with input event", () => {
-    it("should update the value", () => {
-      const { onEventChanged } = hookResult.result.current;
-      const newInputValue = "input value";
+    it('should give the value ', () => {
+      expect(typeof hookResult.result.current.inputValue).toEqual('string')
+    })
+  })
+  describe('updating the value with input event', () => {
+    it('should update the value', () => {
+      const { onEventChanged } = hookResult.result.current
+      const newInputValue = 'input value'
 
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
+        onEventChanged(getEventObject(newInputValue))
+      })
 
-      expect(hookResult.result.current.inputValue).toEqual(newInputValue);
-    });
+      expect(hookResult.result.current.inputValue).toEqual(newInputValue)
+    })
 
-    it("should trim the value", () => {
+    it('should trim the value', () => {
       const hookRes = renderHook(() =>
         useDebounceEvent({
           delay: 0,
           trim: true,
           onChange: onChangeCallbackStub,
-          initialStateValue: ""
-        })
-      );
+          initialStateValue: '',
+        }),
+      )
 
-      const { onEventChanged } = hookRes.result.current;
-      const newInputValue = "value     ";
+      const { onEventChanged } = hookRes.result.current
+      const newInputValue = 'value     '
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
-      expect(hookRes.result.current.inputValue).toEqual(newInputValue.trim());
-    });
+        onEventChanged(getEventObject(newInputValue))
+      })
+      expect(hookRes.result.current.inputValue).toEqual(newInputValue.trim())
+    })
 
-    it("should clear the value", () => {
-      const { clearValue } = hookResult.result.current;
-
-      act(() => {
-        clearValue();
-      });
-
-      expect(hookResult.result.current.inputValue).toEqual("");
-    });
-
-    it("should call onChange with the correct value", () => {
-      const { onEventChanged } = hookResult.result.current;
-      const newInputValue = "input value";
+    it('should clear the value', () => {
+      const { clearValue } = hookResult.result.current
 
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
+        clearValue()
+      })
 
-      expect(onChangeCallbackStub.mock.calls[0][0]).toEqual(newInputValue);
-    });
-  });
-  describe("debounced", () => {
-    const additionalDelay = 200;
+      expect(hookResult.result.current.inputValue).toEqual('')
+    })
+
+    it('should call onChange with the correct value', () => {
+      const { onEventChanged } = hookResult.result.current
+      const newInputValue = 'input value'
+
+      act(() => {
+        onEventChanged(getEventObject(newInputValue))
+      })
+
+      expect(onChangeCallbackStub.mock.calls[0][0]).toEqual(newInputValue)
+    })
+  })
+  describe('debounced', () => {
+    const additionalDelay = 200
 
     beforeEach(() => {
-      jest.useFakeTimers("modern");
+      jest.useFakeTimers('modern')
 
       hookResult = renderHook(() =>
         useDebounceEvent({
           delay: additionalDelay,
           initialStateValue,
-          onChange: onChangeCallbackStub
-        })
-      );
-    });
+          onChange: onChangeCallbackStub,
+        }),
+      )
+    })
 
     afterEach(() => {
-      jest.useRealTimers();
-    });
+      jest.useRealTimers()
+    })
 
-    it("should not call the onChange immediately ", () => {
-      const { onEventChanged } = hookResult.result.current;
-      const newInputValue = "input value";
+    it('should not call the onChange immediately ', () => {
+      const { onEventChanged } = hookResult.result.current
+      const newInputValue = 'input value'
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
-      expect(onChangeCallbackStub.mock.calls.length).toEqual(0);
-    });
+        onEventChanged(getEventObject(newInputValue))
+      })
+      expect(onChangeCallbackStub.mock.calls.length).toEqual(0)
+    })
 
-    it("should not call the onChange before the timer passes ", () => {
-      const { onEventChanged } = hookResult.result.current;
-      const newInputValue = "input value";
+    it('should not call the onChange before the timer passes ', () => {
+      const { onEventChanged } = hookResult.result.current
+      const newInputValue = 'input value'
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
-      jest.advanceTimersByTime(additionalDelay - 1);
+        onEventChanged(getEventObject(newInputValue))
+      })
+      jest.advanceTimersByTime(additionalDelay - 1)
 
-      expect(onChangeCallbackStub.mock.calls.length).toEqual(0);
-    });
+      expect(onChangeCallbackStub.mock.calls.length).toEqual(0)
+    })
 
-    it("should be called after the timeout ", () => {
-      const { onEventChanged } = hookResult.result.current;
-      const newInputValue = "input value";
+    it('should be called after the timeout ', () => {
+      const { onEventChanged } = hookResult.result.current
+      const newInputValue = 'input value'
       act(() => {
-        onEventChanged(getEventObject(newInputValue));
-      });
+        onEventChanged(getEventObject(newInputValue))
+      })
 
-      jest.runOnlyPendingTimers();
+      jest.runOnlyPendingTimers()
 
-      expect(onChangeCallbackStub.mock.calls.length).toEqual(1);
-    });
-  });
-});
+      expect(onChangeCallbackStub.mock.calls.length).toEqual(1)
+    })
+  })
+})
 
 function getEventObject(value: string): ChangeEvent<Partial<HTMLInputElement>> {
   return {
@@ -154,12 +154,12 @@ function getEventObject(value: string): ChangeEvent<Partial<HTMLInputElement>> {
     isTrusted: false,
     nativeEvent: undefined,
     timeStamp: 0,
-    type: "",
+    type: '',
     isDefaultPrevented(): boolean {
-      return false;
+      return false
     },
     isPropagationStopped(): boolean {
-      return false;
+      return false
     },
     persist(): void {},
     preventDefault(): void {},
@@ -168,9 +168,9 @@ function getEventObject(value: string): ChangeEvent<Partial<HTMLInputElement>> {
       value,
       addEventListener(): void {},
       dispatchEvent(): boolean {
-        return false;
+        return false
       },
-      removeEventListener(): void {}
-    }
-  };
+      removeEventListener(): void {},
+    },
+  }
 }

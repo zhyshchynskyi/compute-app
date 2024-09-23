@@ -11,10 +11,7 @@ import TypographyPrimary from 'components/Typography/Primary'
 
 const ListItem = ({ is_active, item, navigate }: any) => {
   return (
-    <StyledListItemContainer
-      is_active={is_active}
-      onClick={() => navigate(`/developers/log/${item.id}`)}
-    >
+    <StyledListItemContainer is_active={is_active} onClick={() => navigate(`/developers/log/${item.id}`)}>
       <StyledListItemBlock>
         {/* <StyledStatusContainer> */}
         {item.status === '200' && (
@@ -24,11 +21,7 @@ const ListItem = ({ is_active, item, navigate }: any) => {
               readOnly
               label={
                 <>
-                  <TypographyTertiary
-                    value={item.status}
-                    type={Typography.types.LABEL}
-                    size={Typography.sizes.xss}
-                  />
+                  <TypographyTertiary value={item.status} type={Typography.types.LABEL} size={Typography.sizes.xss} />
                   <TypographyTertiary
                     value={parseInt(item.status) === 200 && ' OK'}
                     type={Typography.types.LABEL}
@@ -46,11 +39,7 @@ const ListItem = ({ is_active, item, navigate }: any) => {
               readOnly
               label={
                 <>
-                  <TypographySecondary
-                    value={item.status}
-                    type={Typography.types.LABEL}
-                    size={Typography.sizes.xss}
-                  />
+                  <TypographySecondary value={item.status} type={Typography.types.LABEL} size={Typography.sizes.xss} />
                   <TypographySecondary
                     value={parseInt(item.status) === 400 && ' ERR'}
                     type={Typography.types.LABEL}
@@ -66,11 +55,7 @@ const ListItem = ({ is_active, item, navigate }: any) => {
           <>
             <StyledUrlContainer>
               <StyledGqlNameWrapper>
-                <TypographyPrimary
-                  value={item.gql_name}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyPrimary value={item.gql_name} type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledGqlNameWrapper>
 
               {/* <Typography
@@ -80,11 +65,7 @@ const ListItem = ({ is_active, item, navigate }: any) => {
                 customColor='#FFFFFF'
               /> */}
               <StyledEndpointNameWrapper>
-                <TypographyPrimary
-                  value={item.endpoint}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyPrimary value={item.endpoint} type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledEndpointNameWrapper>
               <StyledTimeNameWrapper>
                 <TypographySecondary
@@ -98,21 +79,9 @@ const ListItem = ({ is_active, item, navigate }: any) => {
         ) : (
           <>
             <StyledUrlContainer>
-              <TypographyPrimary
-                value={item.method}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
-              <TypographyPrimary
-                value='&ensp; &ensp;'
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
-              <TypographyPrimary
-                value={item.endpoint}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <TypographyPrimary value={item.method} type={Typography.types.LABEL} size={Typography.sizes.md} />
+              <TypographyPrimary value='&ensp; &ensp;' type={Typography.types.LABEL} size={Typography.sizes.md} />
+              <TypographyPrimary value={item.endpoint} type={Typography.types.LABEL} size={Typography.sizes.md} />
             </StyledUrlContainer>
           </>
         )}
@@ -136,11 +105,7 @@ const LogList = ({ items }: { items: any[] }) => {
   return (
     <StyledContainer>
       <StyledTitle>
-        <TypographyPrimary
-          value='Yesterday'
-          type={Typography.types.LABEL}
-          size={Typography.sizes.sm}
-        />
+        <TypographyPrimary value='Yesterday' type={Typography.types.LABEL} size={Typography.sizes.sm} />
       </StyledTitle>
       {items.map((item: any, index: number) => (
         <ListItem item={item} is_active={params.id === item.id} navigate={navigate} key={index} />

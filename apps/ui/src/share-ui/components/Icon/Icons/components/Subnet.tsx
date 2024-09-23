@@ -6,11 +6,7 @@ export interface SubnetProps extends React.SVGAttributes<SVGElement> {
 }
 const Subnet: React.FC<SubnetProps> = ({ size, ...props }) => (
   <svg version='1.0' width={size || '20'} height={size || '20'} viewBox='0 0 512 512' {...props}>
-    <g
-      transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)'
-      fill='#000000'
-      stroke='none'
-    >
+    <g transform='translate(0.000000,512.000000) scale(0.100000,-0.100000)' fill='#000000' stroke='none'>
       <path
         d='M2465 4899 c-260 -40 -472 -238 -529 -496 -32 -144 -14 -282 55 -423
 56 -115 169 -228 282 -284 l77 -38 -2 -441 -3 -442 -957 -3 -958 -2 0 -654 0

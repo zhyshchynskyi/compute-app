@@ -1,25 +1,25 @@
-import { MutableRefObject, useCallback, useRef } from "react";
+import { MutableRefObject, useCallback, useRef } from 'react'
 
 export default function useRefWithCallback(
   onMount: (element: HTMLElement) => void,
-  onUnmount?: (element: HTMLElement) => void
+  onUnmount?: (element: HTMLElement) => void,
 ): [MutableRefObject<HTMLElement>, (node: HTMLElement) => void] {
-  const nodeRef = useRef(null);
+  const nodeRef = useRef(null)
 
   const setRef = useCallback(
     (node: HTMLElement) => {
       if (nodeRef.current && onUnmount) {
-        onUnmount(nodeRef.current);
+        onUnmount(nodeRef.current)
       }
 
-      nodeRef.current = node;
+      nodeRef.current = node
 
       if (nodeRef.current && onMount) {
-        onMount(nodeRef.current);
+        onMount(nodeRef.current)
       }
     },
-    [onMount, onUnmount]
-  );
+    [onMount, onUnmount],
+  )
 
-  return [nodeRef, setRef];
+  return [nodeRef, setRef]
 }

@@ -14,20 +14,13 @@ type PodListCardProps = {
   status: string
 }
 
-const PodListCard = ({
-  onClick,
-  isSelected,
-  name,
-  templateImage,
-  resource,
-  status,
-}: PodListCardProps) => {
+const PodListCard = ({ onClick, isSelected, name, templateImage, resource, status }: PodListCardProps) => {
   return (
     <StyledRootBox onClick={onClick} isSelected={isSelected} mt={1} display={'flex'}>
       <StyledCardLayoutBox display={'flex'} justifyContent={'space-between'}>
         <Box display={'flex'} flexDirection={'column'}>
           {/* <StyledNameWrapper> */}
-            <TypographyPrimary value={name} bold size='small' />
+          <TypographyPrimary value={name} bold size='small' />
           {/* </StyledNameWrapper> */}
           <TypographyPrimary value={`Template: ${templateImage}`} size='xs-small' />
           <TypographyPrimary value={`${resource.name} - RAM ${resource.ram} GB`} size='xs-small' />
@@ -68,8 +61,7 @@ export const StyledCardLayoutBox = styled(Box)`
   width: 100%;
 `
 export const StyledStatusTypography = styled(Typography)<{ running: boolean }>`
-  color: ${({ running, theme }) =>
-    running ? theme.foundation.accentGreen : theme.foundation.negative};
+  color: ${({ running, theme }) => (running ? theme.foundation.accentGreen : theme.foundation.negative)};
   background: ${({ running }) => (running ? '#95ff752b' : '#fceaecb2')};
   padding: 4px 15px;
   border-radius: 8px;

@@ -10,10 +10,7 @@ import TypographyPrimary from 'components/Typography/Primary'
 
 const ListLog = ({ is_active, item, navigate }: any) => {
   return (
-    <StyledListItemContainer
-      is_active={is_active}
-      onClick={() => navigate(`/developers/failed/${item.id}`)}
-    >
+    <StyledListItemContainer is_active={is_active} onClick={() => navigate(`/developers/failed/${item.id}`)}>
       <StyledListItemBlock>
         {/* <StyledStatusContainer> */}
 
@@ -24,11 +21,7 @@ const ListLog = ({ is_active, item, navigate }: any) => {
               readOnly
               label={
                 <>
-                  <TypographySecondary
-                    value={item.status}
-                    type={Typography.types.LABEL}
-                    size={Typography.sizes.xss}
-                  />
+                  <TypographySecondary value={item.status} type={Typography.types.LABEL} size={Typography.sizes.xss} />
                   <TypographySecondary
                     value={parseInt(item.status) === 400 && ' ERR'}
                     type={Typography.types.LABEL}
@@ -43,18 +36,10 @@ const ListLog = ({ is_active, item, navigate }: any) => {
           <>
             <StyledUrlContainer>
               <StyledGqlNameWrapper>
-                <TypographyPrimary
-                  value={item.gql_name}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyPrimary value={item.gql_name} type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledGqlNameWrapper>
               <StyledEndpointNameWrapper>
-                <TypographyPrimary
-                  value={item.endpoint}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyPrimary value={item.endpoint} type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledEndpointNameWrapper>
               <StyledTimeNameWrapper>
                 <TypographySecondary
@@ -68,21 +53,9 @@ const ListLog = ({ is_active, item, navigate }: any) => {
         ) : (
           <>
             <StyledUrlContainer>
-              <TypographyPrimary
-                value={item.method}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
-              <TypographyPrimary
-                value='&ensp; &ensp;'
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
-              <TypographyPrimary
-                value={item.endpoint}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <TypographyPrimary value={item.method} type={Typography.types.LABEL} size={Typography.sizes.md} />
+              <TypographyPrimary value='&ensp; &ensp;' type={Typography.types.LABEL} size={Typography.sizes.md} />
+              <TypographyPrimary value={item.endpoint} type={Typography.types.LABEL} size={Typography.sizes.md} />
             </StyledUrlContainer>
           </>
         )}

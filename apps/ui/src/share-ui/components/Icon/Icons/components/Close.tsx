@@ -5,13 +5,7 @@ export interface CloseProps extends React.SVGAttributes<SVGElement> {
   size?: string | number
 }
 const Close: React.FC<CloseProps> = ({ size, ...props }) => (
-  <svg
-    viewBox='0 0 32 32'
-    fill='currentColor'
-    width={size || '32'}
-    height={size || '32'}
-    {...props}
-  >
+  <svg viewBox='0 0 32 32' fill='currentColor' width={size || '32'} height={size || '32'} {...props}>
     <g filter='url(#filter0_bd_761_16730)'>
       <g clipPath='url(#clip0_761_16730)'>
         <path d='M23 9L9 23M23 23L9 9.00001' stroke='#fff' strokeLinecap='round' />
@@ -33,11 +27,7 @@ const Close: React.FC<CloseProps> = ({ size, ...props }) => (
         <feFlood result='BackgroundImageFix' floodOpacity='0' />
         <feGaussianBlur in='BackgroundImageFix' stdDeviation='5' />
         <feComposite in2='SourceAlpha' operator='in' result='effect1_backgroundBlur_761_16730' />
-        <feColorMatrix
-          in='SourceAlpha'
-          values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-          result='hardAlpha'
-        />
+        <feColorMatrix in='SourceAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' result='hardAlpha' />
         <feOffset dy='1' />
         <feGaussianBlur stdDeviation='1.5' />
         <feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0' />

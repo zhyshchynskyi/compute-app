@@ -1,37 +1,37 @@
-import { useEffect, useRef, useCallback } from "react";
-import { noop } from "lodash-es";
+import { useEffect, useRef, useCallback } from 'react'
+import { noop } from 'lodash-es'
 
 export default function useTimeout({
   time = 0,
   callback,
-  ignoreZeroTime = false
+  ignoreZeroTime = false,
 }: {
-  callback: () => void;
-  time?: number;
-  ignoreZeroTime?: boolean;
+  callback: () => void
+  time?: number
+  ignoreZeroTime?: boolean
 }) {
-  const ignoreTimeout = time === 0 && ignoreZeroTime;
-  const timeoutId = useRef(null);
+  const ignoreTimeout = time === 0 && ignoreZeroTime
+  const timeoutId = useRef(null)
   const cancelTimeout = useCallback(() => {
     if (!timeoutId.current) {
-      return;
+      return
     }
-    clearTimeout(timeoutId.current);
-  }, [timeoutId]);
+    clearTimeout(timeoutId.current)
+  }, [timeoutId])
 
   useEffect(() => {
     if (ignoreTimeout) {
-      return;
+      return
     }
 
-    timeoutId.current = setTimeout(callback, time);
+    timeoutId.current = setTimeout(callback, time)
     return () => {
-      clearTimeout(timeoutId.current);
-    };
-  }, [callback, time, timeoutId, ignoreTimeout]);
+      clearTimeout(timeoutId.current)
+    }
+  }, [callback, time, timeoutId, ignoreTimeout])
 
   if (ignoreTimeout) {
-    return [noop];
+    return [noop]
   }
-  return [cancelTimeout];
+  return [cancelTimeout]
 }

@@ -1,38 +1,38 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
 
-import { useModal } from 'hooks';
+import { useModal } from 'hooks'
 
-import withRenderModal from 'hocs/withRenderModal';
+import withRenderModal from 'hocs/withRenderModal'
 
-import IconButton from 'share-ui/components/IconButton/IconButton';
+import IconButton from 'share-ui/components/IconButton/IconButton'
 
-import Tab from 'share-ui/components/Tabs/Tab/Tab';
-import TabList from 'share-ui/components/Tabs/TabList/TabList';
-import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel';
-import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels';
-import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext';
+import Tab from 'share-ui/components/Tabs/Tab/Tab'
+import TabList from 'share-ui/components/Tabs/TabList/TabList'
+import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel'
+import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels'
+import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext'
 
-import Close from 'share-ui/components/Icon/Icons/components/Close';
-import SearchOutline from 'share-ui/components/Icon/Icons/components/SearchOutline';
+import Close from 'share-ui/components/Icon/Icons/components/Close'
+import SearchOutline from 'share-ui/components/Icon/Icons/components/SearchOutline'
 
-import NotificationsDateGroup from './NotificationsDateGroup';
-import Modal from 'share-ui/components/Modal/Modal';
+import NotificationsDateGroup from './NotificationsDateGroup'
+import Modal from 'share-ui/components/Modal/Modal'
 
 type NotificationsModalProps = {
-  refetchCount: any;
-};
+  refetchCount: any
+}
 
-const todayNotifications: any[] = [];
-const yesterdayNotifications: any[] = [];
-const thisWeekNotifications: any[] = [];
+const todayNotifications: any[] = []
+const yesterdayNotifications: any[] = []
+const thisWeekNotifications: any[] = []
 
 const NotificationsModal = ({ refetchCount }: NotificationsModalProps) => {
-  const { closeModal } = useModal();
+  const { closeModal } = useModal()
 
-  const [activeTab, setActiveTab] = useState(0);
-  const [isOpen, setIsOpen] = useState(0);
-  const [searchValue, setSearchValue] = useState('');
+  const [activeTab, setActiveTab] = useState(0)
+  const [isOpen, setIsOpen] = useState(0)
+  const [searchValue, setSearchValue] = useState('')
 
   // const { data: todayNotifications } = useNotificationsByDateService({
   //   search_text: searchValue,
@@ -54,22 +54,22 @@ const NotificationsModal = ({ refetchCount }: NotificationsModalProps) => {
   // })
 
   const handleSearchChange = (value: string) => {
-    setTimeout(() => setSearchValue(value), 1000);
-  };
+    setTimeout(() => setSearchValue(value), 1000)
+  }
 
-  const outsideClickRef = useRef(null as any);
+  const outsideClickRef = useRef(null as any)
 
   useEffect(() => {
     function handleClickOutside(event: any) {
       if (outsideClickRef.current && !outsideClickRef.current.contains(event.target)) {
-        closeModal('notifications-modal');
+        closeModal('notifications-modal')
       }
     }
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener('click', handleClickOutside, true)
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [outsideClickRef]);
+      document.removeEventListener('click', handleClickOutside, true)
+    }
+  }, [outsideClickRef])
 
   return (
     <Modal fullscreen show isClean isTransparent onClose={() => closeModal('notifications-modal')}>
@@ -122,7 +122,7 @@ const NotificationsModal = ({ refetchCount }: NotificationsModalProps) => {
               size={Search.sizes.SMALL}
             /> */}
 
-            <TabList size="small">
+            <TabList size='small'>
               <Tab onClick={() => setActiveTab(0)}>All</Tab>
               {/* <Tab onClick={() => setActiveTab(1)}>Errors</Tab> */}
             </TabList>
@@ -140,10 +140,10 @@ const NotificationsModal = ({ refetchCount }: NotificationsModalProps) => {
       </StyledRoot>
       {/* </BgWrapper> */}
     </Modal>
-  );
-};
+  )
+}
 
-export default withRenderModal('notifications-modal')(NotificationsModal);
+export default withRenderModal('notifications-modal')(NotificationsModal)
 
 const StyledRoot = styled.div`
   width: 100vw;
@@ -154,11 +154,11 @@ const StyledRoot = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-`;
+`
 const StyledCloseButton = styled.div`
   top: 42px;
   right: 42px;
-`;
+`
 const StyledNotificationsContainer = styled.div`
   height: fit-content;
   min-width: 460px;
@@ -171,18 +171,18 @@ const StyledNotificationsContainer = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   gap: 60px;
-`;
+`
 const StyledSearchWrapper = styled.div`
   position: relative;
   margin-top: 16px;
   display: flex;
   align-items: center;
-`;
+`
 const StyledIconWrapper = styled.div`
   position: absolute;
   width: 25px;
   margin-left: 20px;
-`;
+`
 
 const StyledSearch = styled.input`
   background: rgba(0, 0, 0, 0.7);
@@ -208,7 +208,7 @@ const StyledSearch = styled.input`
   &:focus-visible {
     outline: none;
   }
-`;
+`
 const StyledTablistWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -220,4 +220,4 @@ const StyledTablistWrapper = styled.div`
   /* Background-blur */
 
   backdrop-filter: blur(67.955px);
-`;
+`

@@ -5,6 +5,5 @@
   "printWidth": 120,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "useEditorConfig": true,
   "arrowParens": "avoid"
 }

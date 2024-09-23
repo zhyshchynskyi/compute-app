@@ -39,11 +39,7 @@ const NotificationItem = ({
             size={Typography.sizes.xss}
           />
           <StyledDot />
-          <TypographyTertiary
-            value={typename}
-            type={Typography.types.LABEL}
-            size={Typography.sizes.xss}
-          />
+          <TypographyTertiary value={typename} type={Typography.types.LABEL} size={Typography.sizes.xss} />
         </StyledText>
       </StyledTextWrapper>
     </StyledNotification>

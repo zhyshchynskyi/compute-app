@@ -77,13 +77,7 @@ const HeaderComponent = (props: any) => {
     <StyledMainWrapper ref={refButton}>
       <StyledHeadingWrapper onClick={(event: any) => sortHandler(event)}>
         {icon && <StyledIconWrapper>{icon}</StyledIconWrapper>}
-        {!noText && (
-          <TypographyPrimary
-            value={displayName}
-            type={Typography.types.LABEL}
-            size={Typography.sizes.sm}
-          />
-        )}
+        {!noText && <TypographyPrimary value={displayName} type={Typography.types.LABEL} size={Typography.sizes.sm} />}
         {sort}
       </StyledHeadingWrapper>
       {menu}

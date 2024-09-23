@@ -115,10 +115,7 @@ const Tooltip: TooltipComponent = props => {
   const getShowDelay = useCallback(() => {
     const { showDelay = 0, immediateShowDelay } = props
     const timeSinceLastTooltip = getTimeSinceLastTooltip()
-    if (
-      (immediateShowDelay === 0 || immediateShowDelay) &&
-      timeSinceLastTooltip < IMMEDIATE_SHOW_THRESHOLD_MS
-    ) {
+    if ((immediateShowDelay === 0 || immediateShowDelay) && timeSinceLastTooltip < IMMEDIATE_SHOW_THRESHOLD_MS) {
       return {
         showDelay: immediateShowDelay,
         preventAnimation: true,

@@ -20,12 +20,7 @@ const UploadedFile = ({ id, name, onClick, hasDeleteIcon = false }: UploadedFile
         <StyledDocIcon />
       </StyledIconWrapper>
       <StyledTextWrapper>
-        <Typography
-          value={name}
-          type={Typography.types.LABEL}
-          size={Typography.sizes.xss}
-          customColor={'#000'}
-        />
+        <Typography value={name} type={Typography.types.LABEL} size={Typography.sizes.xss} customColor={'#000'} />
       </StyledTextWrapper>
       {hasDeleteIcon && (
         <IconButton

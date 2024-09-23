@@ -1,19 +1,19 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { getBaseQuery } from '../fetch-auth-query';
-import { ISshKey } from 'types/sshKey.types';
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { getBaseQuery } from '../fetch-auth-query'
+import { ISshKey } from 'types/sshKey.types'
 
 export interface ISshKeyRegisterRequest {
-  name: string;
-  public_key: string;
+  name: string
+  public_key: string
 }
 
 export const sshKeyApi = createApi({
   reducerPath: 'sshKeyApi',
   baseQuery: getBaseQuery({ baseUrl: '/ssh-keys' }),
   tagTypes: ['SshKeys'],
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     registerSshKey: builder.mutation<ISshKey, ISshKeyRegisterRequest>({
-      query: (data) => ({
+      query: data => ({
         url: '',
         method: 'POST',
         body: data,
@@ -50,7 +50,7 @@ export const sshKeyApi = createApi({
       invalidatesTags: ['SshKeys'],
     }),
   }),
-});
+})
 
 export const {
   useRegisterSshKeyMutation,
@@ -58,4 +58,4 @@ export const {
   useGetSshKeysQuery,
   useUpdateSshKeyMutation,
   useDeleteSshKeyMutation,
-} = sshKeyApi;
+} = sshKeyApi

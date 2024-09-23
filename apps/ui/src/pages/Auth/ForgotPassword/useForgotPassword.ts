@@ -21,12 +21,10 @@ const useForgotPassword = () => {
     validationSchema,
     onSubmit: async values => {
       // const response = await forgotPassword(values.email, () => {})
-
       // if (!response) {
       //   setAlertMessage({ type: 'danger', message: 'Incorrect email' })
       //   return
       // }
-
       // setAlertMessage({
       //   type: 'success',
       //   message: t('forget-password-message'),

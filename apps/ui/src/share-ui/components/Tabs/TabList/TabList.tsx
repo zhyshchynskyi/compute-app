@@ -1,13 +1,4 @@
-import React, {
-  FC,
-  forwardRef,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { FC, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import cx from 'classnames'
 import useGridKeyboardNavigation from '../../../hooks/useGridKeyboardNavigation/useGridKeyboardNavigation'
 import useMergeRefs from '../../../hooks/useMergeRefs'
@@ -90,10 +81,7 @@ const TabList: FC<TabListProps> = forwardRef(
       [children, disabledTabIds, onTabSelect],
     )
 
-    const getItemByIndex = useCallback(
-      (index: number): ReactElement<TabProps> => children[index],
-      [children],
-    )
+    const getItemByIndex = useCallback((index: number): ReactElement<TabProps> => children[index], [children])
     const disabledIndexes = useMemo(() => Array.from(disabledTabIds), [disabledTabIds])
     const ulRef = useRef()
     const { activeIndex: focusIndex, onSelectionAction } = useGridKeyboardNavigation({

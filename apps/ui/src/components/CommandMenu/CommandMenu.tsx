@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useState, useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
-import { v4 as uuidv4 } from 'uuid';
-import { useModal } from 'hooks';
+import { v4 as uuidv4 } from 'uuid'
+import { useModal } from 'hooks'
 
-import { Command } from 'cmdk';
-import { get, groupBy, has, slice } from 'lodash';
-import Games from 'share-ui/components/Icon/Icons/components/Games';
+import { Command } from 'cmdk'
+import { get, groupBy, has, slice } from 'lodash'
+import Games from 'share-ui/components/Icon/Icons/components/Games'
 
 import {
   StyledCommandInput,
@@ -16,104 +16,104 @@ import {
   StyledCommandDialog,
   StyledCommandItemHeader,
   StyledSvgContainer,
-} from './CommandMenuStyles';
+} from './CommandMenuStyles'
 
-import { defaultData } from './defaultData';
-import CommandItem from './components/CommandItem';
+import { defaultData } from './defaultData'
+import CommandItem from './components/CommandItem'
 
-import { useHotkeys } from 'react-hotkeys-hook';
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
-  const { t } = useTranslation();
-  const { openModal, closeModal } = useModal();
-  const componentRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation()
+  const { openModal, closeModal } = useModal()
+  const componentRef = useRef<HTMLDivElement>(null)
 
   // const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('');
-  const [pages, setPages] = useState<any>([]);
-  const [game_id, set_game_id] = useState<string>('');
+  const [search, setSearch] = useState('')
+  const [pages, setPages] = useState<any>([])
+  const [game_id, set_game_id] = useState<string>('')
 
-  const [modal_options, set_modal_options] = useState({ modal_name: '', modal_title: '' });
+  const [modal_options, set_modal_options] = useState({ modal_name: '', modal_title: '' })
 
-  const page = pages[pages.length - 1];
-  const location = useLocation();
-  const navigate = useNavigate();
+  const page = pages[pages.length - 1]
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const handleOpenChat = () => {
-    navigate('/chat');
-  };
+    navigate('/chat')
+  }
 
-  useHotkeys('c', handleOpenChat);
+  useHotkeys('c', handleOpenChat)
 
-  const filter_routes = 'developers';
+  const filter_routes = 'developers'
 
-  const path_id = location.pathname.includes(filter_routes) ? '' : location.pathname.split('/')[2];
+  const path_id = location.pathname.includes(filter_routes) ? '' : location.pathname.split('/')[2]
 
   const onHandleSelect = async (item: any) => {
     if (item.option === 'open-chat') {
-      await navigate(item.url);
+      await navigate(item.url)
       // closeModal('spotlight-modal')
-      setCmdkOpen(false);
+      setCmdkOpen(false)
     }
     if (item.option === 'theme') {
       if (theme === 'dark' && item.name === 'Dark') {
-        setSearch('');
-        setCmdkOpen(false);
-        return;
+        setSearch('')
+        setCmdkOpen(false)
+        return
       }
       if (theme === 'light' && item.name === 'Light') {
-        setSearch('');
-        setCmdkOpen(false);
-        return;
+        setSearch('')
+        setCmdkOpen(false)
+        return
       }
 
-      toggleTheme();
-      setCmdkOpen(false);
-      return;
+      toggleTheme()
+      setCmdkOpen(false)
+      return
     }
     if (item.option === 'open-modal') {
-      openModal({ name: item.modal_name, data: { game_id: path_id, ...item.modalData } });
-      setCmdkOpen(false);
+      openModal({ name: item.modal_name, data: { game_id: path_id, ...item.modalData } })
+      setCmdkOpen(false)
     }
 
     if (item.option === 'show-games') {
-      setSearch('');
+      setSearch('')
 
-      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title });
-      setPages((prevPage: any) => [...prevPage, 'games']);
-      return;
+      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title })
+      setPages((prevPage: any) => [...prevPage, 'games'])
+      return
     }
     if (item.option === 'show-assets') {
-      setSearch('');
+      setSearch('')
 
-      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title });
-      setPages((prevPage: any) => [...prevPage, 'assets']);
-      return;
+      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title })
+      setPages((prevPage: any) => [...prevPage, 'assets'])
+      return
     }
     if (item.option === 'show-collections') {
-      setSearch('');
+      setSearch('')
 
-      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title });
-      setPages((prevPage: any) => [...prevPage, 'collections']);
-      return;
+      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title })
+      setPages((prevPage: any) => [...prevPage, 'collections'])
+      return
     }
     if (item.option === 'show-agents') {
-      setSearch('');
+      setSearch('')
 
-      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title });
-      setPages((prevPage: any) => [...prevPage, 'collections']);
-      return;
+      set_modal_options({ modal_name: item.modal_name, modal_title: item.modal_title })
+      setPages((prevPage: any) => [...prevPage, 'collections'])
+      return
     }
     if (item.option === 'separate-link') {
-      window.open(item.url);
-      return;
+      window.open(item.url)
+      return
     } else {
-      await navigate(item.url);
+      await navigate(item.url)
       // closeModal('spotlight-modal')
-      setCmdkOpen(false);
+      setCmdkOpen(false)
     }
     // return openModal({ name: item.modal_name, data: { game_id: path_id } })
-  };
+  }
 
   // const onCreateOptionBasedOnOption = (game_id: any) => {
   //   openModal({ name: modal_options.modal_name, data: { game_id } })
@@ -131,23 +131,23 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
   useEffect(() => {
     // Function to handle outside click
     const handleClickOutside = (event: any) => {
-      setSearch('');
+      setSearch('')
       if (componentRef.current) {
-        setCmdkOpen(false);
+        setCmdkOpen(false)
         //       // Clicked outside the component
         // console.log('Clicked outside the component')
         //     }
       }
-    };
+    }
 
     // Add event listener to document on component mount
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleClickOutside)
 
     // Clean up event listener on component unmount
     return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
   // useEffect(() => {
   //   const handleClickOutside = (event: MouseEvent) => {
@@ -173,25 +173,25 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
   //   }
   // }, [])
 
-  const groupedItems = groupBy(defaultData(path_id), (data) => {
-    return get(data, 'group_name', '');
-  });
+  const groupedItems = groupBy(defaultData(path_id), data => {
+    return get(data, 'group_name', '')
+  })
 
   return (
     <StyledCommandDialog
       open={open}
-      className="cmdk_root"
+      className='cmdk_root'
       ref={componentRef}
-      onKeyDown={(e) => {
+      onKeyDown={e => {
         // Escape goes to previous page
         // Backspace goes to previous page when search is empty
         if (e.key === 'Escape') {
-          e.preventDefault();
-          setPages((pages: any) => pages.slice(0, -1));
+          e.preventDefault()
+          setPages((pages: any) => pages.slice(0, -1))
         }
         if (pages.length === 0 && e.key === 'Escape') {
-          setCmdkOpen(false);
-          setSearch(''); // Clear the search when the menu is closed
+          setCmdkOpen(false)
+          setSearch('') // Clear the search when the menu is closed
         }
       }}
     >
@@ -224,7 +224,7 @@ const CommandMenu = ({ open, setCmdkOpen, theme, toggleTheme }: any) => {
         </>
       </StyledCommandList>
     </StyledCommandDialog>
-  );
-};
+  )
+}
 
-export default CommandMenu;
+export default CommandMenu

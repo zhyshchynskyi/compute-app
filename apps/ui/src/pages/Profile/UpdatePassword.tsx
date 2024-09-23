@@ -6,33 +6,28 @@ import FormikTextField from 'components/TextFieldFormik'
 import { useUpdatePassword } from './useProfile'
 
 const UpdatePassword = () => {
-    const { formik } = useUpdatePassword()
+  const { formik } = useUpdatePassword()
 
-    return (
-        <StyledFormWrapper>
-            <CardWrapper>
-                <FormikProvider value={formik}>
-                    <StyledFieldsWrapper>
-                        <FormikTextField
-                            name='new_password'
-                            placeholder='New password'
-                            label='New password'
-                            type='password'
-                        />
-                        <FormikTextField
-                            name='confirm_password'
-                            placeholder={'Confirm new password'}
-                            label={'Confirm new password'}
-                            type='password'
-                        />
-                        <StyledButtonWrapper>
-                            <ButtonPrimary onClick={formik.handleSubmit}>Save</ButtonPrimary>
-                        </StyledButtonWrapper>
-                    </StyledFieldsWrapper>
-                </FormikProvider>
-            </CardWrapper>
-        </StyledFormWrapper>
-    )
+  return (
+    <StyledFormWrapper>
+      <CardWrapper>
+        <FormikProvider value={formik}>
+          <StyledFieldsWrapper>
+            <FormikTextField name='new_password' placeholder='New password' label='New password' type='password' />
+            <FormikTextField
+              name='confirm_password'
+              placeholder={'Confirm new password'}
+              label={'Confirm new password'}
+              type='password'
+            />
+            <StyledButtonWrapper>
+              <ButtonPrimary onClick={formik.handleSubmit}>Save</ButtonPrimary>
+            </StyledButtonWrapper>
+          </StyledFieldsWrapper>
+        </FormikProvider>
+      </CardWrapper>
+    </StyledFormWrapper>
+  )
 }
 
 export default UpdatePassword

@@ -53,14 +53,8 @@ const Toggle: FC<ToggleProps> = ({
   label = false,
   kind = 'primary',
 }) => {
-  const overrideClassName = backwardCompatibilityForProperties([
-    className,
-    componentClassName,
-  ]) as string
-  const overrideDisabled = backwardCompatibilityForProperties(
-    [disabled, isDisabled],
-    false,
-  ) as boolean
+  const overrideClassName = backwardCompatibilityForProperties([className, componentClassName]) as string
+  const overrideDisabled = backwardCompatibilityForProperties([disabled, isDisabled], false) as boolean
   const wrapperClassName = cx(
     bemHelper({ element: 'wrapper' }),
     {

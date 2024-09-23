@@ -35,6 +35,6 @@ interface PodServiceActionReturn {
 }
 
 export interface UseUpdatePodNameServiceReturn {
-  updatePodName: (pod_id: string, input: { pod_name: string }) => Promise<{ updatePodName: PodServiceActionReturn }>;
-  loading: boolean;
+  updatePodName: (pod_id: string, input: { pod_name: string }) => Promise<{ updatePodName: PodServiceActionReturn }>
+  loading: boolean
 }

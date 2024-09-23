@@ -31,11 +31,7 @@ const DatePickerHeader = (props: DatePickerHeaderProps) => {
     <div>
       <div className='heading'>{string}</div>
       {!hideNavigationKeys && (
-        <button
-          data-testid={`${dateTestId}-year-toggle`}
-          type='button'
-          onClick={onToggleMonthYearPicker}
-        >
+        <button data-testid={`${dateTestId}-year-toggle`} type='button' onClick={onToggleMonthYearPicker}>
           <div>
             <Icon
               iconType={Icon?.type?.SVG}

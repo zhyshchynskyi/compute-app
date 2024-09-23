@@ -33,9 +33,7 @@ const SettingView = ({
 
   const fields = SETTINGS_FIELDS?.find((setting: any) => setting.slug === settingSlug)?.configs
   const name = SETTINGS_FIELDS?.find((setting: any) => setting.slug === settingSlug)?.title
-  const description = SETTINGS_FIELDS?.find(
-    (setting: any) => setting.slug === settingSlug,
-  )?.description
+  const description = SETTINGS_FIELDS?.find((setting: any) => setting.slug === settingSlug)?.description
   const { formik, isLoading, handleSubmit } = useSettingView({ fields })
 
   const filteredLogos = settingLogos.find((setting: any) => setting.settingName === name)
@@ -53,11 +51,7 @@ const SettingView = ({
             <>
               <StyledImg src={logoSrc} alt='' />
               <StyledTextWrapper>
-                <TypographySecondary
-                  value={t('by')}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.xss}
-                />
+                <TypographySecondary value={t('by')} type={Typography.types.LABEL} size={Typography.sizes.xss} />
 
                 <TypographySecondary
                   value={t('l3')}
@@ -67,16 +61,8 @@ const SettingView = ({
                 />
               </StyledTextWrapper>
               <StyledMainTextWrapper>
-                <TypographyPrimary
-                  value={name}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.lg}
-                />
-                <TypographySecondary
-                  value={description}
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyPrimary value={name} type={Typography.types.LABEL} size={Typography.sizes.lg} />
+                <TypographySecondary value={description} type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledMainTextWrapper>
             </>
           )}
@@ -84,25 +70,14 @@ const SettingView = ({
           {!hideForm && (
             <StyledFieldsWrapper>
               {fields?.map((field: any) => {
-                return (
-                  <FormikTextField
-                    key={field.key}
-                    name={field.key}
-                    placeholder=''
-                    label={field.label}
-                  />
-                )
+                return <FormikTextField key={field.key} name={field.key} placeholder='' label={field.label} />
               })}
             </StyledFieldsWrapper>
           )}
 
           {!hideForm && (
             <StyledButtonWrapper>
-              <ButtonPrimary
-                onClick={onHandleSubmit}
-                disabled={isLoading}
-                size={Button.sizes?.MEDIUM}
-              >
+              <ButtonPrimary onClick={onHandleSubmit} disabled={isLoading} size={Button.sizes?.MEDIUM}>
                 {isLoading ? <Loader size={22} /> : t('save')}
               </ButtonPrimary>
             </StyledButtonWrapper>

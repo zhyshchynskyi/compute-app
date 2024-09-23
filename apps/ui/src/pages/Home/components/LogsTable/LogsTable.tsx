@@ -1,28 +1,28 @@
-import Table from 'components/Table';
-import { columns } from 'pages/Subnets/panels/LogsPanel/columnConfig';
-import LogDetails from 'pages/Subnets/panels/LogsPanel/LogDetails';
-import { formatDate, generateSubnetApiLogsUrl } from 'pages/Subnets/panels/LogsPanel/useApiLog';
-import styled from 'styled-components';
+import Table from 'components/Table'
+import { columns } from 'pages/Subnets/panels/LogsPanel/columnConfig'
+import LogDetails from 'pages/Subnets/panels/LogsPanel/LogDetails'
+import { formatDate, generateSubnetApiLogsUrl } from 'pages/Subnets/panels/LogsPanel/useApiLog'
+import styled from 'styled-components'
 
 interface FilterProps {
-  limit: number;
-  page: number;
+  limit: number
+  page: number
 }
 
 const LogsTable = () => {
   const default_filter: FilterProps = {
     page: 1,
     limit: 20,
-  };
+  }
 
-  const url = generateSubnetApiLogsUrl(default_filter);
+  const url = generateSubnetApiLogsUrl(default_filter)
 
   // const { data: all_api_logs, loading: fetch_logs_loading } = useAllApiLogs(url)
-  const all_api_logs: { items: any[] } = { items: [] };
+  const all_api_logs: { items: any[] } = { items: [] }
 
-  const { items } = all_api_logs;
+  const { items } = all_api_logs
 
-  const logs = items?.map((logs) => {
+  const logs = items?.map(logs => {
     return {
       ...logs,
       created_on: formatDate(logs.created_on),
@@ -44,25 +44,25 @@ const LogsTable = () => {
         request_id: logs.request_id,
         request_url: logs.request_url,
       },
-    };
-  });
+    }
+  })
 
   return (
     <StyledRoot>
       <Table
         columns={columns()}
         data={logs}
-        hiddenContentAccessor={(row) => {
-          return <LogDetails data={row?.additional_data as any} />;
+        hiddenContentAccessor={row => {
+          return <LogDetails data={row?.additional_data as any} />
         }}
         noBorder
         isLoading={false}
       />
     </StyledRoot>
-  );
-};
+  )
+}
 
-export default LogsTable;
+export default LogsTable
 
 const StyledRoot = styled.div`
   display: flex;
@@ -70,4 +70,4 @@ const StyledRoot = styled.div`
   overflow: auto;
   height: 100%;
   width: 100%;
-`;
+`

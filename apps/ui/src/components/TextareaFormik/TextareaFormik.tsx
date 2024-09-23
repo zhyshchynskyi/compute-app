@@ -15,14 +15,7 @@ type TextareaProps = {
   placeholder?: string
 }
 
-const TextareaFormik = ({
-  label,
-  value,
-  fieldName,
-  triggerResize,
-  minHeight,
-  ...props
-}: TextareaProps) => {
+const TextareaFormik = ({ label, value, fieldName, triggerResize, minHeight, ...props }: TextareaProps) => {
   const textareaRef = useRef(null as any)
   const input_name = fieldName
 

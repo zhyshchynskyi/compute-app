@@ -5,40 +5,40 @@ import Heading from 'share-ui/components/Heading/Heading'
 import { useDomainConfig } from 'utils/useDomainConfig'
 
 export const WelcomeLoader = () => {
-    const { t } = useTranslation()
-    const { getDomainConfig } = useDomainConfig()
-    const domainLogo = getDomainConfig('logo')
+  const { t } = useTranslation()
+  const { getDomainConfig } = useDomainConfig()
+  const domainLogo = getDomainConfig('logo')
 
-    return (
-        <StyledMainWraper>
-            <StyledFirstFigure />
-            <StyledSecondFigure />
-            <StyledThirdFigure />
-            <StyledCenterContainer>
-                <StyledImg src={domainLogo} alt='' />
-                <Heading
-                    value={t('welcome-l3agi')}
-                    type={Heading.types?.h1}
-                    customColor='#fff'
-                    style={{ fontSize: 90, lineHeight: 'normal' }}
-                />
-            </StyledCenterContainer>
-        </StyledMainWraper>
-    )
+  return (
+    <StyledMainWraper>
+      <StyledFirstFigure />
+      <StyledSecondFigure />
+      <StyledThirdFigure />
+      <StyledCenterContainer>
+        <StyledImg src={domainLogo} alt='' />
+        <Heading
+          value={t('welcome-l3agi')}
+          type={Heading.types?.h1}
+          customColor='#fff'
+          style={{ fontSize: 90, lineHeight: 'normal' }}
+        />
+      </StyledCenterContainer>
+    </StyledMainWraper>
+  )
 }
 export default WelcomeLoader
 
 const StyledImg = styled.img`
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 `
 
 const StyledMainWraper = styled.div`
-    position: relative;
-    background-color: rgb(253, 252, 250);
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
+  position: relative;
+  background-color: rgb(253, 252, 250);
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 `
 
 const figureOneAnimation = keyframes`
@@ -72,60 +72,60 @@ const figureThirdAnimation = keyframes`
 `
 
 const StyledFirstFigure = styled.div`
-    background: #07d2fb;
-    filter: blur(210px);
-    width: 1642px;
-    height: 686px;
-    position: absolute;
-    border-radius: 50%;
+  background: #07d2fb;
+  filter: blur(210px);
+  width: 1642px;
+  height: 686px;
+  position: absolute;
+  border-radius: 50%;
 
-    animation-name: ${figureOneAnimation};
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+  animation-name: ${figureOneAnimation};
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 `
 
 const StyledSecondFigure = styled.div`
-    background: F5F5F7;
-    filter: blur(310px);
-    width: 1642px;
-    height: 686px;
-    position: absolute;
-    border-radius: 50%;
+  background: F5F5F7;
+  filter: blur(310px);
+  width: 1642px;
+  height: 686px;
+  position: absolute;
+  border-radius: 50%;
 
-    //   right: -25%;
-    //   top: -50%;
+  //   right: -25%;
+  //   top: -50%;
 
-    animation-name: ${figureSecondAnimation};
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+  animation-name: ${figureSecondAnimation};
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 `
 const StyledThirdFigure = styled.div`
-    background: rgb(14, 14, 14);
-    filter: blur(310px);
-    width: 1324px;
-    height: 1324px;
-    position: absolute;
-    border-radius: 50%;
-    animation-name: ${figureThirdAnimation};
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
+  background: rgb(14, 14, 14);
+  filter: blur(310px);
+  width: 1324px;
+  height: 1324px;
+  position: absolute;
+  border-radius: 50%;
+  animation-name: ${figureThirdAnimation};
+  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 `
 
 const StyledCenterContainer = styled.div`
-    top: 35%;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    display: grid;
-    align-items: center;
-    justify-items: center;
+  top: 35%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 `

@@ -44,17 +44,9 @@ const baseConfig = ({
 const TemplateSecretModal = ({ data: { secrets, handleSelectSecret, index } }: any) => {
   const { closeModal } = useModal()
   return (
-    <MainModal
-      onClose={() => closeModal('template-secret-modal')}
-      title={'Pick secret'}
-      customButtons={<></>}
-    >
+    <MainModal onClose={() => closeModal('template-secret-modal')} title={'Pick secret'} customButtons={<></>}>
       <StyledModalBody>
-        <Table
-          columns={baseConfig({ handleSelectSecret, index })}
-          data={secrets}
-          isLoading={false}
-        />
+        <Table columns={baseConfig({ handleSelectSecret, index })} data={secrets} isLoading={false} />
       </StyledModalBody>
     </MainModal>
   )

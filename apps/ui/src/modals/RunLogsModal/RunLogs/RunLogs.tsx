@@ -1,41 +1,41 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import styled from 'styled-components';
-import Loader from 'share-ui/components/Loader/Loader';
+import styled from 'styled-components'
+import Loader from 'share-ui/components/Loader/Loader'
 
-import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel';
-import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels';
-import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext';
-import TabList from 'share-ui/components/Tabs/TabList/TabList';
+import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel'
+import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels'
+import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext'
+import TabList from 'share-ui/components/Tabs/TabList/TabList'
 
-import RunLogMessages from './RunLogMessages';
-import Tab from 'share-ui/components/Tabs/Tab/Tab';
+import RunLogMessages from './RunLogMessages'
+import Tab from 'share-ui/components/Tabs/Tab/Tab'
 
 type RunLogsProps = {
-  runId: string;
-};
+  runId: string
+}
 
 const RunLogs = ({ runId }: RunLogsProps) => {
   // const { data, loading } = useRunLogsService({ run_id: runId })
-  const [activeTab, setActiveTab] = useState(0);
-  const data: any[] = [];
-  const loading = false;
+  const [activeTab, setActiveTab] = useState(0)
+  const data: any[] = []
+  const loading = false
 
   if (loading)
     return (
       <StyledLoaderWrapper>
         <Loader size={40} />
       </StyledLoaderWrapper>
-    );
+    )
 
   const handleTabClick = (tabId: number) => {
-    setActiveTab(tabId);
-  };
+    setActiveTab(tabId)
+  }
 
   return (
     <StyledWrapper>
       <StyledFormTabsWrapper>
-        <TabList size="small" activeTabId={activeTab} isColumn>
+        <TabList size='small' activeTabId={activeTab} isColumn>
           {data.map(({ name }, index) => (
             <Tab key={index} onClick={() => handleTabClick(index)}>
               {`${index + 1} ${name}`}
@@ -56,17 +56,17 @@ const RunLogs = ({ runId }: RunLogsProps) => {
         </TabsContext>
       </StyledTabContextWrapper>
     </StyledWrapper>
-  );
-};
+  )
+}
 
-export default RunLogs;
+export default RunLogs
 
 const StyledFormTabsWrapper = styled.div`
   position: sticky;
   top: 0;
 
   margin-bottom: 20px;
-`;
+`
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -74,7 +74,7 @@ const StyledWrapper = styled.div`
   display: grid;
   grid-template-columns: 250px 1fr;
   overflow-y: scroll;
-`;
+`
 
 const StyledLoaderWrapper = styled.div`
   position: absolute;
@@ -85,13 +85,13 @@ const StyledLoaderWrapper = styled.div`
 
   margin-bottom: 20px;
   margin-left: 5px;
-`;
+`
 const StyledTabContextWrapper = styled.div`
   /* overflow: hidden; */
   max-height: calc(100vh - 120px);
   margin-right: 10px;
-`;
+`
 const StyledSpan = styled.span`
   color: ${({ theme }) => theme.body.textColorPrimary};
   width: 150px;
-`;
+`

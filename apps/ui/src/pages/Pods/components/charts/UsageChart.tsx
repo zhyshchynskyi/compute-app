@@ -47,11 +47,7 @@ const UsageChart = () => {
         >
           {/* <CartesianGrid /> */}
           <XAxis dataKey='date' tick={{ fontSize: 11 }} stroke='#868686' />
-          <YAxis
-            tickFormatter={value => `$${value.toFixed(2)}`}
-            tick={{ fontSize: 11 }}
-            stroke='#868686'
-          />
+          <YAxis tickFormatter={value => `$${value.toFixed(2)}`} tick={{ fontSize: 11 }} stroke='#868686' />
           <Tooltip
             formatter={value => `$${Number(value).toFixed(2)}`}
             wrapperStyle={{

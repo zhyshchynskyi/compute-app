@@ -31,11 +31,6 @@ export const MockToggle: FC<MockToggleProps> = ({
       })}
       aria-hidden='true'
     />
-    {label &&
-      (checked ? (
-        <ToggleText>{onOverrideText}</ToggleText>
-      ) : (
-        <ToggleText>{offOverrideText}</ToggleText>
-      ))}
+    {label && (checked ? <ToggleText>{onOverrideText}</ToggleText> : <ToggleText>{offOverrideText}</ToggleText>)}
   </>
 )

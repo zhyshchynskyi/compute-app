@@ -1,28 +1,28 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
-import { StyledHeader, StyledLogoWrapper, StyledNavigationColumn } from './LayoutStyle';
+import { StyledHeader, StyledLogoWrapper, StyledNavigationColumn } from './LayoutStyle'
 
-import ArrowNavigation from 'pages/Navigation/ArrowNavigation';
+import ArrowNavigation from 'pages/Navigation/ArrowNavigation'
 
-import HeaderButtons from 'components/HeaderButtons';
-import Tags from 'share-ui/components/Tags/Tags';
+import HeaderButtons from 'components/HeaderButtons'
+import Tags from 'share-ui/components/Tags/Tags'
 
-import styled from 'styled-components';
-import { useDomainConfig } from 'utils/useDomainConfig';
+import styled from 'styled-components'
+import { useDomainConfig } from 'utils/useDomainConfig'
 
 interface HeaderTypes {
-  expandMode?: boolean;
-  isPublicRoute?: boolean;
-  hideButtons?: boolean;
+  expandMode?: boolean
+  isPublicRoute?: boolean
+  hideButtons?: boolean
 }
 
 const Header = ({ expandMode = false, isPublicRoute, hideButtons }: HeaderTypes) => {
-  const { t } = useTranslation();
-  const { getDomainConfig } = useDomainConfig();
-  const domainLogo = getDomainConfig('logo');
+  const { t } = useTranslation()
+  const { getDomainConfig } = useDomainConfig()
+  const domainLogo = getDomainConfig('logo')
 
   return (
-    <StyledHeader id="main_header">
+    <StyledHeader id='main_header'>
       <StyledNavigationColumn>
         {!isPublicRoute && (
           <>
@@ -32,8 +32,8 @@ const Header = ({ expandMode = false, isPublicRoute, hideButtons }: HeaderTypes)
         )}
       </StyledNavigationColumn>
 
-      <StyledLogoWrapper to="/">
-        <StyledLogo src={domainLogo} alt="Logo" />
+      <StyledLogoWrapper to='/'>
+        <StyledLogo src={domainLogo} alt='Logo' />
         {/* <Tags
           label={t('beta')}
           readOnly
@@ -47,15 +47,15 @@ const Header = ({ expandMode = false, isPublicRoute, hideButtons }: HeaderTypes)
         <HeaderButtons />
       </StyledHeaderButtonWrapper>
     </StyledHeader>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const StyledHeaderButtonWrapper = styled.div`
   margin-left: auto;
-`;
+`
 const StyledLogo = styled.img`
   width: 48px;
   height: 48px;
-`;
+`

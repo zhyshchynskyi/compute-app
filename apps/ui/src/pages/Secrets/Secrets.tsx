@@ -1,45 +1,45 @@
-import { StyledChatWrapper, StyledContainer, StyledHorizontalDivider, StyledMainWrapper } from 'routes/ChatRouteLayout';
-import { StyledAppContainer } from 'components/Layout/LayoutStyle';
+import { StyledChatWrapper, StyledContainer, StyledHorizontalDivider, StyledMainWrapper } from 'routes/ChatRouteLayout'
+import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 
-import { ButtonPrimary } from 'components/Button/Button';
-import Button from 'share-ui/components/Button/Button';
-import Table from 'components/Table';
-import useSecret from './useSecret';
+import { ButtonPrimary } from 'components/Button/Button'
+import Button from 'share-ui/components/Button/Button'
+import Table from 'components/Table'
+import useSecret from './useSecret'
 
-import TabList from 'share-ui/components/Tabs/TabList/TabList';
-import Tab from 'share-ui/components/Tabs/Tab/Tab';
-import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext';
-import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels';
-import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel';
-import { useState } from 'react';
-import { StyledPanelWrapper } from 'styles/panelStyles.css';
-import styled from 'styled-components';
-import SHH from 'pages/SHH';
-import { useModal } from 'hooks';
-import CreateSecretModal from './CreateSecret/CreateSecretModal';
+import TabList from 'share-ui/components/Tabs/TabList/TabList'
+import Tab from 'share-ui/components/Tabs/Tab/Tab'
+import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext'
+import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels'
+import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel'
+import { useState } from 'react'
+import { StyledPanelWrapper } from 'styles/panelStyles.css'
+import styled from 'styled-components'
+import SHH from 'pages/SHH'
+import { useModal } from 'hooks'
+import CreateSecretModal from './CreateSecret/CreateSecretModal'
 
 const Secrets = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0)
   const handleTabClick = (tabId: number) => {
-    setActiveTab(tabId);
-  };
+    setActiveTab(tabId)
+  }
 
-  const { openModal } = useModal();
+  const { openModal } = useModal()
 
-  const { columns, fetch_secret_loading, secrets } = useSecret();
+  const { columns, fetch_secret_loading, secrets } = useSecret()
 
   const handleOpenSHHModal = () => {
-    openModal({ name: 'add-shh-key-modal' });
-  };
+    openModal({ name: 'add-shh-key-modal' })
+  }
 
   const handleOpenCreateSecretModal = () => {
-    openModal({ name: 'create-secret' });
-  };
+    openModal({ name: 'create-secret' })
+  }
 
   const buttonProperties = [
     { label: 'Create Secret', onClick: handleOpenCreateSecretModal },
     { label: 'Add SHH', onClick: handleOpenSHHModal },
-  ];
+  ]
 
   return (
     <>
@@ -79,14 +79,14 @@ const Secrets = () => {
       </StyledAppContainer>
       <CreateSecretModal />
     </>
-  );
-};
+  )
+}
 
-export default Secrets;
+export default Secrets
 
 export const StyledTabListWrapper = styled.header`
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
   padding-right: 20px;
-`;
+`

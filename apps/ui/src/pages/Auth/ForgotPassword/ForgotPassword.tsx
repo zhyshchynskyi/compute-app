@@ -15,11 +15,7 @@ const ForgotPassword = () => {
   const { formik } = useForgotPassword()
   return (
     <StyledCenterFormContainer>
-      <HeadingTertiary
-        value={t('add-email')}
-        type={Heading.types?.h1}
-        style={{ fontSize: 52, lineHeight: 'normal' }}
-      />
+      <HeadingTertiary value={t('add-email')} type={Heading.types?.h1} style={{ fontSize: 52, lineHeight: 'normal' }} />
       <StyledFormContainer>
         <FormikProvider value={formik}>
           <TextFieldFormik field_name='email' placeholder={`${t('email')}*`} size='large' />

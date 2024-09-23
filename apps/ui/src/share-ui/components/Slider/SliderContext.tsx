@@ -31,19 +31,11 @@ export interface SliderProviderProps extends SliderProps {
      *  - Or it can be an object for Label (Icon, Title - and other components)
      *  - Or it can be Render Props Function witch are getting value and valueText
      */
-    prefix?:
-      | { icon: IconType }
-      | string
-      | ((value: number, valueText: string) => void)
-      | ReactElement
+    prefix?: { icon: IconType } | string | ((value: number, valueText: string) => void) | ReactElement
     /**
      * Options for postfix/end/finishing element. Same as prefix element.
      */
-    postfix?:
-      | { icon: IconType }
-      | string
-      | ((value: number, valueText: string) => void)
-      | ReactElement
+    postfix?: { icon: IconType } | string | ((value: number, valueText: string) => void) | ReactElement
     /**
      * Width of SelectionIndicator (i.e. TextField)
      */
@@ -97,18 +89,7 @@ export function SliderProvider({
       shapeTestId,
       showValue,
     }),
-    [
-      active,
-      ariaLabel,
-      ariaLabelledby,
-      color,
-      disabled,
-      dragging,
-      focused,
-      size,
-      shapeTestId,
-      showValue,
-    ],
+    [active, ariaLabel, ariaLabelledby, color, disabled, dragging, focused, size, shapeTestId, showValue],
   )
 
   const selectionContextValue: SliderContextSelection = useMemo(

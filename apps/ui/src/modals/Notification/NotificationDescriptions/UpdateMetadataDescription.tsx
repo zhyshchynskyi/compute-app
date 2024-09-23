@@ -9,21 +9,13 @@ export type MetadataDescriptionProps = {
 export const UpdateMetadataDescription = ({ collectionName }: MetadataDescriptionProps) => {
   return (
     <>
-      <TypographyPrimary
-        value={'Metadata'}
-        type={Typography.types.LABEL}
-        size={Typography.sizes.sm}
-      />
+      <TypographyPrimary value={'Metadata'} type={Typography.types.LABEL} size={Typography.sizes.sm} />
       <TypographyTertiary
         value='update required in collection'
         type={Typography.types.LABEL}
         size={Typography.sizes.sm}
       />
-      <TypographyPrimary
-        value={collectionName}
-        type={Typography.types.LABEL}
-        size={Typography.sizes.sm}
-      />
+      <TypographyPrimary value={collectionName} type={Typography.types.LABEL} size={Typography.sizes.sm} />
     </>
   )
 }

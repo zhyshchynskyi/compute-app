@@ -32,17 +32,11 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
         onClose={closeModal}
         show
         backgroundColor='dark'
-        title={
-          <HeadingPrimary type={Heading.types?.h1} size={Heading.sizes?.SMALL} value='Filer' />
-        }
+        title={<HeadingPrimary type={Heading.types?.h1} size={Heading.sizes?.SMALL} value='Filer' />}
       >
         <StyledApiAddressContainerWrapper>
           <StyledIPAddressContainer>
-            <TypographyPrimary
-              value='IP address'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyPrimary value='IP address' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledIPAddressContainer>
           <StyledIPAdressFieldContainer>
             <TextField placeholder='Label' />
@@ -64,20 +58,12 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledSourceContainerWrapper>
           <StyledSourceTextWrapper>
-            <TypographyPrimary
-              value='Source'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyPrimary value='Source' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledSourceTextWrapper>
           <StyledCheckBoxWrapper>
             <StyledDashboardCheckboxContainer>
               <StyledDashboardText>
-                <TypographyTertiary
-                  value='Dashboard'
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyTertiary value='Dashboard' type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledDashboardText>
               <StyledDashboardCheckbox>
                 <Checkbox kind='secondary' size='small' />
@@ -96,20 +82,12 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledAccountContainerWrapper>
           <StyledAccountTextWrapper>
-            <TypographyTertiary
-              value='Account'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyTertiary value='Account' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledAccountTextWrapper>
           <StyledCheckBoxWrapper>
             <StyledCheckboxContainer_1>
               <StyledAccountText>
-                <TypographyTertiary
-                  value='This account'
-                  type={Typography.types.LABEL}
-                  size={Typography.sizes.md}
-                />
+                <TypographyTertiary value='This account' type={Typography.types.LABEL} size={Typography.sizes.md} />
               </StyledAccountText>
               <StyledAccountCheckbox>
                 <Checkbox kind='secondary' size='small' />
@@ -144,11 +122,7 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledApiVersionContainerWrapper>
           <StyledIPAddressContainer>
-            <TypographyTertiary
-              value='API version '
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyTertiary value='API version ' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledIPAddressContainer>
           <StyledIPAdressFieldContainer>
             <TextField placeholder='Label' />
@@ -157,11 +131,7 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledApiVersionContainerWrapper>
           <StyledIPAddressContainer>
-            <TypographyTertiary
-              value='Error type'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyTertiary value='Error type' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledIPAddressContainer>
           <StyledIPAdressFieldContainer>
             <TextField placeholder='Label' />
@@ -170,11 +140,7 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledApiVersionContainerWrapper>
           <StyledIPAddressContainer>
-            <TypographyTertiary
-              value='Error code'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyTertiary value='Error code' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledIPAddressContainer>
           <StyledIPAdressFieldContainer>
             <TextField placeholder='Label' />
@@ -183,11 +149,7 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
 
         <StyledApiVersionContainerWrapper>
           <StyledIPAddressContainer>
-            <TypographyTertiary
-              value='Error param'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographyTertiary value='Error param' type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledIPAddressContainer>
           <StyledIPAdressFieldContainer>
             <TextField placeholder='Label' />
@@ -200,11 +162,7 @@ const CreateLogModal = ({ closeModal }: CreateLogModalProps) => {
             </Button>
 
             <Button kind={Button.kinds?.PRIMARY} size={Button.sizes?.LARGE}>
-              <StyledLabelTypography
-                value='Create'
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <StyledLabelTypography value='Create' type={Typography.types.LABEL} size={Typography.sizes.md} />
             </Button>
           </StyledActionsContainer>
         </StyledModalFooter>

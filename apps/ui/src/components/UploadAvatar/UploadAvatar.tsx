@@ -26,11 +26,7 @@ const UploadAvatar = ({ onChange, isLoading, avatarSrc, name = '' }: UploadAvata
         //  style={{ display: 'none' }}
         onChange={onChange}
       />
-      {isLoading ? (
-        <Loader size={48} />
-      ) : (
-        <AvatarGenerator name={name} size={80} avatar={avatarSrc} />
-      )}
+      {isLoading ? <Loader size={48} /> : <AvatarGenerator name={name} size={80} avatar={avatarSrc} />}
     </StyledAvatarInputWrapper>
   )
 }

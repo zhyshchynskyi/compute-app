@@ -1,14 +1,14 @@
-import { MutableRefObject, ReactElement, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { GridKeyboardNavigationContext } from "../../components/GridKeyboardNavigationContext/GridKeyboardNavigationContext";
-import useFullKeyboardListeners, { NavDirections } from "../../hooks/useFullKeyboardListeners";
-import useEventListener from "../../hooks/useEventListener";
+import { MutableRefObject, ReactElement, useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { GridKeyboardNavigationContext } from '../../components/GridKeyboardNavigationContext/GridKeyboardNavigationContext'
+import useFullKeyboardListeners, { NavDirections } from '../../hooks/useFullKeyboardListeners'
+import useEventListener from '../../hooks/useEventListener'
 import {
   calcActiveIndexAfterArrowNavigation,
-  getActiveIndexFromInboundNavigation
-} from "./gridKeyboardNavigationHelper";
-import { useLastNavigationDirection } from "../../components/Menu/Menu/hooks/useLastNavigationDirection";
+  getActiveIndexFromInboundNavigation,
+} from './gridKeyboardNavigationHelper'
+import { useLastNavigationDirection } from '../../components/Menu/Menu/hooks/useLastNavigationDirection'
 
-const NO_ACTIVE_INDEX = -1;
+const NO_ACTIVE_INDEX = -1
 
 /**
  * A hook which is used for accessible keyboard navigation. Useful for components rendering a list of items that can be navigated and selected with a keyboard.
@@ -38,31 +38,31 @@ export default function useGridKeyboardNavigation({
   getItemByIndex = (_index: number) => {},
   focusOnMount = false,
   focusItemIndexOnMount = NO_ACTIVE_INDEX,
-  disabledIndexes = []
+  disabledIndexes = [],
 }: {
-  ref: MutableRefObject<HTMLElement>;
-  itemsCount: number;
-  numberOfItemsInLine: number;
-  onItemClicked: (element: HTMLElement | ReactElement | void, index: number) => void;
-  getItemByIndex: (index: number | void) => HTMLElement | ReactElement | void;
-  focusOnMount?: boolean;
-  focusItemIndexOnMount?: number;
-  disabledIndexes?: number[];
+  ref: MutableRefObject<HTMLElement>
+  itemsCount: number
+  numberOfItemsInLine: number
+  onItemClicked: (element: HTMLElement | ReactElement | void, index: number) => void
+  getItemByIndex: (index: number | void) => HTMLElement | ReactElement | void
+  focusOnMount?: boolean
+  focusItemIndexOnMount?: number
+  disabledIndexes?: number[]
 }) {
   const [isInitialActiveState, setIsInitialActiveState] = useState(
-    focusOnMount && focusItemIndexOnMount !== NO_ACTIVE_INDEX
-  );
-  const skippedInitialActiveIndexChange = useRef(false);
-  const [activeIndex, setActiveIndex] = useState(isInitialActiveState ? focusItemIndexOnMount : NO_ACTIVE_INDEX);
-  const [isUsingKeyboardNav, setIsUsingKeyboardNav] = useState(true);
+    focusOnMount && focusItemIndexOnMount !== NO_ACTIVE_INDEX,
+  )
+  const skippedInitialActiveIndexChange = useRef(false)
+  const [activeIndex, setActiveIndex] = useState(isInitialActiveState ? focusItemIndexOnMount : NO_ACTIVE_INDEX)
+  const [isUsingKeyboardNav, setIsUsingKeyboardNav] = useState(true)
 
-  const keyboardContext = useContext(GridKeyboardNavigationContext);
+  const keyboardContext = useContext(GridKeyboardNavigationContext)
 
   const onArrowNavigation = (direction: NavDirections) => {
-    setIsUsingKeyboardNav(true);
+    setIsUsingKeyboardNav(true)
     if (activeIndex === NO_ACTIVE_INDEX) {
-      setActiveIndex(0);
-      return;
+      setActiveIndex(0)
+      return
     }
 
     const { isOutbound, nextIndex } = calcActiveIndexAfterArrowNavigation({
@@ -70,95 +70,95 @@ export default function useGridKeyboardNavigation({
       itemsCount,
       numberOfItemsInLine,
       direction,
-      disabledIndexes
-    });
+      disabledIndexes,
+    })
     if (isOutbound) {
-      keyboardContext?.onOutboundNavigation(ref, direction);
+      keyboardContext?.onOutboundNavigation(ref, direction)
     } else {
-      setActiveIndex(nextIndex);
+      setActiveIndex(nextIndex)
     }
-  };
+  }
 
   useEffect(() => {
     if (!skippedInitialActiveIndexChange.current) {
-      skippedInitialActiveIndexChange.current = true;
-      return;
+      skippedInitialActiveIndexChange.current = true
+      return
     }
     // if the active state changes, this is no longer the initial active state
-    setIsInitialActiveState(false);
-  }, [activeIndex]);
+    setIsInitialActiveState(false)
+  }, [activeIndex])
 
-  const blurTargetElement = useCallback(() => ref.current?.blur(), [ref]);
+  const blurTargetElement = useCallback(() => ref.current?.blur(), [ref])
 
-  const { lastNavigationDirectionRef } = useLastNavigationDirection();
+  const { lastNavigationDirectionRef } = useLastNavigationDirection()
   const onFocus = useCallback(() => {
-    const direction = lastNavigationDirectionRef.current;
+    const direction = lastNavigationDirectionRef.current
     if (direction) {
       // if we did not already focused on any grid item, set focus according to the item which selected
       if (activeIndex === -1) {
-        const newIndex = getActiveIndexFromInboundNavigation({ direction, numberOfItemsInLine, itemsCount });
-        setActiveIndex(newIndex);
+        const newIndex = getActiveIndexFromInboundNavigation({ direction, numberOfItemsInLine, itemsCount })
+        setActiveIndex(newIndex)
       }
-      setIsUsingKeyboardNav(true);
-      return;
+      setIsUsingKeyboardNav(true)
+      return
     }
     if (activeIndex === NO_ACTIVE_INDEX) {
-      setActiveIndex(0);
+      setActiveIndex(0)
     }
-  }, [activeIndex, itemsCount, lastNavigationDirectionRef, numberOfItemsInLine]);
+  }, [activeIndex, itemsCount, lastNavigationDirectionRef, numberOfItemsInLine])
 
   const onMouseDown = useCallback(() => {
     // If the user clicked on the grid element we assume that that what will caused the focus
-    setIsUsingKeyboardNav(false);
-  }, [setIsUsingKeyboardNav]);
+    setIsUsingKeyboardNav(false)
+  }, [setIsUsingKeyboardNav])
 
   const onBlur = useCallback(() => {
     // If we lose focus we will return to isUsingKeyboardNav default mode which is that any interaction
     // with the grid always done by keyboard, unless we clicked on the grid element before that with a mouse
-    setIsUsingKeyboardNav(true);
-    setActiveIndex(NO_ACTIVE_INDEX);
-  }, [setActiveIndex]);
+    setIsUsingKeyboardNav(true)
+    setActiveIndex(NO_ACTIVE_INDEX)
+  }, [setActiveIndex])
 
-  useEventListener({ eventName: "focus", callback: onFocus, ref });
-  useEventListener({ eventName: "mousedown", callback: onMouseDown, ref });
-  useEventListener({ eventName: "blur", callback: onBlur, ref });
+  useEventListener({ eventName: 'focus', callback: onFocus, ref })
+  useEventListener({ eventName: 'mousedown', callback: onMouseDown, ref })
+  useEventListener({ eventName: 'blur', callback: onBlur, ref })
 
   useEffect(() => {
     if (activeIndex > -1) {
-      ref.current?.focus();
+      ref.current?.focus()
     }
-  }, [activeIndex, ref]);
+  }, [activeIndex, ref])
 
   const onSelectionAction = useCallback(
     (index: number, isKeyboardAction = false) => {
-      setIsUsingKeyboardNav(isKeyboardAction);
-      setActiveIndex(index);
+      setIsUsingKeyboardNav(isKeyboardAction)
+      setActiveIndex(index)
 
-      onItemClicked(getItemByIndex(index), index);
+      onItemClicked(getItemByIndex(index), index)
     },
-    [setActiveIndex, onItemClicked, getItemByIndex]
-  );
+    [setActiveIndex, onItemClicked, getItemByIndex],
+  )
 
   const onKeyboardSelection = useCallback(() => {
     if (!isUsingKeyboardNav) {
-      return;
+      return
     }
-    return onSelectionAction(activeIndex, true);
-  }, [isUsingKeyboardNav, onSelectionAction, activeIndex]);
+    return onSelectionAction(activeIndex, true)
+  }, [isUsingKeyboardNav, onSelectionAction, activeIndex])
 
   useFullKeyboardListeners({
     ref,
     onSelectionKey: onKeyboardSelection,
     onArrowNavigation,
     onEscape: blurTargetElement,
-    focusOnMount
-  });
+    focusOnMount,
+  })
 
   // if the user is not using keyboard nav, the consumers should not treat the index as active
-  const externalActiveIndex = isUsingKeyboardNav ? activeIndex : NO_ACTIVE_INDEX;
+  const externalActiveIndex = isUsingKeyboardNav ? activeIndex : NO_ACTIVE_INDEX
   return {
     activeIndex: externalActiveIndex,
     onSelectionAction,
-    isInitialActiveState
-  };
+    isInitialActiveState,
+  }
 }

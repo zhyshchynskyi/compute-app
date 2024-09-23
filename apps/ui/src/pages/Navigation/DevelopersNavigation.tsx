@@ -30,10 +30,7 @@ const DevelopersNavigation = () => {
 
   return (
     <StyledUl>
-      <StyledLi
-        isActive={active.length === 2 && includes(active, '')}
-        onClick={() => onHandleClick('')}
-      >
+      <StyledLi isActive={active.length === 2 && includes(active, '')} onClick={() => onHandleClick('')}>
         <Games />
         <span>{t('api-keys')}</span>
       </StyledLi>

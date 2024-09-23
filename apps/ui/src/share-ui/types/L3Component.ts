@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 type L3Component<T, P = HTMLElement> = React.ForwardRefExoticComponent<T & React.RefAttributes<P>> & {
-  defaultTestId?: string;
-};
+  defaultTestId?: string
+}
 
-export default L3Component;
+export default L3Component

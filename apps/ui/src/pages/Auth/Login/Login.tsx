@@ -17,11 +17,7 @@ import googleIcon from 'assets/tools/google.png'
 
 import './login.css'
 import { useModal } from 'hooks'
-import {
-  StyledImageWrapper,
-  StyledImg,
-  StyledInnerButtonWrapper,
-} from 'components/HeaderButtons/HeaderButtons'
+import { StyledImageWrapper, StyledImg, StyledInnerButtonWrapper } from 'components/HeaderButtons/HeaderButtons'
 import OrDivider from 'components/OrDivider/OrDivider'
 import TypographyTertiary from 'components/Typography/Tertiary'
 import TypographyPrimary from 'components/Typography/Primary'
@@ -128,12 +124,7 @@ const Login = () => {
         {loginConfig?.email_password && (
           <FormikProvider value={formik}>
             <StyledInputWrapper>
-              <TextFieldFormik
-                label='Email'
-                field_name='email'
-                placeholder={t('enter-email')}
-                size='small'
-              />
+              <TextFieldFormik label='Email' field_name='email' placeholder={t('enter-email')} size='small' />
               <TextFieldFormik
                 label='Password'
                 field_name='password'
@@ -150,11 +141,7 @@ const Login = () => {
         </ButtonPrimary>
 
         <StyledSignUpWrapper>
-          <TypographyTertiary
-            value={t('dont-have-account')}
-            type={Typography.types.label}
-            size={Typography.sizes.md}
-          />
+          <TypographyTertiary value={t('dont-have-account')} type={Typography.types.label} size={Typography.sizes.md} />
           <button
             onClick={() => {
               openModal({ name: 'login-modal', data: { isRegister: true } })

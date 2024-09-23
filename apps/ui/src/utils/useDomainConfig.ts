@@ -10,9 +10,7 @@ export const useDomainConfig = () => {
     discovery: true,
   }
 
-  const getDomainConfig = (
-    value: 'title' | 'content' | 'logo' | 'welcome_message' | 'login_page',
-  ) => {
+  const getDomainConfig = (value: 'title' | 'content' | 'logo' | 'welcome_message' | 'login_page') => {
     if (value === 'title') return domainEnv.REACT_APP_TITLE || 'L3AGI'
     if (value === 'content')
       return (
@@ -20,8 +18,7 @@ export const useDomainConfig = () => {
         `Open-source framework to make AI agents' team collaboration as effective as human collaboration.`
       )
     if (value === 'logo') return domainEnv.REACT_APP_LOGO || logo
-    if (value === 'welcome_message')
-      return domainEnv.REACT_APP_WELCOME_MESSAGE || 'Welcome to L3AGI'
+    if (value === 'welcome_message') return domainEnv.REACT_APP_WELCOME_MESSAGE || 'Welcome to L3AGI'
     if (value === 'login_page') {
       if (!domainEnv.REACT_APP_LOGIN_PAGE) return loginPage
 

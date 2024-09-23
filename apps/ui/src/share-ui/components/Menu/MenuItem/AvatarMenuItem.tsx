@@ -11,9 +11,7 @@ interface AvatarMenuItemProps extends L3ComponentProps {
 /**
  * MenuItem with Avatar instead of Icon
  */
-const AvatarMenuItem: React.FC<
-  AvatarMenuItemProps & { isMenuChild?: boolean; isSelectable?: boolean }
-> = forwardRef(
+const AvatarMenuItem: React.FC<AvatarMenuItemProps & { isMenuChild?: boolean; isSelectable?: boolean }> = forwardRef(
   ({ avatarProps, menuItemProps, ...embeddedMenuItemProps }, ref: ForwardedRef<HTMLElement>) => {
     const renderAvatar = useCallback(() => {
       // <Avatar {...avatarProps} />

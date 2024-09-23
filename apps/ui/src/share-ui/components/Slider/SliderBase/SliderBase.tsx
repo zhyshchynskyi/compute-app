@@ -86,12 +86,7 @@ const SliderBase: FC<SliderBaseProps> = forwardRef(({ className }, _ref) => {
               <SliderFilledTrack dimension={dimension} offset={offset} />
               {positions.map((position, index) => {
                 return (
-                  <SliderThumb
-                    key={thumbKeys[index]}
-                    index={index}
-                    onMove={handlePointerMove}
-                    position={position}
-                  />
+                  <SliderThumb key={thumbKeys[index]} index={index} onMove={handlePointerMove} position={position} />
                 )
               })}
             </>
@@ -103,11 +98,7 @@ const SliderBase: FC<SliderBaseProps> = forwardRef(({ className }, _ref) => {
       <SliderInText
         kind={SliderInText.kinds?.TEXTFIX}
         textSize={
-          size === 'small'
-            ? SliderTextSize.SMALL
-            : size === 'medium'
-            ? SliderTextSize.MEDIUM
-            : SliderTextSize.LARGE
+          size === 'small' ? SliderTextSize.SMALL : size === 'medium' ? SliderTextSize.MEDIUM : SliderTextSize.LARGE
         }
       />
     </div>

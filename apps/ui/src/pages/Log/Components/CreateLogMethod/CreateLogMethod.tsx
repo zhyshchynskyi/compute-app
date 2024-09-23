@@ -18,11 +18,7 @@ const CreateLogMethod = ({ onClose }: { onClose: Function }) => {
       <StyledLogMethodContainer>
         <StyledContainerWrapper>
           <StyledTextWrapper>
-            <TypographyPrimary
-              value='GET'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.md}
-            />
+            <TypographyPrimary value='GET' type={Typography.types.LABEL} size={Typography.sizes.md} />
           </StyledTextWrapper>
           <StyledCheckBoxWrapper>
             <Toggle size='small' kind='primary' isDefaultSelected={false} />
@@ -31,11 +27,7 @@ const CreateLogMethod = ({ onClose }: { onClose: Function }) => {
 
         <StyledContainerWrapper>
           <StyledTextWrapper>
-            <TypographyPrimary
-              value='POST'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.md}
-            />
+            <TypographyPrimary value='POST' type={Typography.types.LABEL} size={Typography.sizes.md} />
           </StyledTextWrapper>
           <StyledCheckBoxWrapper>
             <Toggle size='small' kind='primary' isDefaultSelected={false} />
@@ -44,11 +36,7 @@ const CreateLogMethod = ({ onClose }: { onClose: Function }) => {
 
         <StyledContainerWrapper>
           <StyledTextWrapper>
-            <TypographyPrimary
-              value='DELETE'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.md}
-            />
+            <TypographyPrimary value='DELETE' type={Typography.types.LABEL} size={Typography.sizes.md} />
           </StyledTextWrapper>
           <StyledCheckBoxWrapper>
             <Toggle size='small' kind='primary' isDefaultSelected={false} />
@@ -56,24 +44,12 @@ const CreateLogMethod = ({ onClose }: { onClose: Function }) => {
         </StyledContainerWrapper>
 
         <StyledButtonContainer>
-          <StyledTertiaryButton
-            kind={Button.kinds?.TERTIARY}
-            size={Button.sizes?.SMALL}
-            onClick={onClose}
-          >
-            <TypographyPrimary
-              value='Clear'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+          <StyledTertiaryButton kind={Button.kinds?.TERTIARY} size={Button.sizes?.SMALL} onClick={onClose}>
+            <TypographyPrimary value='Clear' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledTertiaryButton>
 
           <StyledPrimaryButton kind={Button.kinds?.PRIMARY} size={Button.sizes?.SMALL}>
-            <TypographyPrimary
-              value='Apply'
-              type={Typography.types.LABEL}
-              size={Typography.sizes.sm}
-            />
+            <TypographyPrimary value='Apply' type={Typography.types.LABEL} size={Typography.sizes.sm} />
           </StyledPrimaryButton>
         </StyledButtonContainer>
       </StyledLogMethodContainer>

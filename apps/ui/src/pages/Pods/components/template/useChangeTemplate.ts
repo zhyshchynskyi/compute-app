@@ -1,5 +1,5 @@
-import React from 'react';
-import { Template } from 'types/template';
+import React from 'react'
+import { Template } from 'types/template'
 
 /**
  * Returns a memoized array of templates that match the search term.
@@ -10,16 +10,16 @@ import { Template } from 'types/template';
  */
 const useSearchTemplates = (searchTerm: string, data: Template[]): Template[] => {
   return React.useMemo(() => {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    const lowerCaseSearchTerm = searchTerm.toLowerCase()
 
-    return data.filter((template) => {
-      const { name, container_image } = template;
+    return data.filter(template => {
+      const { name, container_image } = template
       return (
         name.toLowerCase().includes(lowerCaseSearchTerm) || container_image.toLowerCase().includes(lowerCaseSearchTerm)
-      );
-    });
-  }, [searchTerm, data]);
-};
+      )
+    })
+  }, [searchTerm, data])
+}
 
 const templates = [
   {
@@ -43,23 +43,23 @@ const templates = [
     created_by: '',
     created_on: '',
   },
-];
-const publicTemplates: any = [];
+]
+const publicTemplates: any = []
 
 const useChangeTemplate = () => {
-  const [searchText, setSearchText] = React.useState<string>('');
+  const [searchText, setSearchText] = React.useState<string>('')
   // const { data: templates, loading: templates_loading } = useGetTemplates()
   // const { data: publicTemplates, loading: public_templates_loading } = useGetPublicTemplates()
 
-  const filteredTemplates = useSearchTemplates(searchText, templates);
-  const filteredPublicTemplates = useSearchTemplates(searchText, publicTemplates);
+  const filteredTemplates = useSearchTemplates(searchText, templates)
+  const filteredPublicTemplates = useSearchTemplates(searchText, publicTemplates)
 
   return {
     templates: [...filteredTemplates, ...filteredPublicTemplates],
     searchText,
     setSearchText,
     templates_loading: false,
-  };
-};
+  }
+}
 
-export default useChangeTemplate;
+export default useChangeTemplate

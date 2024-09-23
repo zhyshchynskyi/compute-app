@@ -112,20 +112,12 @@ export type SliderProps = {
   /**
    * Options for postfix/end/finishing element. Same as prefix element.
    */
-  postfix?:
-    | { icon: IconType }
-    | string
-    | ((value: number, valueText: string) => void)
-    | ReactElement
+  postfix?: { icon: IconType } | string | ((value: number, valueText: string) => void) | ReactElement
   /**
    * Width of SelectionIndicator (i.e. TextField)
    */
   selectionIndicatorWidth?: string
-  textfix?:
-    | { icon: IconType }
-    | string
-    | ((value: number, valueText: string) => void)
-    | ReactElement
+  textfix?: { icon: IconType } | string | ((value: number, valueText: string) => void) | ReactElement
 }
 
 const Slider: React.FC<SliderProps> & {

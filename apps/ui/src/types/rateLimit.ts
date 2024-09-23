@@ -49,10 +49,7 @@ export interface UseRateLimitsReturn {
 }
 
 export interface UseUpdateRateLimitService {
-  updateRateLimit: (
-    rate_limit_id: string,
-    input: RateLimitInput,
-  ) => Promise<{ updateRateLimit: RateLimitActionReturn }>
+  updateRateLimit: (rate_limit_id: string, input: RateLimitInput) => Promise<{ updateRateLimit: RateLimitActionReturn }>
   loading: boolean
 }
 

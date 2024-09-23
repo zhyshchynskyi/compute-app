@@ -40,23 +40,13 @@ const TabPanels: FC<TabPanelsProps> = forwardRef(
         return React.cloneElement(child, {
           index,
           ...child.props,
-          className: cx(
-            'tab-panel',
-            activeClass,
-            noAnimationClass,
-            animationClass,
-            child.props.className,
-          ),
+          className: cx('tab-panel', activeClass, noAnimationClass, animationClass, child.props.className),
         })
       }).filter(Boolean)
     }, [children, activeTabId, renderOnlyActiveTab, animationDirection])
 
     return (
-      <StyledTabPanelsWrapper
-        ref={mergedRef}
-        className={cx('tab-panels--wrapper', className)}
-        id={id}
-      >
+      <StyledTabPanelsWrapper ref={mergedRef} className={cx('tab-panels--wrapper', className)} id={id}>
         {renderedTabs}
       </StyledTabPanelsWrapper>
     )

@@ -1,4 +1,4 @@
 export enum TabSize {
-  LARGE = "large",
-  SMALL = "small"
+  LARGE = 'large',
+  SMALL = 'small',
 }

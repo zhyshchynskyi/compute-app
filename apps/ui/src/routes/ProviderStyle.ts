@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 const StyledAppContainer = styled.div<{ backgroundImage?: string }>`
-  background-image: url(${p =>
-    p.backgroundImage ? p.backgroundImage : p.theme.body.backgroundImage});
+  background-image: url(${p => (p.backgroundImage ? p.backgroundImage : p.theme.body.backgroundImage)});
   display: grid;
   grid-auto-flow: row;
   grid-auto-rows: auto 1fr;

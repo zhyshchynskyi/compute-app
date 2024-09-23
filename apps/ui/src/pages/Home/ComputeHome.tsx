@@ -1,17 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { StyledHeaderGroup, StyledSectionWrapper } from './homeStyle.css';
-import HeadingPrimary from 'components/Heading/Primary';
-import Heading from 'share-ui/components/Heading/Heading';
-import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper';
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import { StyledHeaderGroup, StyledSectionWrapper } from './homeStyle.css'
+import HeadingPrimary from 'components/Heading/Primary'
+import Heading from 'share-ui/components/Heading/Heading'
+import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
 
-import PodsMainCard from 'pages/Pods/PodsMainCard';
+import PodsMainCard from 'pages/Pods/PodsMainCard'
 
-import UsageChart from 'pages/Pods/components/charts/UsageChart';
+import UsageChart from 'pages/Pods/components/charts/UsageChart'
 
-import ComingSoonContainer from 'components/ComingSoonContainer';
+import ComingSoonContainer from 'components/ComingSoonContainer'
 
-import { StyledMainHeaderWrapper } from './Home';
+import { StyledMainHeaderWrapper } from './Home'
 
 const TEMP_DATA = [
   {
@@ -47,17 +47,17 @@ const TEMP_DATA = [
     cpu: { utl: 70, mem: 20 },
     gpu: { utl: 10, mem: 80 },
   },
-];
+]
 
 const ComputeHome = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <>
       <StyledSectionWrapper>
-        <StyledHeaderGroup className="header_group">
+        <StyledHeaderGroup className='header_group'>
           <StyledMainHeaderWrapper>
-            <HeadingPrimary type={Heading.types?.h1} size="xss" value={`Usage`} />
+            <HeadingPrimary type={Heading.types?.h1} size='xss' value={`Usage`} />
           </StyledMainHeaderWrapper>
         </StyledHeaderGroup>
 
@@ -69,15 +69,15 @@ const ComputeHome = () => {
       </StyledSectionWrapper>
 
       <StyledSectionWrapper>
-        <StyledHeaderGroup className="header_group">
+        <StyledHeaderGroup className='header_group'>
           <StyledMainHeaderWrapper>
-            <HeadingPrimary type={Heading.types?.h1} size="xss" value={`Pods`} />
+            <HeadingPrimary type={Heading.types?.h1} size='xss' value={`Pods`} />
           </StyledMainHeaderWrapper>
         </StyledHeaderGroup>
 
         <ComponentsWrapper noPadding>
           <StyledCardsWrapper>
-            {TEMP_DATA.slice(0, 3).map((data) => {
+            {TEMP_DATA.slice(0, 3).map(data => {
               return (
                 <PodsMainCard
                   key={data.name}
@@ -90,16 +90,16 @@ const ComputeHome = () => {
                   cpu={data.cpu}
                   gpu={data.gpu}
                 />
-              );
+              )
             })}
           </StyledCardsWrapper>
         </ComponentsWrapper>
       </StyledSectionWrapper>
     </>
-  );
-};
+  )
+}
 
-export default ComputeHome;
+export default ComputeHome
 
 export const StyledCardsWrapper = styled.div`
   display: flex;
@@ -110,4 +110,4 @@ export const StyledCardsWrapper = styled.div`
   /* height: 100%; */
 
   padding: 5px 32px;
-`;
+`

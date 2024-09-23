@@ -59,11 +59,7 @@ const ImageRenderer = (p: any) => {
               <Attach />
             </StyledOutlineIcon>
 
-            <TypographySecondary
-              value={t('upload')}
-              type={Typography.types.LABEL}
-              size={Typography.sizes.lg}
-            />
+            <TypographySecondary value={t('upload')} type={Typography.types.LABEL} size={Typography.sizes.lg} />
           </StyledWrapper>
         </StyledUploadDiv>
       )}

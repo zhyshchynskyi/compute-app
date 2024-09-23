@@ -20,16 +20,8 @@ const CreateSecretModal = () => {
       >
         <StyledBody>
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={3}>
-            <FormikTextField
-              name='secret_name'
-              placeholder={'Type Secret Name...'}
-              label={'Secret Name'}
-            />
-            <FormikTextField
-              name='secret_value'
-              placeholder={'Type Secret Value...'}
-              label={'Secret Value'}
-            />
+            <FormikTextField name='secret_name' placeholder={'Type Secret Name...'} label={'Secret Name'} />
+            <FormikTextField name='secret_value' placeholder={'Type Secret Value...'} label={'Secret Value'} />
 
             <Box width={'100%'}>
               <TextareaFormik

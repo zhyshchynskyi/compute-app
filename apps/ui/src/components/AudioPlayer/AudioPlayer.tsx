@@ -6,13 +6,7 @@ import Pause from 'share-ui/components/Icon/Icons/components/Pause'
 import styled, { css } from 'styled-components'
 import { Close } from 'share-ui/components/Icon/Icons'
 
-const AudioPlayer = ({
-  audioUrl,
-  onCloseClick,
-}: {
-  audioUrl: string
-  onCloseClick?: () => void
-}) => {
+const AudioPlayer = ({ audioUrl, onCloseClick }: { audioUrl: string; onCloseClick?: () => void }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
@@ -105,12 +99,7 @@ const AudioPlayer = ({
         hasClose={onCloseClick ? true : false}
       >
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-        <audio
-          ref={audioRef}
-          src={audioUrl}
-          onTimeUpdate={handleTimeUpdate}
-          onLoadedMetadata={handleMetadata}
-        />
+        <audio ref={audioRef} src={audioUrl} onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleMetadata} />
 
         <StyledTimeIndicator>
           <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>

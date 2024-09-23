@@ -1,11 +1,11 @@
-import { useContext } from 'react';
-import { ToastContext } from 'contexts';
-import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
-import { TemplateInput } from 'types/template';
+import { useContext } from 'react'
+import { ToastContext } from 'contexts'
+import { useFormik } from 'formik'
+import { useParams } from 'react-router-dom'
+import { TemplateInput } from 'types/template'
 
-import { Credential } from 'types/credential';
-import { templateValidationSchema } from '../CreateTemplate/useCreateTemplate';
+import { Credential } from 'types/credential'
+import { templateValidationSchema } from '../CreateTemplate/useCreateTemplate'
 
 const data = {
   name: 'GPU template',
@@ -24,18 +24,18 @@ const data = {
   environment_variables: {
     env: [],
   },
-};
+}
 
 const useEditTemplate = () => {
-  const { setToast } = useContext(ToastContext);
+  const { setToast } = useContext(ToastContext)
 
-  const { id } = useParams();
+  const { id } = useParams()
 
   // const { data, loading: template_loading, refetch: refetchTemplate } = useTemplateById(id)
   // const { updateTemplate, loading: update_template_loading } = useUpdateTemplateService()
   // const { data: credentials } = useGetCredentials()
 
-  const credentials: any = [];
+  const credentials: any = []
 
   const initialValues: TemplateInput = {
     name: data?.name || '',
@@ -54,7 +54,7 @@ const useEditTemplate = () => {
     environment_variables: {
       env: data?.environment_variables?.env || [],
     },
-  };
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -62,17 +62,17 @@ const useEditTemplate = () => {
     },
     validationSchema: templateValidationSchema,
     enableReinitialize: true,
-    onSubmit: (values) => handleSubmit(values),
-  });
+    onSubmit: values => handleSubmit(values),
+  })
 
   async function handleSubmit(values: TemplateInput) {
     const data = {
       ...values,
       credential: values.credential?.length === 0 ? null : values.credential,
       environment_variables: {
-        env: values?.environment_variables?.env?.filter((i) => i.key && i.value) || [],
+        env: values?.environment_variables?.env?.filter(i => i.key && i.value) || [],
       },
-    };
+    }
     // const result = await updateTemplate(id, data)
     // await refetchTemplate()
 
@@ -88,14 +88,14 @@ const useEditTemplate = () => {
   const credentialsList = credentials.map((item: Credential) => ({
     label: item.credential_name,
     value: item.id,
-  }));
+  }))
 
   return {
     formik,
     update_template_loading: false,
     credentials: credentialsList,
     templateIsLoading: false,
-  };
-};
+  }
+}
 
-export default useEditTemplate;
+export default useEditTemplate

@@ -49,11 +49,7 @@ const ChangePassword = ({ closeModal }: CreateChangePasswordModalProps) => {
                 size={Typography.sizes.lg}
                 customColor={'#FFFFFF'}
               /> */}
-            <HeadingPrimary
-              type={Heading.types?.h1}
-              size={Heading.sizes?.MEDIUM}
-              value={t('change-password')}
-            />
+            <HeadingPrimary type={Heading.types?.h1} size={Heading.sizes?.MEDIUM} value={t('change-password')} />
           </StyledTextWrapper>
           <StyledPasswordDetailsWrapper>
             <StyledPassword>

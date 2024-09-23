@@ -29,25 +29,11 @@ export interface SliderThumbProps extends L3ComponentProps {
   position?: number
 }
 
-const SliderThumb: FC<SliderThumbProps> = ({
-  className,
-  index = 0,
-  onMove = NOOP,
-  position = 0,
-}) => {
-  const {
-    max,
-    min,
-    ranged,
-    value: valueOrValues,
-    valueText: valueOrValuesText,
-  } = useSliderSelection()
+const SliderThumb: FC<SliderThumbProps> = ({ className, index = 0, onMove = NOOP, position = 0 }) => {
+  const { max, min, ranged, value: valueOrValues, valueText: valueOrValuesText } = useSliderSelection()
   const value = ranged ? (valueOrValues as unknown as number[])[index] : (valueOrValues as number)
-  const valueText = ranged
-    ? (valueOrValuesText as unknown as string[])[index]
-    : (valueOrValuesText as string)
-  const { ariaLabel, ariaLabelledby, disabled, dragging, focused, shapeTestId, showValue } =
-    useSliderUi()
+  const valueText = ranged ? (valueOrValuesText as unknown as string[])[index] : (valueOrValuesText as string)
+  const { ariaLabel, ariaLabelledby, disabled, dragging, focused, shapeTestId, showValue } = useSliderUi()
   const { setActive, setFocused, setDragging } = useSliderActions()
   const ref = useRef(null)
 

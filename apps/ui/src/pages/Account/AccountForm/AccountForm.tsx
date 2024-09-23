@@ -36,11 +36,7 @@ const AccountForm = () => {
         <StyledFormContainer>
           <StyledCustomTextField>
             <StyledTypographyWrapper>
-              <TypographyTertiary
-                value={t('full-name')}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <TypographyTertiary value={t('full-name')} type={Typography.types.LABEL} size={Typography.sizes.md} />
             </StyledTypographyWrapper>
             <TextField
               name='first_name'
@@ -51,11 +47,7 @@ const AccountForm = () => {
           </StyledCustomTextField>
           <StyledCustomTextField>
             <StyledTypographyWrapper>
-              <TypographyTertiary
-                value={t('company-name')}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <TypographyTertiary value={t('company-name')} type={Typography.types.LABEL} size={Typography.sizes.md} />
             </StyledTypographyWrapper>
             <TextField
               name='name'
@@ -67,11 +59,7 @@ const AccountForm = () => {
 
           <StyledCustomTextField>
             <StyledTypographyWrapper>
-              <TypographyTertiary
-                value={t('email')}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.md}
-              />
+              <TypographyTertiary value={t('email')} type={Typography.types.LABEL} size={Typography.sizes.md} />
             </StyledTypographyWrapper>
             <TextField
               name='email'
@@ -83,11 +71,7 @@ const AccountForm = () => {
 
           <StyledButton>
             <ButtonTertiary onClick={handleLogout} leftIcon={LogOut} size={Button.sizes?.SMALL}>
-              <TypographySecondary
-                value={t('log-out')}
-                type={Typography.types.LABEL}
-                size={Typography.sizes.sm}
-              />
+              <TypographySecondary value={t('log-out')} type={Typography.types.LABEL} size={Typography.sizes.sm} />
             </ButtonTertiary>
           </StyledButton>
         </StyledFormContainer>

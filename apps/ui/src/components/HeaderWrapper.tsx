@@ -14,11 +14,7 @@ const HeaderWrapper = ({ children }: any) => {
     })
   }, [])
 
-  return (
-    <div className={is_scroll ? 'header_wrapper header_is_visible' : 'header_wrapper'}>
-      {children}
-    </div>
-  )
+  return <div className={is_scroll ? 'header_wrapper header_is_visible' : 'header_wrapper'}>{children}</div>
 }
 
 export default HeaderWrapper

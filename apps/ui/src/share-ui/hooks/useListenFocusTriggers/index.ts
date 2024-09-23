@@ -1,51 +1,51 @@
-import useEventListener from "../useEventListener";
-import { RefObject, useCallback, useRef } from "react";
+import useEventListener from '../useEventListener'
+import { RefObject, useCallback, useRef } from 'react'
 
 export function useListenFocusTriggers({
   ref,
   onFocusByKeyboard,
-  onFocusByMouse
+  onFocusByMouse,
 }: {
-  ref: RefObject<HTMLElement>;
-  onFocusByKeyboard?: (event: FocusEvent) => void;
-  onFocusByMouse?: (event: FocusEvent) => void;
+  ref: RefObject<HTMLElement>
+  onFocusByKeyboard?: (event: FocusEvent) => void
+  onFocusByMouse?: (event: FocusEvent) => void
 }) {
-  const isElementMouseDown = useRef(false);
+  const isElementMouseDown = useRef(false)
 
   const onMouseDown = useCallback(() => {
-    isElementMouseDown.current = true;
-  }, [isElementMouseDown]);
+    isElementMouseDown.current = true
+  }, [isElementMouseDown])
 
   const onFocus = useCallback(
     (e: FocusEvent) => {
       // if focus triggered by mouse down, call onFocusByMouse
       if (isElementMouseDown.current) {
-        onFocusByMouse?.(e);
+        onFocusByMouse?.(e)
       } else {
-        onFocusByKeyboard && onFocusByKeyboard(e);
+        onFocusByKeyboard && onFocusByKeyboard(e)
       }
     },
-    [onFocusByKeyboard, onFocusByMouse]
-  );
+    [onFocusByKeyboard, onFocusByMouse],
+  )
   const onMouseUp = useCallback(() => {
-    isElementMouseDown.current = false;
-  }, [isElementMouseDown]);
+    isElementMouseDown.current = false
+  }, [isElementMouseDown])
 
   useEventListener({
-    eventName: "mousedown",
+    eventName: 'mousedown',
     ref,
-    callback: onMouseDown
-  });
+    callback: onMouseDown,
+  })
 
   useEventListener({
-    eventName: "focus",
+    eventName: 'focus',
     ref,
-    callback: onFocus
-  });
+    callback: onFocus,
+  })
 
   useEventListener({
-    eventName: "mouseup",
+    eventName: 'mouseup',
     ref,
-    callback: onMouseUp
-  });
+    callback: onMouseUp,
+  })
 }

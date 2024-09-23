@@ -21,11 +21,7 @@ function _createBemBlockHelper(block: string, isConsume = false) {
   }
 }
 
-function _ensureSingleValueText(
-  valueText: string,
-  value: number,
-  formatter: (value: number) => string,
-): string {
+function _ensureSingleValueText(valueText: string, value: number, formatter: (value: number) => string): string {
   if (valueText) {
     return valueText
   }
@@ -48,12 +44,7 @@ function _ensureStepModulo(pageStep: number, step: number) {
 
 export const bem = _createBemBlockHelper(COMPONENT_ID)
 
-export function calcDimensions(
-  max: number,
-  min: number,
-  ranged: boolean,
-  value: number | number[],
-) {
+export function calcDimensions(max: number, min: number, ranged: boolean, value: number | number[]) {
   if (!ranged) {
     const [dimension, position] = _calcDimension(max, min, value as number)
 
@@ -121,13 +112,7 @@ export function getNearest(newValue: number, ranged: boolean, value: number | nu
   return diff0 > diff1 ? 1 : 0
 }
 
-export function moveToPx(
-  offsetInPx: number,
-  min: number,
-  max: number,
-  railCoords: { width: number },
-  step: number,
-) {
+export function moveToPx(offsetInPx: number, min: number, max: number, railCoords: { width: number }, step: number) {
   const valuePoints = max - min
   const pxToValuePoints = railCoords.width / valuePoints
   const offsetInValuePoints = Math.round(offsetInPx / pxToValuePoints) + min

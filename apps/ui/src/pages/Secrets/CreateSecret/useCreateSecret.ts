@@ -39,14 +39,12 @@ const useCreateSecret = () => {
 
   async function handleSubmit(values: SecretInput) {
     // const result = await createSecret(values)
-
     // if (result) {
     //   setToast({
     //     message: result.message,
     //     type: result.success ? 'positive' : 'warning',
     //     open: true,
     //   })
-
     //   handleCloseModal()
     // }
   }

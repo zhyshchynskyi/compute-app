@@ -308,9 +308,7 @@ const MenuItem: L3Component<MenuItemProps> & {
             >
               <div ref={titleRef} className='l3-style-menu-item__title'>
                 {title}
-                {description && (
-                  <span className='l3-style-menu-item__description'>{description}</span>
-                )}
+                {description && <span className='l3-style-menu-item__description'>{description}</span>}
               </div>
             </Tooltip>
             {label && (
@@ -339,12 +337,7 @@ const MenuItem: L3Component<MenuItemProps> & {
                 </DialogContentContainer>
               )}
             </div>
-            <Icon
-              iconType={Icon.type.SVG}
-              icon={DropdownChevronRight}
-              iconLabel='my bolt svg icon'
-              iconSize={27}
-            />
+            <Icon iconType={Icon.type.SVG} icon={DropdownChevronRight} iconLabel='my bolt svg icon' iconSize={27} />
           </>
         )}
       </li>

@@ -1,4 +1,4 @@
 export type MoveBy = {
-  main?: number;
-  secondary?: number;
-};
+  main?: number
+  secondary?: number
+}

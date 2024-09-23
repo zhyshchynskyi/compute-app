@@ -48,18 +48,10 @@ const ChangeTemplateModal = ({ data: { handleSelectTemplate } }: ChangeTemplateM
   const { templates, searchText, setSearchText, templates_loading } = useChangeTemplate()
 
   return (
-    <MainModal
-      onClose={() => closeModal('change-pod-template-modal')}
-      customButtons={<></>}
-      title='Templates'
-    >
+    <MainModal onClose={() => closeModal('change-pod-template-modal')} customButtons={<></>} title='Templates'>
       <StyledModalBody>
         <Box display={'flex'} flexDirection={'column'} position={'relative'}>
-          <TextField
-            onChange={(value: string) => setSearchText(value)}
-            value={searchText}
-            placeholder='Search'
-          />
+          <TextField onChange={(value: string) => setSearchText(value)} value={searchText} placeholder='Search' />
 
           {templates.length === 0 && templates_loading && (
             <Box position={'absolute'} sx={{ marginTop: '15%', marginLeft: '47%' }}>
@@ -72,11 +64,7 @@ const ChangeTemplateModal = ({ data: { handleSelectTemplate } }: ChangeTemplateM
               <Box display={'flex'} flexDirection={'column'}>
                 <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={2} mt={2}>
                   {templates.map((template: Template, index: number) => (
-                    <TemplateCard
-                      key={index}
-                      template={template}
-                      handleSelectTemplate={handleSelectTemplate}
-                    />
+                    <TemplateCard key={index} template={template} handleSelectTemplate={handleSelectTemplate} />
                   ))}
                 </Box>
               </Box>

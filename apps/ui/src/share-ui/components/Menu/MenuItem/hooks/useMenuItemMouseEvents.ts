@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from "react";
-import useIsMouseEnter from "../../../../hooks/useIsMouseEnter";
-import usePrevious from "../../../../hooks/usePrevious";
+import React, { useLayoutEffect } from 'react'
+import useIsMouseEnter from '../../../../hooks/useIsMouseEnter'
+import usePrevious from '../../../../hooks/usePrevious'
 
 export default function useMenuItemMouseEvents({
   ref,
@@ -9,40 +9,40 @@ export default function useMenuItemMouseEvents({
   isActive,
   setActiveItemIndex,
   index,
-  hasChildren
+  hasChildren,
 }: {
-  ref: React.RefObject<HTMLElement>;
-  resetOpenSubMenuIndex: () => void;
-  setSubMenuIsOpenByIndex: (index: number, isOpen: boolean) => void;
-  isActive: boolean;
-  setActiveItemIndex: (index: number) => void;
-  index: number;
-  hasChildren: boolean;
+  ref: React.RefObject<HTMLElement>
+  resetOpenSubMenuIndex: () => void
+  setSubMenuIsOpenByIndex: (index: number, isOpen: boolean) => void
+  isActive: boolean
+  setActiveItemIndex: (index: number) => void
+  index: number
+  hasChildren: boolean
 }) {
-  const isMouseEnter = useIsMouseEnter({ ref });
+  const isMouseEnter = useIsMouseEnter({ ref })
 
-  const prevIsMouseEnter = usePrevious(isMouseEnter);
+  const prevIsMouseEnter = usePrevious(isMouseEnter)
 
   useLayoutEffect(() => {
-    if (!isMouseEnter) return;
-    if (isMouseEnter === prevIsMouseEnter) return;
+    if (!isMouseEnter) return
+    if (isMouseEnter === prevIsMouseEnter) return
 
     if (!setSubMenuIsOpenByIndex || !resetOpenSubMenuIndex) {
-      console.error("MenuItem must be a first level child of a menu");
-      return;
+      console.error('MenuItem must be a first level child of a menu')
+      return
     }
 
     if (!isActive) {
-      setActiveItemIndex(index);
+      setActiveItemIndex(index)
       if (hasChildren) {
-        setSubMenuIsOpenByIndex(index, true);
+        setSubMenuIsOpenByIndex(index, true)
       } else {
-        resetOpenSubMenuIndex();
+        resetOpenSubMenuIndex()
       }
     }
 
     if (isActive && hasChildren) {
-      setSubMenuIsOpenByIndex(index, !!isMouseEnter);
+      setSubMenuIsOpenByIndex(index, !!isMouseEnter)
     }
   }, [
     resetOpenSubMenuIndex,
@@ -52,8 +52,8 @@ export default function useMenuItemMouseEvents({
     isActive,
     setActiveItemIndex,
     index,
-    hasChildren
-  ]);
+    hasChildren,
+  ])
 
-  return isMouseEnter;
+  return isMouseEnter
 }

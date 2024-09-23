@@ -43,19 +43,11 @@ const CreateEndPoint = ({ onClose }: { onClose: Function }) => {
       </StyledFieldWrapper>
       <StyledButtonContainer>
         <StyledTertiaryButton size={Button.sizes?.SMALL} onClick={onClose}>
-          <TypographyPrimary
-            value='Clear'
-            type={Typography.types.LABEL}
-            size={Typography.sizes.sm}
-          />
+          <TypographyPrimary value='Clear' type={Typography.types.LABEL} size={Typography.sizes.sm} />
         </StyledTertiaryButton>
 
         <StyledPrimaryButton size={Button.sizes?.SMALL} onClick={handleFilter}>
-          <TypographyPrimary
-            value='Apply'
-            type={Typography.types.LABEL}
-            size={Typography.sizes.sm}
-          />
+          <TypographyPrimary value='Apply' type={Typography.types.LABEL} size={Typography.sizes.sm} />
         </StyledPrimaryButton>
       </StyledButtonContainer>
     </StyledEndPointContainer>

@@ -1,19 +1,19 @@
-import styled from 'styled-components';
-import IconButton from 'share-ui/components/IconButton/IconButton';
-import moment from 'moment';
-import Delete from 'share-ui/components/Icon/Icons/components/Delete';
-import Edit from 'share-ui/components/Icon/Icons/components/Edit';
-import { ISshKey } from 'types/sshKey.types';
+import styled from 'styled-components'
+import IconButton from 'share-ui/components/IconButton/IconButton'
+import moment from 'moment'
+import Delete from 'share-ui/components/Icon/Icons/components/Delete'
+import Edit from 'share-ui/components/Icon/Icons/components/Edit'
+import { ISshKey } from 'types/sshKey.types'
 
 // eslint-disable-next-line react/prop-types
 const DateRenderer: React.FC<{ value: Date }> = ({ value }) => {
-  const formattedDate = moment(value).fromNow();
-  return <span>{formattedDate}</span>;
-};
+  const formattedDate = moment(value).fromNow()
+  return <span>{formattedDate}</span>
+}
 
 interface RendererColumnProps {
-  handleOpenUpdateSSHModal: (ssh: ISshKey) => void;
-  handleDeleteSSH: (event: React.MouseEvent<Element, MouseEvent>, ssh: ISshKey) => void;
+  handleOpenUpdateSSHModal: (ssh: ISshKey) => void
+  handleDeleteSSH: (event: React.MouseEvent<Element, MouseEvent>, ssh: ISshKey) => void
 }
 
 export const renderColumns = ({ handleOpenUpdateSSHModal, handleDeleteSSH }: RendererColumnProps) => [
@@ -49,19 +49,19 @@ export const renderColumns = ({ handleOpenUpdateSSHModal, handleDeleteSSH }: Ren
           icon={() => <StyledEditIcon />}
           size={IconButton.sizes?.SMALL}
           kind={IconButton.kinds?.TERTIARY}
-          ariaLabel="Edit"
+          ariaLabel='Edit'
         />
         <IconButton
-          onClick={(e) => handleDeleteSSH(e, original)}
+          onClick={e => handleDeleteSSH(e, original)}
           icon={() => <StyledDeleteIcon />}
           size={IconButton.sizes?.SMALL}
           kind={IconButton.kinds?.TERTIARY}
-          ariaLabel="Delete"
+          ariaLabel='Delete'
         />
       </StyledActionWrapper>
     ),
   },
-];
+]
 
 const StyledActionWrapper = styled.div`
   display: flex;
@@ -75,15 +75,15 @@ const StyledActionWrapper = styled.div`
       border-radius: 50%;
     }
   }
-`;
+`
 
 const StyledDeleteIcon = styled(Delete)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`
 const StyledEditIcon = styled(Edit)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
-`;
+`

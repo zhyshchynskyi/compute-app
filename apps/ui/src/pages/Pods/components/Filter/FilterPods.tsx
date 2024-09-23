@@ -47,12 +47,8 @@ const FilterPods = ({ values, handleChangeFilter }: any) => {
               </Box>
             )}
           >
-            <DropDownItem handleSelect={() => onChange('cloud_type', 'Secure Cloud')}>
-              Secure Cloud
-            </DropDownItem>
-            <DropDownItem handleSelect={() => onChange('cloud_type', 'Community Cloud')}>
-              Community Cloud
-            </DropDownItem>
+            <DropDownItem handleSelect={() => onChange('cloud_type', 'Secure Cloud')}>Secure Cloud</DropDownItem>
+            <DropDownItem handleSelect={() => onChange('cloud_type', 'Community Cloud')}>Community Cloud</DropDownItem>
           </DropDownMenu>
 
           <StyledButton color='primary' size='small'>

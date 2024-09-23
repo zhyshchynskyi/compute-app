@@ -157,9 +157,7 @@ const Textarea: L3Component<TextareaProps, unknown> = forwardRef(
           )}
         </StyledTextareaInnerWrapper>
         {hint && <div>{hint}</div>}
-        {validation && validation.text && (
-          <StyledValidationText>{validation.text}</StyledValidationText>
-        )}
+        {validation && validation.text && <StyledValidationText>{validation.text}</StyledValidationText>}
       </StyledTextareaWrapper>
     )
   },

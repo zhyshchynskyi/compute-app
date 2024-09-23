@@ -1,12 +1,7 @@
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 import ListHeader from 'routes/components/ListHeader'
 
-import {
-  StyledChatWrapper,
-  StyledContainer,
-  StyledLeftColumn,
-  StyledMainWrapper,
-} from 'routes/ChatRouteLayout'
+import { StyledChatWrapper, StyledContainer, StyledLeftColumn, StyledMainWrapper } from 'routes/ChatRouteLayout'
 import { useNavigate, useOutlet, useParams } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { usePod } from './usePods'

@@ -1,16 +1,16 @@
-import Avatar, { ConfigProvider } from 'react-avatar';
-import styled, { css } from 'styled-components';
+import Avatar, { ConfigProvider } from 'react-avatar'
+import styled, { css } from 'styled-components'
 
 type AvatarGeneratorProps = {
-  name: string;
-  size: number;
-  isRound?: boolean;
-  textSizeRatio?: number;
-  avatar?: string;
-  arcShape?: boolean;
-};
+  name: string
+  size: number
+  isRound?: boolean
+  textSizeRatio?: number
+  avatar?: string
+  arcShape?: boolean
+}
 
-const AVATAR_COLORS = ['#A822F3', '#F0A300', '#EF5533'];
+const AVATAR_COLORS = ['#A822F3', '#F0A300', '#EF5533']
 
 const AvatarGenerator = ({
   name,
@@ -33,10 +33,10 @@ const AvatarGenerator = ({
         />
       </ConfigProvider>
     </StyledAvatarWrapper>
-  );
-};
+  )
+}
 
-export default AvatarGenerator;
+export default AvatarGenerator
 
 const StyledAvatarWrapper = styled.div<{ size: number; arcShape: boolean; isRound: boolean }>`
   border-radius: 100px 100px 100px 20px;
@@ -49,14 +49,14 @@ const StyledAvatarWrapper = styled.div<{ size: number; arcShape: boolean; isRoun
   align-items: center;
   justify-content: center;
 
-  ${(props) =>
+  ${props =>
     !props.isRound &&
     props.size &&
     css`
       width: calc(${props.size}px - 20px);
       height: calc(${props.size}px - 20px);
     `}
-  ${(props) =>
+  ${props =>
     !props.isRound &&
     props.arcShape &&
     css`
@@ -66,7 +66,7 @@ const StyledAvatarWrapper = styled.div<{ size: number; arcShape: boolean; isRoun
 
       border: 2px solid #000;
     `}
-`;
+`
 
 const StyledAvatar = styled(Avatar)<{ mainShape?: boolean }>`
   font-family: unset !important;
@@ -75,9 +75,9 @@ const StyledAvatar = styled(Avatar)<{ mainShape?: boolean }>`
 
   /* outline: 2px solid #000 !important; */
 
-  /* ${(props) =>
+  /* ${props =>
     props.mainShape &&
     css`
       border-radius: 100px 100px 100px 0 !important;
     `} */
-`;
+`

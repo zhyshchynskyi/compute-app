@@ -35,11 +35,7 @@ const EditPodTemplateModal = ({
             <ButtonPrimary onClick={clearOverrides} size={Button.sizes?.MEDIUM}>
               Clear Overrides
             </ButtonPrimary>
-            <ButtonPrimary
-              onClick={formik.handleSubmit}
-              size={Button.sizes?.MEDIUM}
-              loading={false}
-            >
+            <ButtonPrimary onClick={formik.handleSubmit} size={Button.sizes?.MEDIUM} loading={false}>
               Set Overrides
             </ButtonPrimary>
           </>

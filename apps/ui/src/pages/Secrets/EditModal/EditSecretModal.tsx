@@ -17,9 +17,7 @@ interface EditSecretModalProps {
   }
 }
 
-const EditSecretModal = ({
-  data: { handleUpdateSecret, field, renderComponent },
-}: EditSecretModalProps) => {
+const EditSecretModal = ({ data: { handleUpdateSecret, field, renderComponent } }: EditSecretModalProps) => {
   const { closeModal } = useModal()
   return (
     <MainModal

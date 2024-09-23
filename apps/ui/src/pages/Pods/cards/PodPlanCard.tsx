@@ -26,9 +26,7 @@ const PodPlanCard = ({ plan, selectedPlan, handleSelectPlan }: PlanCardItemProps
           <Box display={'flex'} alignItems={'flex-end'} mt={1} gap={'5px'}>
             <TypographyPrimary value={`$${plan.price.toFixed(2)}/hr`} size='medium' bold />
 
-            {plan.total_price && (
-              <TypographySecondary value={`$${plan.total_price.toFixed(2)}`} size='xs-small' />
-            )}
+            {plan.total_price && <TypographySecondary value={`$${plan.total_price.toFixed(2)}`} size='xs-small' />}
           </Box>
 
           <StyledDescriptionWrapper>

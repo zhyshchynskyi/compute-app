@@ -5,14 +5,7 @@ export interface KeyProps extends React.SVGAttributes<SVGElement> {
   size?: string | number
 }
 const Key: React.FC<KeyProps> = ({ size, ...props }) => (
-  <svg
-    width='30px'
-    height='22px'
-    viewBox='-1 0 24 12'
-    version='1.1'
-    xmlns='http://www.w3.org/2000/svg'
-    {...props}
-  >
+  <svg width='30px' height='22px' viewBox='-1 0 24 12' version='1.1' xmlns='http://www.w3.org/2000/svg' {...props}>
     <g id='Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
       <g id='Rounded' transform='translate(-135.000000, -1266.000000)'>
         <g id='Communication' transform='translate(100.000000, 1162.000000)'>

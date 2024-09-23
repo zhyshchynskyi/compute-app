@@ -16,15 +16,7 @@ const TableCell = ({ cell, noBorder }: TableCellProps) => {
 
   const { column, row, value: cellValue } = cell
   const { original: data } = row
-  const {
-    isEdit,
-    cellEditor: Editor,
-    cellEditorParams,
-    valueSetter,
-    maxWidth,
-    minWidth,
-    width,
-  } = column
+  const { isEdit, cellEditor: Editor, cellEditorParams, valueSetter, maxWidth, minWidth, width } = column
 
   let handleEditMode = null
 

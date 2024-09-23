@@ -1,23 +1,23 @@
-import Box from '@mui/material/Box';
-import Dropdown from 'components/Dropdown';
+import Box from '@mui/material/Box'
+import Dropdown from 'components/Dropdown'
 
-import FormikTextField from 'components/TextFieldFormik';
-import TextareaFormik from 'components/TextareaFormik';
-import { FormikProvider } from 'formik';
+import FormikTextField from 'components/TextFieldFormik'
+import TextareaFormik from 'components/TextareaFormik'
+import { FormikProvider } from 'formik'
 
-import { StyledFormInputWrapper } from 'styles/formStyles.css';
-import { StyledPanelWrapper } from 'styles/panelStyles.css';
+import { StyledFormInputWrapper } from 'styles/formStyles.css'
+import { StyledPanelWrapper } from 'styles/panelStyles.css'
 
-import { Credential } from 'types/credential';
+import { Credential } from 'types/credential'
 
 const Settings = ({ formik }: { formik: any }) => {
   // const { data: credentials } = useGetCredentials()
-  const credentials: any[] = [];
+  const credentials: any[] = []
 
   const credentialsList = credentials.map((item: Credential) => ({
     label: item.credential_name,
     value: item.id,
-  }));
+  }))
 
   return (
     <FormikProvider value={formik}>
@@ -25,7 +25,7 @@ const Settings = ({ formik }: { formik: any }) => {
         <StyledFormInputWrapper noPadding style={{ paddingLeft: '5px' }}>
           <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={3}>
             <FormikTextField
-              name="template_config.template_data.container_image"
+              name='template_config.template_data.container_image'
               placeholder={'Container Image'}
               label={'Container Image'}
             />
@@ -52,13 +52,13 @@ const Settings = ({ formik }: { formik: any }) => {
           <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={3}>
             <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={3}>
               <FormikTextField
-                name="template_config.template_data.container_disk"
+                name='template_config.template_data.container_disk'
                 placeholder={'Container Disc'}
                 label={'Container Disc'}
               />
               {formik.values.template_config?.template_data?.compute_type !== 'cpu' && (
                 <FormikTextField
-                  name="template_config.template_data.volume_disk"
+                  name='template_config.template_data.volume_disk'
                   placeholder={'Volume Disc'}
                   label={'Volume Disc'}
                 />
@@ -66,7 +66,7 @@ const Settings = ({ formik }: { formik: any }) => {
             </Box>
             {formik.values.template_config?.template_data?.compute_type !== 'cpu' && (
               <FormikTextField
-                name="template_config.template_data.volume_mount_path"
+                name='template_config.template_data.volume_mount_path'
                 placeholder={'Volume Mount Path'}
                 label={'Volume Mount Path'}
               />
@@ -74,12 +74,12 @@ const Settings = ({ formik }: { formik: any }) => {
           </Box>
           <Box display={'grid'} gridTemplateColumns={'1fr 1fr'} gap={3}>
             <FormikTextField
-              name="template_config.template_data.expose_http_ports"
+              name='template_config.template_data.expose_http_ports'
               placeholder={'Expose HTTP Ports (Max 10)'}
               label={'Expose HTTP Ports (Max 10)'}
             />
             <FormikTextField
-              name="template_config.template_data.expose_tcp_ports"
+              name='template_config.template_data.expose_tcp_ports'
               placeholder={'Expose TCP Ports'}
               label={'Expose TCP Ports'}
             />
@@ -87,7 +87,7 @@ const Settings = ({ formik }: { formik: any }) => {
         </StyledFormInputWrapper>
       </StyledPanelWrapper>
     </FormikProvider>
-  );
-};
+  )
+}
 
-export default Settings;
+export default Settings

@@ -1,3 +1,3 @@
 export type CloseMenuOption = {
-  propagate?: boolean;
-};
+  propagate?: boolean
+}

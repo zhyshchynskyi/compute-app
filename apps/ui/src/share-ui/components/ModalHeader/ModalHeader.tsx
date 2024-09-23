@@ -75,13 +75,7 @@ const ModalHeader: FC<ModalHeaderProps> = ({
       <p role='heading' aria-level={1} id={id}>
         {icon && (
           <span>
-            <Icon
-              icon={icon}
-              iconType={Icon.type?.SVG}
-              iconSize={iconSize}
-              ignoreFocusStyle
-              clickable={false}
-            />
+            <Icon icon={icon} iconType={Icon.type?.SVG} iconSize={iconSize} ignoreFocusStyle clickable={false} />
           </span>
         )}
         {title}

@@ -1,39 +1,39 @@
-import { FormikProvider } from 'formik';
-import styled, { useTheme } from 'styled-components';
-import { useTranslation } from 'react-i18next';
+import { FormikProvider } from 'formik'
+import styled, { useTheme } from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
-import useRegister from 'pages/Auth/Register/useRegister';
-import TextFieldFormik from 'components/TextFieldFormik';
+import useRegister from 'pages/Auth/Register/useRegister'
+import TextFieldFormik from 'components/TextFieldFormik'
 
-import { StyledCenterFormContainer } from 'styles/globalStyle.css';
-import { useModal } from 'hooks';
+import { StyledCenterFormContainer } from 'styles/globalStyle.css'
+import { useModal } from 'hooks'
 
-import githubIcon from 'assets/icons/githubIcon.png';
-import { StyledImageWrapper, StyledImg, StyledInnerButtonWrapper } from 'components/HeaderButtons/HeaderButtons';
-import { StyledHeaderWrapper, StyledInputWrapper } from '../Login/Login';
+import githubIcon from 'assets/icons/githubIcon.png'
+import { StyledImageWrapper, StyledImg, StyledInnerButtonWrapper } from 'components/HeaderButtons/HeaderButtons'
+import { StyledHeaderWrapper, StyledInputWrapper } from '../Login/Login'
 
-import Heading from 'share-ui/components/Heading/Heading';
+import Heading from 'share-ui/components/Heading/Heading'
 
-import OrDivider from 'components/OrDivider/OrDivider';
-import useGithubLogin from '../Login/useGithubLogin';
-import TypographyTertiary from 'components/Typography/Tertiary';
-import TypographyPrimary from 'components/Typography/Primary';
-import HeadingSecondary from 'components/Heading/Secondary';
-import { ButtonPrimary } from 'components/Button/Button';
-import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants';
-import { useDomainConfig } from 'utils/useDomainConfig';
+import OrDivider from 'components/OrDivider/OrDivider'
+import useGithubLogin from '../Login/useGithubLogin'
+import TypographyTertiary from 'components/Typography/Tertiary'
+import TypographyPrimary from 'components/Typography/Primary'
+import HeadingSecondary from 'components/Heading/Secondary'
+import { ButtonPrimary } from 'components/Button/Button'
+import { TypographySizes, TypographyTypes } from 'share-ui/components/typography/TypographyConstants'
+import { useDomainConfig } from 'utils/useDomainConfig'
 
 const Register = () => {
-  const { getDomainConfig } = useDomainConfig();
-  const loginConfig = getDomainConfig('login_page');
+  const { getDomainConfig } = useDomainConfig()
+  const loginConfig = getDomainConfig('login_page')
 
-  const { t } = useTranslation();
-  const { formik, alertMessage } = useRegister({ noPopup: !loginConfig?.popup });
-  const { openModal } = useModal();
+  const { t } = useTranslation()
+  const { formik, alertMessage } = useRegister({ noPopup: !loginConfig?.popup })
+  const { openModal } = useModal()
 
-  const { githubLogin } = useGithubLogin();
+  const { githubLogin } = useGithubLogin()
 
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <StyledCenterFormContainer>
@@ -53,8 +53,8 @@ const Register = () => {
         {loginConfig?.github && (
           <ButtonPrimary
             onClick={async () => {
-              const res = await githubLogin();
-              window.location.href = res.auth_url;
+              const res = await githubLogin()
+              window.location.href = res.auth_url
             }}
           >
             <StyledInnerButtonWrapper>
@@ -71,14 +71,14 @@ const Register = () => {
         {loginConfig?.email_password && (
           <FormikProvider value={formik}>
             <StyledInputWrapper>
-              <TextFieldFormik name="name" placeholder="Full name" label={t('first-name')} />
+              <TextFieldFormik name='name' placeholder='Full name' label={t('first-name')} />
               {/* <TextFieldFormik
                 name='account_name'
                 placeholder='Company name'
                 label={t('company-name')}
               /> */}
-              <TextFieldFormik name="email" placeholder="Email" label={t('email')} />
-              <TextFieldFormik name="password" placeholder={t('password')} label={t('password')} type="password" />
+              <TextFieldFormik name='email' placeholder='Email' label={t('email')} />
+              <TextFieldFormik name='password' placeholder={t('password')} label={t('password')} type='password' />
               {/* <TextFieldFormik
                     name='confirm_password'
                     placeholder='Confirm password'
@@ -100,7 +100,7 @@ const Register = () => {
             />
             <button
               onClick={() => {
-                openModal({ name: 'login-modal', data: { isRegister: false } });
+                openModal({ name: 'login-modal', data: { isRegister: false } })
               }}
             >
               <TypographyPrimary
@@ -127,10 +127,10 @@ const Register = () => {
         </FormikProvider>
       </StyledFormContainer> */}
     </StyledCenterFormContainer>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
 
 const StyledFormContainer = styled.div`
   margin-top: 22px;
@@ -139,10 +139,10 @@ const StyledFormContainer = styled.div`
   padding: 0 87px;
   width: 550px;
   max-width: 550px;
-`;
+`
 const StyledLoginWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-`;
+`

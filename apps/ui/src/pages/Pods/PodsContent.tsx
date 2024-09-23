@@ -197,10 +197,7 @@ const PodsContent = () => {
           >
             <Box>
               <Box>
-                <FilterPods
-                  values={resourcesFormik.values}
-                  handleChangeFilter={resourcesFormik.setFieldValue}
-                />
+                <FilterPods values={resourcesFormik.values} handleChangeFilter={resourcesFormik.setFieldValue} />
               </Box>
 
               {data_keys.map((key: string, index: number) => (
@@ -209,11 +206,7 @@ const PodsContent = () => {
                   <Grid container rowSpacing={1} columnSpacing={{ xs: 2 }} mt={2} rowGap={1}>
                     {resources[key].map((item: Resource, i: number) => (
                       <Grid item xs={12} sm={6} md={4} lg={3} key={i} minWidth={'300px'}>
-                        <PodResourcesCard
-                          item={item}
-                          selected={resource}
-                          selectCard={handleSelectResource}
-                        />
+                        <PodResourcesCard item={item} selected={resource} selectCard={handleSelectResource} />
                       </Grid>
                     ))}
                   </Grid>

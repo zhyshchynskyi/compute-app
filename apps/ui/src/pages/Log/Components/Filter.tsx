@@ -100,18 +100,10 @@ const Filter = ({ filter }: any) => {
         <TypographyPrimary value='Date' type={Typography.types.LABEL} size={Typography.sizes.sm} />
       </ButtonTertiary>
       <ButtonTertiary size={Button.sizes?.SMALL} onClick={() => setShowMethod(true)}>
-        <TypographyPrimary
-          value='Method'
-          type={Typography.types.LABEL}
-          size={Typography.sizes.sm}
-        />
+        <TypographyPrimary value='Method' type={Typography.types.LABEL} size={Typography.sizes.sm} />
       </ButtonTertiary>
       <ButtonTertiary size={Button.sizes?.SMALL} onClick={() => setShowEndpoint(true)}>
-        <TypographyPrimary
-          value='API endpoints'
-          type={Typography.types.LABEL}
-          size={Typography.sizes.sm}
-        />
+        <TypographyPrimary value='API endpoints' type={Typography.types.LABEL} size={Typography.sizes.sm} />
       </ButtonTertiary>
       {/* <StyledAdditionalFilterContainer>
         <Button kind={Button.kinds?.TERTIARY} size={Button.sizes?.SMALL} onClick={openCreateLogModal}>
