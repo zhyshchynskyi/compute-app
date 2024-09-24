@@ -1,17 +1,11 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src https: 'unsafe-inline' 'unsafe-eval'; connect-src https: http: ws:"
+          "value": "default-src 'self'; connect-src 'self' http://54.236.110.39:20002; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
         }
       ]
     }
