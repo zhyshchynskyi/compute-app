@@ -1,18 +1,14 @@
 import React from 'react'
 import { AuthContext } from 'contexts'
-import { Navigate, useOutlet } from 'react-router-dom'
-
+import { useOutlet } from 'react-router-dom'
 import ChatSwitcher from 'components/ChatSwitcher'
-
 import styled from 'styled-components'
 import { ThemeProps } from 'components/AvatarDropDown'
 
 const RootLayout = ({ theme }: { theme: ThemeProps }) => {
-  const { user, loading } = React.useContext(AuthContext)
+  const { user } = React.useContext(AuthContext)
 
   const outlet = useOutlet()
-
-  if (!user && !loading) return <Navigate to='/login' />
 
   return (
     <StyledRoot>
